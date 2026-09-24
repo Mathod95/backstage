@@ -12,6 +12,10 @@ nav:
       - Catalogue lu depuis GitHub: catalogue-depuis-github.md
       - Retirer SQLite de l'image: retirer-sqlite-de-l-image.md
       - TechDocs: techdocs.md
-  - Personnalisation: personnalisation.md
+  - Backstage:
+      - Personnalisation:
+          - Où sont les réglages: backstage/personnalisation/reglages.md
+          - Thème (MUI et BUI): backstage/personnalisation/theme.md
+          - Page de connexion: backstage/personnalisation/page-de-connexion.md
 plugins:
   - techdocs-core

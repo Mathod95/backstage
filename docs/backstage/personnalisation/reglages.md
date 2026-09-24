@@ -1,10 +1,10 @@
-# Personnalisation de Backstage: où se trouvent les réglages
+# Où sont les réglages
 
 Carte de tout ce qu'on peut personnaliser dans l'interface, avec le fichier où ça se règle et la valeur actuelle. Rédigé le 2026-09-24 à partir du code du repo (Backstage 1.55.0, nouveau système frontend) et de la documentation officielle (liens en fin de document).
 
 État au 2026-09-24: **rien n'est personnalisé**, tout est resté comme dans le modèle `create-app`.
 
-Tous ces réglages sont dans le code ou dans `app-config.yaml`, donc dans l'image: chaque changement demande un rebuild et un redéploiement (voir [catalogue-depuis-github.md](catalogue-depuis-github.md)). Le mieux est donc de regrouper les personnalisations dans un seul lot.
+Tous ces réglages sont dans le code ou dans `app-config.yaml`, donc dans l'image: chaque changement demande un rebuild et un redéploiement (voir [catalogue-depuis-github.md](../../catalogue-depuis-github.md)). Le mieux est donc de regrouper les personnalisations dans un seul lot.
 
 ## La carte
 
@@ -23,8 +23,8 @@ Tous ces réglages sont dans le code ou dans `app-config.yaml`, donc dans l'imag
 | Icône de l'onglet du navigateur | `packages/app/public/` | `favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png`, `safari-pinned-tab.svg`, `apple-touch-icon.png`, `android-chrome-192x192.png` | Icônes Backstage |
 | Nom et couleurs quand on "installe" le site sur mobile | `packages/app/public/manifest.json` | `name`, `short_name`, `theme_color`, `background_color` | `Backstage`, noir et blanc |
 | Description de la page (moteurs de recherche) | `packages/app/public/index.html` | `<meta name="description">` | Texte du modèle |
-| Page de connexion (titre, texte du bouton) | `packages/app/src/App.tsx` | `SignInPage`, props `title` et `provider.message` | Titre = `app.title`, bouton "Sign in using GitHub" |
-| Couleurs, polices, thème clair et sombre | Nouveau fichier, par exemple `packages/app/src/theme/` | Voir "Thème" plus bas | Thèmes Backstage par défaut |
+| Page de connexion (titre de la carte, texte) | `packages/app/src/App.tsx` | `SignInPage`, `provider.title` et `provider.message` | Titre de la page = `app.title`, carte "GitHub", texte "Sign in using GitHub". Voir [Page de connexion](page-de-connexion.md) |
+| Couleurs, polices, formes, thème clair et sombre | Nouveau dossier prévu `packages/app/src/theme/` | Voir [Thème (MUI et BUI)](theme.md) | Thèmes Backstage par défaut |
 
 ## Détails
 
@@ -116,35 +116,17 @@ Définit ce qui apparaît dans la barre latérale et dans quel ordre. Chaque pag
 
 Des fichiers image à remplacer par les siens, en gardant les mêmes noms et tailles. `manifest.json` donne le nom et les couleurs quand le site est ajouté à l'écran d'accueil d'un téléphone.
 
-### Thème: couleurs et polices
+### Thème: couleurs, polices, formes
 
-Deux systèmes cohabitent dans Backstage (doc officielle "Customize the look-and-feel"):
-- **Backstage UI (BUI)**, le nouveau: des variables CSS dans un fichier `.css` importé dans `App.tsx`. Les éléments concernés ont des classes qui commencent par `bui-`.
+Ce Backstage mélange trois systèmes d'affichage: MUI v4 (`@material-ui/core` 4.12.4), MUI v5 (`@mui/material` 5.18.0) et BUI (`@backstage/ui` 0.18.0). Tout ce qui touche à l'apparence générale (couleurs, polices, arrondis, ombres, style des boutons, des cartes, des menus...) se règle dans le thème. Détails dans [Thème (MUI et BUI)](theme.md).
 
-  ```css
-  [data-theme-mode='light'] {
-    --bui-bg-app: #f8f8f8;
-    --bui-fg-primary: #000;
-  }
-  ```
+### Page de connexion
 
-- **Material UI (MUI)**, l'ancien, encore utilisé par la plupart des pages: un thème créé avec `createUnifiedTheme` (paquet `@backstage/theme`), déclaré dans l'app avec l'extension `ThemeBlueprint` (paquet `@backstage/plugin-app-react`).
-
-  ```ts
-  import { createBaseThemeOptions, createUnifiedTheme, palettes } from '@backstage/theme';
-
-  export const lightTheme = createUnifiedTheme({
-    ...createBaseThemeOptions({ palette: palettes.light }),
-    fontFamily: 'Comic Sans MS',
-    defaultPageTheme: 'home',
-  });
-  ```
-
-Pour un résultat cohérent partout, il faut aujourd'hui régler les deux. C'est la personnalisation la plus lourde de la liste: à garder pour la fin, si les couleurs par défaut dérangent vraiment.
+Titre, carte, bouton, fond, disposition: voir [Page de connexion](page-de-connexion.md).
 
 ## Ce qui était fait sur l'ancienne instance
 
-D'après [historique-ancienne-instance.md](historique-ancienne-instance.md): titre `Mathod.io` (`app.title`), logos de la barre latérale (`LogoFull.tsx`, `LogoIcon.tsx`) et page d'accueil personnalisée avec le logo (`homeModule.tsx`, image `mathod-logo.png`). Le code est encore dans `~/backstage` et peut servir de point de départ.
+D'après [historique-ancienne-instance.md](../../historique-ancienne-instance.md): titre `Mathod.io` (`app.title`), logos de la barre latérale (`LogoFull.tsx`, `LogoIcon.tsx`) et page d'accueil personnalisée avec le logo (`homeModule.tsx`, image `mathod-logo.png`). Le code est encore dans `~/backstage` et peut servir de point de départ.
 
 ## Sources
 
