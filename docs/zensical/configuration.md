@@ -29,7 +29,7 @@ python3 -m venv zensical/.venv && zensical/.venv/bin/pip install zensical
 
 ### Organisation des fichiers
 
-| Fichier                                  | Lu par               | Rôle                                             |
+| File                                     | Read by              | Role                                             |
 | ---------------------------------------- | -------------------- | ------------------------------------------------ |
 | `docs/`                                  | MkDocs et Zensical   | Les pages, un seul exemplaire                    |
 | `mkdocs.yml`                             | TechDocs (Backstage) | Doc publiée dans Backstage                       |

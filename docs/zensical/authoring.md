@@ -28,9 +28,9 @@ todo:
 ---
 ```
 
-### Champs
+### Fields
 
-| Champ         | Obligatoire           | Valeur                                                            |
+| Field         | Required              | Value                                                             |
 | ------------- | --------------------- | ----------------------------------------------------------------- |
 | `title`       | Oui                   | Titre court de la page                                            |
 | `description` | Oui, peut rester vide | Une phrase qui résume la page                                     |
@@ -43,21 +43,21 @@ Remplie, `description` devient la description de la page dans le HTML généré 
 
 Les icônes disponibles pour `icon` sont celles fournies par mkdocs-material:
 
-| Famille         | Préfixe           | Liste                                    |
+| Family          | Prefix            | List                                     |
 | --------------- | ----------------- | ---------------------------------------- |
 | Material Design | `material/...`    | <https://pictogrammers.com/library/mdi/> |
 | FontAwesome     | `fontawesome/...` | <https://fontawesome.com/search?ic=free> |
 | Octicons        | `octicons/...`    | <https://primer.style/foundations/icons> |
 
-### Statuts
+### Statuses
 
-| Statut   | Sens                                                                 |
+| Status   | Meaning                                                              |
 | -------- | -------------------------------------------------------------------- |
 | `draft`  | Brouillon: la page est en cours d'écriture, son contenu peut changer |
 | `review` | À relire: la page est complète et attend une relecture               |
 | `done`   | Terminée: la page est relue et à jour                                |
 
-### Écrire la liste `todo`
+### Writing the `todo` list
 
 Chaque tâche est une ligne entre guillemets, qui commence par `[ ]` (à faire) ou `[x]` (fait):
 
@@ -71,7 +71,7 @@ todo:
 
 Sans tâche, écrire `todo: []`. Un `todo:` laissé vide fonctionne aussi (vérifié), mais `[]` montre clairement que la liste est vide.
 
-### Champs vides
+### Empty fields
 
 Un champ vide ne casse pas la page. Vérifié le 2026-09-24 avec le générateur de Backstage (`mkdocs-techdocs-core` 1.7.1), sur toutes ces formes:
 
@@ -88,7 +88,7 @@ Dans tous les cas, la page se construit sans erreur ni avertissement, l'en-tête
 
 Testé aussi avec des champs remplis: `description: Une description` apparaît bien dans le HTML généré, et `icon: material/cog` affiche l'icône devant le titre dans le menu. Ces deux effets ont été vérifiés sur le site généré par MkDocs, pas encore dans l'affichage de TechDocs dans Backstage.
 
-### Vérifier
+### Checking
 
 Après avoir écrit ou modifié un front matter, vérifier dans l'aperçu local que l'en-tête n'apparaît pas en haut de la page (voir [Configuration](configuration.md#apercu-local)).
 
@@ -99,6 +99,8 @@ Les tableaux s'écrivent en Markdown, avec des `|` entre les colonnes et une lig
 ### Usage
 
 Dans le fichier, les colonnes sont **alignées**: chaque cellule est complétée par des espaces pour que les `|` tombent les uns sous les autres, avec un espace de chaque côté. Le rendu est le même, mais le fichier reste lisible.
+
+Les titres des colonnes sont en anglais (`Field`, `Required`, `Value`...), le contenu des cellules reste en français.
 
 Garder des cellules courtes: une explication longue va dans un paragraphe sous le tableau plutôt que dans une cellule.
 
