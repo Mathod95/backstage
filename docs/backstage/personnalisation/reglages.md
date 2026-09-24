@@ -166,10 +166,6 @@ Ce Backstage mélange trois systèmes d'affichage: MUI v4 (`@material-ui/core` 4
 
 Titre, carte, bouton, fond, disposition: voir [Sign-in page](page-de-connexion.md).
 
-## Previous instance
-
-D'après l'[historique de l'ancienne instance](../../historique-ancienne-instance.md): titre `Mathod.io` (`app.title`), logos de la barre latérale (`LogoFull.tsx`, `LogoIcon.tsx`) et page d'accueil personnalisée avec le logo (`homeModule.tsx`). Le code est encore dans `~/backstage` et peut servir de point de départ.
-
 ## Sources
 
 - Page d'accueil (nouveau système frontend): <https://backstage.io/docs/getting-started/homepage>
