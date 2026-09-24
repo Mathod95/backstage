@@ -1,0 +1,16 @@
+site_name: Backstage Mathod
+site_description: Documentation du Backstage de backstage.mathod.fr
+repo_url: https://github.com/Mathod95/backstage
+edit_uri: edit/main/docs
+nav:
+  - Accueil: index.md
+  - Todo: todo.md
+  - Historique de l'ancienne instance: historique-ancienne-instance.md
+  - Changements:
+      - Retirer les exemples et l'invité: retirer-exemples-et-invite.md
+      - Catalogue lu depuis GitHub: catalogue-depuis-github.md
+      - Retirer SQLite de l'image: retirer-sqlite-de-l-image.md
+      - TechDocs: techdocs.md
+  - Personnalisation: personnalisation.md
+plugins:
+  - techdocs-core

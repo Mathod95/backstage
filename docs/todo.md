@@ -1,6 +1,6 @@
 # TODO
 
-Liste condensée de tout ce qui reste à faire ou à décider. Contexte et détails dans [historique-ancienne-instance.md](historique-ancienne-instance.md). Les lignes "Décider" sont des choix à faire avant d'agir.
+Liste condensée de tout ce qui reste à faire ou à décider. Contexte et détails dans [historique-ancienne-instance.md](historique-ancienne-instance.md). Cette documentation s'affiche dans Backstage (TechDocs), voir [techdocs.md](techdocs.md). Les lignes "Décider" sont des choix à faire avant d'agir.
 
 ## Fait
 
@@ -37,9 +37,10 @@ Procédure détaillée pour GitHub OAuth, le retrait de l'invité et des exemple
 - [ ] Décider: branding (titre `Mathod.io`, logos, page d'accueil), fait sur l'ancienne instance. Carte de tous les réglages: [personnalisation.md](personnalisation.md)
 - [ ] Remplacer les valeurs par défaut du modèle dans `app-config.yaml`: `app.title` (`Scaffolded Backstage App`), `organization.name` et `mcpActions.name` (`My Company`)
 - [x] Remplacer le catalogue d'exemple par les vraies sources (`catalog.locations`), première étape décrite dans [retirer-exemples-et-invite.md](retirer-exemples-et-invite.md)
-- [ ] TechDocs: passer en génération CI et stockage externe (le mode `local` est déconseillé en production)
-- [ ] TechDocs n'est pas fonctionnel en l'état: aucune entité n'a l'annotation `backstage.io/techdocs-ref`, `runIn: docker` suppose une CLI Docker absente de l'image, et `publisher: local` écrit dans le conteneur sans persistance
-- [ ] Une fois TechDocs en place: migrer `docs-temp/` vers `docs/` avec un `mkdocs.yml` et annoter `catalog-info.yaml`
+- [ ] TechDocs mis en place le 2026-09-24 avec génération par Backstage lui-même (choix de l'utilisateur, plutôt que CI et stockage externe), reste à déployer et vérifier: voir [techdocs.md](techdocs.md)
+- [x] TechDocs n'était pas fonctionnel (aucune annotation `backstage.io/techdocs-ref`, `runIn: docker` sans Docker dans l'image): corrigé, voir [techdocs.md](techdocs.md)
+- [x] Une fois TechDocs en place: migrer `docs-temp/` vers `docs/` avec un `mkdocs.yml` et annoter `catalog-info.yaml`
+- [ ] Plus tard, si la doc grossit ou si plusieurs instances existent: passer à la génération en CI et à un stockage externe (recommandation officielle)
 - [ ] Décider: sauvegardes planifiées de Postgres
 - [ ] Décider: healthcheck du conteneur (`/.backstage/health/v1/readiness`)
 - [ ] Maintenance régulière: monter la version de Backstage (`yarn backstage-cli versions:bump`) et redéployer
@@ -54,7 +55,8 @@ Procédure détaillée pour GitHub OAuth, le retrait de l'invité et des exemple
 - [ ] Décider: groupes API Crossplane cluster-scoped (actuels) ou namespaced `.m.` (Crossplane v2)
 - [ ] Installer le provider AWS (Upbound) et son `ProviderConfig` sur le cluster de test
 - [ ] Valider les 9 skeletons contre les vraies CRD AWS
-- [ ] Créer le sommaire racine `catalog/all.yaml` et y faire pointer `app-config.production.yaml` (dernier rebuild pour le catalogue), puis un sommaire par thème dans `templates/` (voir [catalogue-depuis-github.md](catalogue-depuis-github.md#organisation-un-seul-catalogue-plusieurs-sommaires))
+- [x] Créer le sommaire racine `catalog/all.yaml` et y faire pointer `app-config.production.yaml` (fait avec TechDocs le 2026-09-24)
+- [ ] Un sommaire par thème dans `templates/`, ajouté à `catalog/all.yaml` (voir [catalogue-depuis-github.md](catalogue-depuis-github.md#organisation-un-seul-catalogue-plusieurs-sommaires))
 - [ ] Templates enregistrés par URL GitHub dans `templates/`, pas copiés dans l'image (décidé le 2026-09-24, même principe que [catalogue-depuis-github.md](catalogue-depuis-github.md)): location `type: url` avec `allow: [Template]`. `templates/**` est déjà dans le `paths-ignore` du workflow
 - [ ] Tester le comportement des chemins relatifs `../../skeletons/...` avec un enregistrement par URL
 - [ ] Reprendre les templates un par un: `create-vpc`, `create-internet-gateway`, `create-route-table`, `create-subnet-pub`, `create-subnet-priv`, `create-security-group`, `create-eks-cluster`, `stack-network`

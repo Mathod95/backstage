@@ -161,7 +161,9 @@ proxy:
 techdocs:
   builder: 'local' # Alternatives - 'external'
   generator:
-    runIn: 'docker' # Alternatives - 'local'
+    # mkdocs-techdocs-core is installed in the image (see packages/backend/Dockerfile),
+    # there is no Docker inside the container to run the generator image.
+    runIn: 'local'
   publisher:
     type: 'local' # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
 
@@ -198,13 +200,13 @@ catalog:
     entityFilename: catalog-info.yaml
     pullRequestBranchName: backstage-integration
   rules:
-    - allow: [Component, System, API, Resource, Location]
+    # Local development only: app-config.production.yaml replaces these rules and
+    # restricts users, groups and templates to files from this repo on GitHub.
+    - allow: [Component, System, API, Resource, Location, User, Group, Template]
   locations:
-    # Organizational data, file locations are relative to the backend process, typically `packages/backend`
+    # Root of the catalog (catalog/all.yaml lists the other files), relative to `packages/backend`
     - type: file
-      target: ../../catalog/org.yaml
-      rules:
-        - allow: [User, Group]
+      target: ../../catalog/all.yaml
 
 kubernetes:
   # see https://backstage.io/docs/features/kubernetes/configuration for kubernetes configuration options

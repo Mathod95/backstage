@@ -1,0 +1,13 @@
+---
+# Root of the catalog: the only file referenced from app-config. Add new files here
+# (users, components, template summaries) so that no config change or image rebuild is needed.
+# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-location
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: root
+  description: Root of the Backstage Mathod catalog
+spec:
+  targets:
+    - ./org.yaml
+    - ../catalog-info.yaml

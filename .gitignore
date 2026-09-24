@@ -54,3 +54,7 @@ e2e-test-report/
 
 # Cache
 .cache/
+
+# Local TechDocs preview (see docs/techdocs.md)
+.venv/
+site/

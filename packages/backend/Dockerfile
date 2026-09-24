@@ -20,6 +20,19 @@ FROM node:24-trixie-slim
 # No sqlite3 dependencies: production uses Postgres (app-config.production.yaml),
 # better-sqlite3 is a devDependency only used by `yarn start` locally.
 
+# TechDocs generator (techdocs.generator.runIn: local), must run before `USER node`.
+# See https://backstage.io/docs/features/techdocs/getting-started
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt-get update && \
+    apt-get install -y --no-install-recommends python3 python3-pip python3-venv && \
+    rm -rf /var/lib/apt/lists/*
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+# Pinned to the version tested locally, bump deliberately (mkdocs-material keeps MkDocs < 2)
+RUN pip3 install --no-cache-dir mkdocs-techdocs-core==1.7.1
+
 # From here on we use the least-privileged `node` user to run the backend.
 USER node
 

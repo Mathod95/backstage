@@ -118,7 +118,7 @@ La doc Backstage ne parle que des tokens classiques (scope `repo`), un token fin
 
 Ce token sert aussi à l'intégration GitHub du scaffolder. Les templates prévus demandent le token Git de l'utilisateur via un champ `Secret` au moment de l'exécution, ils ne dépendent donc pas de ce token en écriture.
 
-Ajout sur l'hôte Saltbox (spécifique à cette plateforme, voir [retirer-exemples-et-invite.md](retirer-exemples-et-invite.md#où-vivent-les-identifiants)):
+Ajout sur l'hôte Saltbox (spécifique à cette plateforme, voir [retirer-exemples-et-invite.md](retirer-exemples-et-invite.md#ou-vivent-les-identifiants)):
 
 ```bash
 INV=/srv/git/saltbox/inventories/host_vars/localhost.yml

@@ -45,8 +45,15 @@ catalog:
   # on how to get entities into the catalog.
   # Catalog data is read from GitHub, not from the image: changing users, groups or
   # templates only needs a push to main, no image rebuild. The catalog refreshes it periodically.
+  rules:
+    # Anything can register components and APIs (for example through the catalog import page)
+    - allow: [Component, System, API, Resource, Location]
+    # Users, groups and templates only come from this repo
+    - allow: [Location, User, Group, Component, System, API, Resource, Template]
+      locations:
+        - type: url
+          pattern: https://github.com/Mathod95/backstage/blob/main/**
   locations:
+    # Root of the catalog: catalog/all.yaml lists the other files
     - type: url
-      target: https://github.com/Mathod95/backstage/blob/main/catalog/org.yaml
-      rules:
-        - allow: [User, Group]
+      target: https://github.com/Mathod95/backstage/blob/main/catalog/all.yaml
