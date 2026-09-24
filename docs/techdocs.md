@@ -1,6 +1,6 @@
 # TechDocs: la documentation dans Backstage
 
-Mise en place le 2026-09-24. Statut: **appliqué dans le repo et vérifié en local, pas encore déployé**.
+Mise en place le 2026-09-24. Statut: **déployé et vérifié le 2026-09-24** (commits `4f0e9e5` et `586cecb`).
 
 Cette documentation s'affiche dans Backstage, sur la fiche du composant `backstage` (onglet "Docs"), et dans la recherche. Avant, elle vivait dans un dossier `docs-temp/` en attendant que TechDocs fonctionne.
 
@@ -113,11 +113,11 @@ Ce que ça veut dire pour ce repo:
 
 Pour vérifier en local avant de pousser: `python3 -m venv .venv && .venv/bin/pip install mkdocs-techdocs-core==1.7.1 && .venv/bin/mkdocs serve`.
 
-## À vérifier après déploiement
+## Vérification après déploiement
 
-- La pipeline est verte.
-- Après `sb install mod-backstage`: le catalogue affiche le composant `backstage`, son onglet Docs affiche cette documentation, et la connexion fonctionne toujours (les utilisateurs passent maintenant par le sommaire `all.yaml`, la connexion peut échouer quelques minutes le temps que le catalogue se stabilise).
-- Modifier une page, pousser: aucune pipeline ne part, et la modification apparaît dans Backstage.
+Le 2026-09-24: pipeline verte (3 min 28, contre 2 min 17 avant, à cause de l'installation de Python et MkDocs), puis `sb install mod-backstage`. Le catalogue affiche le composant `backstage` avec le propriétaire `admins`, son onglet Docs affiche cette documentation, et la connexion fonctionne.
+
+Reste à tester: modifier une page et pousser, vérifier qu'aucune pipeline ne part et que la modification apparaît dans Backstage.
 
 ## Sources
 

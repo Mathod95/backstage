@@ -37,7 +37,8 @@ Procédure détaillée pour GitHub OAuth, le retrait de l'invité et des exemple
 - [ ] Décider: branding (titre `Mathod.io`, logos, page d'accueil), fait sur l'ancienne instance. Carte de tous les réglages: [personnalisation.md](personnalisation.md)
 - [ ] Remplacer les valeurs par défaut du modèle dans `app-config.yaml`: `app.title` (`Scaffolded Backstage App`), `organization.name` et `mcpActions.name` (`My Company`)
 - [x] Remplacer le catalogue d'exemple par les vraies sources (`catalog.locations`), première étape décrite dans [retirer-exemples-et-invite.md](retirer-exemples-et-invite.md)
-- [ ] TechDocs mis en place le 2026-09-24 avec génération par Backstage lui-même (choix de l'utilisateur, plutôt que CI et stockage externe), reste à déployer et vérifier: voir [techdocs.md](techdocs.md)
+- [x] TechDocs mis en place le 2026-09-24 avec génération par Backstage lui-même (choix de l'utilisateur, plutôt que CI et stockage externe), déployé et vérifié: voir [techdocs.md](techdocs.md)
+- [ ] Explorer les améliorations possibles de TechDocs: apparence (thème), addons (le paquet `@backstage/plugin-techdocs-module-addons-contrib` est déjà installé), plugins MkDocs et fonctionnalités. Attention: chaque plugin MkDocs ajouté compliquera le futur passage à Zensical
 - [x] TechDocs n'était pas fonctionnel (aucune annotation `backstage.io/techdocs-ref`, `runIn: docker` sans Docker dans l'image): corrigé, voir [techdocs.md](techdocs.md)
 - [x] Une fois TechDocs en place: migrer `docs-temp/` vers `docs/` avec un `mkdocs.yml` et annoter `catalog-info.yaml`
 - [ ] Plus tard, si la doc grossit ou si plusieurs instances existent: passer à la génération en CI et à un stockage externe (recommandation officielle)
