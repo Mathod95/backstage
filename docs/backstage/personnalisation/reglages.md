@@ -160,7 +160,7 @@ Titre, carte, bouton, fond, disposition: voir [Sign-in page](page-de-connexion.m
 
 ## Previous instance
 
-D'après l'[historique de l'ancienne instance](../../historique-ancienne-instance.md): titre `Mathod.io` (`app.title`), logos de la barre latérale (`LogoFull.tsx`, `LogoIcon.tsx`) et page d'accueil personnalisée avec le logo (`homeModule.tsx`, image `mathod-logo.png`). Le code est encore dans `~/backstage` et peut servir de point de départ.
+D'après l'[historique de l'ancienne instance](../../historique-ancienne-instance.md): titre `Mathod.io` (`app.title`), logos de la barre latérale (`LogoFull.tsx`, `LogoIcon.tsx`) et page d'accueil personnalisée avec le logo (`homeModule.tsx`). Le code est encore dans `~/backstage` et peut servir de point de départ.
 
 ## Sources
 

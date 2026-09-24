@@ -60,7 +60,7 @@ Quatre maquettes ont été faites le 2026-09-24 pour comparer des styles (caneva
 | 3. Terminal                   | Fond noir, police de code, fausse fenêtre de terminal      | Page sur mesure |
 | 4. Bandeau revisité           | Disposition actuelle avec d'autres couleurs et formes      | Thème seul      |
 
-**Retenue: la maquette 2** (choix du 2026-09-24, pas encore appliquée): rond avec l'initiale, "Bienvenue sur Mathod.io", un gros bouton plein "Se connecter avec GitHub" et un lien "Besoin d'aide ?". Sa couleur d'accent sera celle du thème. Le logo reste à fournir: l'initiale "M" est provisoire, l'ancienne instance avait `mathod-logo.png` (`~/backstage/packages/app/src/assets/`).
+**Retenue: la maquette 2** (choix du 2026-09-24, pas encore appliquée): rond avec l'initiale, "Bienvenue sur Mathod.io", un gros bouton plein "Se connecter avec GitHub" et un lien "Besoin d'aide ?". Sa couleur d'accent sera celle du thème. Le logo reste à fournir: l'initiale "M" est provisoire.
 
 ## Sources
 
