@@ -3,15 +3,18 @@
 apiVersion: backstage.io/v1alpha1
 kind: User
 metadata:
-  name: guest
+  name: mathod
+  annotations:
+    # GraphQL node_id of the GitHub account, not the numeric REST id
+    github.com/user-id: MDQ6VXNlcjMyNzk1NzQ4
 spec:
-  memberOf: [guests]
+  memberOf: [admins]
 ---
 # https://backstage.io/docs/features/software-catalog/descriptor-format#kind-group
 apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
-  name: guests
+  name: admins
 spec:
   type: team
   children: []

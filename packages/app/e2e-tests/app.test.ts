@@ -16,18 +16,11 @@
 
 import { test, expect } from '@playwright/test';
 
-test('App should render the welcome page', async ({ page }) => {
+// The GitHub OAuth flow cannot be completed in e2e, so this only checks
+// that the sign-in page offers GitHub and no longer offers guest access.
+test('App should render the GitHub sign-in page', async ({ page }) => {
   await page.goto('/');
 
-  const enterButton = page.getByRole('button', { name: 'Enter' });
-  await expect(enterButton).toBeVisible();
-  await enterButton.click();
-
-  const nav = page.getByRole('navigation', { name: 'sidebar nav' });
-  await expect(
-    nav.getByRole('link', { name: 'Catalog', exact: true }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole('link', { name: 'APIs', exact: true }),
-  ).toBeVisible();
+  await expect(page.getByText('Sign in using GitHub')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Enter' })).toHaveCount(0);
 });
