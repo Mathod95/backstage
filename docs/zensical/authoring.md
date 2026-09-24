@@ -100,9 +100,7 @@ Les tableaux s'écrivent en Markdown, avec des `|` entre les colonnes et une lig
 
 Dans le fichier, les colonnes sont **alignées**: chaque cellule est complétée par des espaces pour que les `|` tombent les uns sous les autres, avec un espace de chaque côté. Le rendu est le même, mais le fichier reste lisible.
 
-Les titres des colonnes sont en anglais (`Field`, `Required`, `Value`...), le contenu des cellules reste en français.
-
-Garder des cellules courtes: une explication longue va dans un paragraphe sous le tableau plutôt que dans une cellule.
+Les règles de rédaction des tableaux (titres de colonnes, longueur des cellules) sont dans [Rules](rules.md#tableaux).
 
 L'alignement du texte dans une colonne se règle avec des `:` dans la ligne de séparation: au début pour aligner à gauche, aux deux bouts pour centrer, à la fin pour aligner à droite.
 
