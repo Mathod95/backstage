@@ -16,6 +16,8 @@ Chaque page commence par un en-tête YAML, le front matter, placé tout en haut 
 ```yaml
 ---
 title: Settings
+description: 
+icon: 
 status: draft
 date: 2026-09-24
 todo:
@@ -29,6 +31,8 @@ todo:
 | Champ | Obligatoire | Valeur |
 |---|---|---|
 | `title` | Oui | Titre court de la page |
+| `description` | Oui, peut rester vide | Une phrase qui résume la page. Remplie, elle devient la description de la page dans le HTML généré (`<meta name="description">`) |
+| `icon` | Oui, peut rester vide | Icône affichée devant le titre de la page dans le menu, par son nom, par exemple `material/cog`. Icônes disponibles: celles de Material Design (`material/...`, liste sur <https://pictogrammers.com/library/mdi/>), FontAwesome (`fontawesome/...`) et Octicons (`octicons/...`), fournies par mkdocs-material |
 | `status` | Oui | `draft`, `review` ou `done` (voir plus bas) |
 | `date` | Oui | Date de la dernière mise à jour, au format `AAAA-MM-JJ` (par exemple `2026-09-24`) |
 | `todo` | Oui | Ce qui reste à faire sur la page. Liste vide s'il n'y a rien: `todo: []` |
@@ -54,6 +58,23 @@ todo:
 **Les guillemets sont obligatoires.** En YAML, `[ ]` sans guillemets veut dire "liste vide": `- [ ] Tâche` est invalide. MkDocs n'arrive alors pas à lire l'en-tête et l'affiche comme du texte brut en haut de la page, sans aucun avertissement.
 
 Sans tâche, écrire `todo: []`. Un `todo:` laissé vide fonctionne aussi (vérifié), mais `[]` montre clairement que la liste est vide.
+
+### Champs vides
+
+Un champ vide ne casse pas la page. Vérifié le 2026-09-24 avec le générateur de Backstage (`mkdocs-techdocs-core` 1.7.1), sur toutes ces formes:
+
+```yaml
+description:
+icon:
+todo:
+todo: []
+description: ""
+icon: ""
+```
+
+Dans tous les cas, la page se construit sans erreur ni avertissement, l'en-tête reste invisible et le contenu s'affiche normalement. Un champ vide n'a simplement aucun effet (pas d'icône, pas de description).
+
+Testé aussi avec des champs remplis: `description: Une description` apparaît bien dans le HTML généré, et `icon: material/cog` affiche l'icône devant le titre dans le menu. Ces deux effets ont été vérifiés sur le site généré par MkDocs, pas encore dans l'affichage de TechDocs dans Backstage.
 
 ### Vérifier
 
