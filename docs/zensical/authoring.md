@@ -100,27 +100,7 @@ Les tableaux s'écrivent en Markdown, avec des `|` entre les colonnes et une lig
 
 Dans le fichier, les colonnes sont **alignées**: chaque cellule est complétée par des espaces pour que les `|` tombent les uns sous les autres, avec un espace de chaque côté. Le rendu est le même, mais le fichier reste lisible.
 
-``` markdown title="Data table"
-| Method   | Description     |
-| -------- | --------------- |
-| `GET`    | Fetch resource  |
-| `PUT`    | Update resource |
-| `DELETE` | Delete resource |
-```
-
-<div class="result" markdown>
-
-| Method   | Description     |
-| -------- | --------------- |
-| `GET`    | Fetch resource  |
-| `PUT`    | Update resource |
-| `DELETE` | Delete resource |
-
-</div>
-
 Garder des cellules courtes: une explication longue va dans un paragraphe sous le tableau plutôt que dans une cellule.
-
-### Column alignment
 
 L'alignement du texte dans une colonne se règle avec des `:` dans la ligne de séparation: au début pour aligner à gauche, aux deux bouts pour centrer, à la fin pour aligner à droite.
 
