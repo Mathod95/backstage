@@ -9,7 +9,7 @@ todo: []
 
 # Rules
 
-Les règles à suivre pour écrire cette documentation. Elles s'ajoutent au fil des demandes, et s'appliquent à toute page créée ou modifiée. La façon technique de créer une page (front matter, syntaxe des tableaux) est dans [Authoring](authoring.md).
+> Les règles à suivre pour écrire cette documentation. Elles s'ajoutent au fil des demandes, et s'appliquent à toute page créée ou modifiée. La façon technique de créer une page (front matter, syntaxe des tableaux) est dans [Authoring](authoring.md).
 
 ## Structure
 
@@ -19,6 +19,14 @@ Les règles à suivre pour écrire cette documentation. Elles s'ajoutent au fil 
 - Chaque template aura sa propre page de doc, accessible depuis le template lui-même.
 
 ## Pages
+
+- Chaque page commence, juste sous son titre, par une courte phrase d'intro en citation (`>` devant le texte), qui dit de quoi parle la page:
+
+    ```markdown
+    # Authoring
+
+    > Comment créer et écrire une page de cette documentation.
+    ```
 
 - Chaque page commence par un front matter complet: `title`, `description`, `icon`, `status`, `date`, `todo` (détails dans [Authoring](authoring.md#front-matter)).
 

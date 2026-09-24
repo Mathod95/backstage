@@ -9,7 +9,9 @@ todo:
 
 # Où sont les réglages
 
-Carte de tout ce qu'on peut personnaliser dans l'interface, avec le fichier où ça se règle et la valeur actuelle. Rédigé le 2026-09-24 à partir du code du repo (Backstage 1.55.0, nouveau système frontend) et de la documentation officielle (liens en fin de document).
+> Carte de tout ce qu'on peut personnaliser dans l'interface, avec le fichier où ça se règle et la valeur actuelle.
+
+Rédigé le 2026-09-24 à partir du code du repo (Backstage 1.55.0, nouveau système frontend) et de la documentation officielle (liens en fin de document).
 
 État au 2026-09-24: **rien n'est personnalisé**, tout est resté comme dans le modèle `create-app`.
 

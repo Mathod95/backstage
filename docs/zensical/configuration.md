@@ -9,7 +9,7 @@ todo: []
 
 # Configuration
 
-Configuration de Zensical dans ce repo: l'aperçu local de la doc, et les fonctionnalités ajoutées au thème.
+> Configuration de Zensical dans ce repo: l'aperçu local de la doc, et les fonctionnalités ajoutées au thème.
 
 ## Aperçu local
 

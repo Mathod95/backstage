@@ -1,6 +1,6 @@
 # Page de connexion
 
-Tout ce qui s'affiche sur la page de connexion est modifiable: titre, carte, bouton, texte, fond, bandeau, disposition.
+> Tout ce qui s'affiche sur la page de connexion est modifiable: titre, carte, bouton, texte, fond, bandeau, disposition.
 
 ## Aujourd'hui
 

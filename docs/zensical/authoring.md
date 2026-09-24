@@ -9,7 +9,7 @@ todo: []
 
 # Authoring
 
-Comment créer et écrire une page de cette documentation. Toute nouvelle page, et toute page modifiée, suit ces règles et celles de [Rules](rules.md).
+> Comment créer et écrire une page de cette documentation. Toute nouvelle page, et toute page modifiée, suit ces règles et celles de [Rules](rules.md).
 
 ## Front matter
 
