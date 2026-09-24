@@ -41,6 +41,7 @@ Procédure détaillée pour GitHub OAuth, le retrait de l'invité et des exemple
 - [x] TechDocs n'était pas fonctionnel (aucune annotation `backstage.io/techdocs-ref`, `runIn: docker` sans Docker dans l'image): corrigé, voir [techdocs.md](techdocs.md)
 - [x] Une fois TechDocs en place: migrer `docs-temp/` vers `docs/` avec un `mkdocs.yml` et annoter `catalog-info.yaml`
 - [ ] Plus tard, si la doc grossit ou si plusieurs instances existent: passer à la génération en CI et à un stockage externe (recommandation officielle)
+- [ ] Suivre l'arrivée de Zensical comme moteur TechDocs ([PR #35322](https://github.com/backstage/backstage/pull/35322), [PR #35781](https://github.com/backstage/backstage/pull/35781)) et migrer quand il sera disponible. D'ici là, garder `mkdocs-techdocs-core` fixé et la doc en Markdown simple, voir [techdocs.md](techdocs.md#avenir-de-mkdocs-et-zensical)
 - [ ] Décider: sauvegardes planifiées de Postgres
 - [ ] Décider: healthcheck du conteneur (`/.backstage/health/v1/readiness`)
 - [ ] Maintenance régulière: monter la version de Backstage (`yarn backstage-cli versions:bump`) et redéployer

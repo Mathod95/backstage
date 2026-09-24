@@ -50,7 +50,7 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 RUN pip3 install --no-cache-dir mkdocs-techdocs-core==1.7.1
 ```
 
-La version de `mkdocs-techdocs-core` est fixée (1.7.1, celle testée en local) pour que deux constructions de l'image donnent le même résultat. Elle installe MkDocs 1.6.1 et mkdocs-material 9.7.7, qui interdit MkDocs 2.0 (une future version annoncée comme incompatible avec les plugins). Monter la version volontairement, après un test. L'image grossit (Python et MkDocs): c'est le prix d'une génération sans stockage externe.
+La version de `mkdocs-techdocs-core` est fixée (1.7.1, celle testée en local) pour que deux constructions de l'image donnent le même résultat. Elle installe MkDocs 1.6.1 et mkdocs-material 9.7.7, qui interdit MkDocs 2.0 (une réécriture incompatible avec les plugins, voir "Avenir de MkDocs et Zensical" plus bas). Monter la version volontairement, après un test. L'image grossit (Python et MkDocs): c'est le prix d'une génération sans stockage externe.
 
 **`app-config.yaml`**: `techdocs.generator.runIn` passe de `docker` à `local`. Le conteneur n'a pas Docker, il ne pouvait donc pas lancer l'image de génération.
 
@@ -89,6 +89,20 @@ Pourquoi un motif: les règles données directement sur une location de la confi
   - `/api/techdocs/static/docs/default/component/backstage/index.html` répond 200.
 
 Pas testé en local: la lecture depuis GitHub (les nouveaux fichiers n'y sont pas encore), ni l'image elle-même (pas de Docker dans l'environnement de travail). Ce sera vérifié au déploiement.
+
+## Avenir de MkDocs et Zensical
+
+Point fait le 2026-09-24 à partir des discussions GitHub listées plus bas.
+
+- **MkDocs 1.x n'est plus maintenu** (dernière version, 1.6.1, en août 2024). **MkDocs 2.0** est une réécriture qui supprime le système de plugins: TechDocs (`techdocs-core` est un plugin) et mkdocs-material ne fonctionnent pas avec.
+- **Zensical** est le successeur de mkdocs-material, créé par la même équipe. Il lit les fichiers `mkdocs.yml` existants pour faciliter la migration.
+- **Côté Backstage**: la discussion officielle est l'[RFC #33990](https://github.com/backstage/backstage/issues/33990) "Exploring Zensical as the Next TechDocs Documentation Engine". Les autres tickets ([#32815](https://github.com/backstage/backstage/issues/32815), [#34329](https://github.com/backstage/backstage/issues/34329), [mkdocs-techdocs-core#341](https://github.com/backstage/mkdocs-techdocs-core/issues/341)) ont été fermés en renvoyant vers elle. La proposition concrète est la [PR #35322](https://github.com/backstage/backstage/pull/35322) (ouverte, pas encore acceptée): ajouter Zensical comme second moteur de TechDocs, en trois étapes (préparer le terrain sans rien changer, ajouter Zensical, puis en faire le moteur par défaut). La première étape a commencé le 2026-09-18 dans la [PR #35781](https://github.com/backstage/backstage/pull/35781), en brouillon.
+- **Exemple d'un autre projet**: [radiorabe/actions#226](https://github.com/radiorabe/actions/issues/226) publie déjà sa doc avec Zensical sur GitHub Pages, garde le nom `mkdocs.yml`, et laisse son Backstage sur MkDocs en attendant.
+
+Ce que ça veut dire pour ce repo:
+- **Aujourd'hui, rien à changer.** La version fixée (`mkdocs-techdocs-core==1.7.1`) installe MkDocs 1.6.1 et mkdocs-material 9.7.7, qui interdit MkDocs 2. L'image ne peut donc pas récupérer MkDocs 2 par accident. MkDocs 1.6.1 n'évolue plus, mais il fonctionne.
+- **Préparer la migration**: garder une doc simple, en Markdown standard, sans plugin MkDocs supplémentaire. Plus la doc est simple, plus le passage à Zensical sera facile.
+- **Plus tard**: quand Backstage proposera Zensical comme moteur TechDocs, changer de moteur (config et image). Le skill `create-docs` (Zensical) pourra alors resservir.
 
 ## Modifier la documentation
 
