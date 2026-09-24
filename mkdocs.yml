@@ -9,8 +9,8 @@ nav:
           - Thème (MUI et BUI): backstage/personnalisation/theme.md
           - Page de connexion: backstage/personnalisation/page-de-connexion.md
   - Zensical:
-      - Authoring: zensical/authoring.md
       - Configuration: zensical/configuration.md
+      - Authoring: zensical/authoring.md
 
 plugins:
   - techdocs-core

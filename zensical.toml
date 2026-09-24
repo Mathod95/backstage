@@ -22,8 +22,8 @@ nav = [
     ] },
   ] },
   { "Zensical" = [
-    { "Authoring" = "zensical/authoring.md" },
     { "Configuration" = "zensical/configuration.md" },
+    { "Authoring" = "zensical/authoring.md" },
   ] },
 ]
 
