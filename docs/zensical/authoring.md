@@ -4,7 +4,8 @@ description: Comment créer et écrire une page de cette documentation
 icon: material/pencil
 status: draft
 date: 2026-09-24
-todo: []
+todo:
+  - "[ ] Ajouter une ligne technique: toujours une ligne vide avant une liste"
 ---
 
 # Authoring
@@ -90,7 +91,7 @@ Testé aussi avec des champs remplis: `description: Une description` apparaît b
 
 ### Checking
 
-Après avoir écrit ou modifié un front matter, vérifier dans l'aperçu local que l'en-tête n'apparaît pas en haut de la page (voir [Configuration](configuration.md#apercu-local)).
+Après avoir écrit ou modifié un front matter, vérifier dans l'aperçu local que l'en-tête n'apparaît pas en haut de la page (voir [Configuration](configuration.md#local-preview)).
 
 ## Data tables
 
@@ -100,7 +101,7 @@ Les tableaux s'écrivent en Markdown, avec des `|` entre les colonnes et une lig
 
 Dans le fichier, les colonnes sont **alignées**: chaque cellule est complétée par des espaces pour que les `|` tombent les uns sous les autres, avec un espace de chaque côté. Le rendu est le même, mais le fichier reste lisible.
 
-Les règles de rédaction des tableaux (titres de colonnes, longueur des cellules) sont dans [Rules](rules.md#tableaux).
+Les règles de rédaction des tableaux (titres de colonnes, longueur des cellules) sont dans [Rules](rules.md#tables).
 
 L'alignement du texte dans une colonne se règle avec des `:` dans la ligne de séparation: au début pour aligner à gauche, aux deux bouts pour centrer, à la fin pour aligner à droite.
 

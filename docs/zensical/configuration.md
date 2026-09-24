@@ -11,7 +11,7 @@ todo: []
 
 > Configuration de Zensical dans ce repo: l'aperçu local de la doc, et les fonctionnalités ajoutées au thème.
 
-## Aperçu local
+## Local preview
 
 Pour voir une page sans pousser ni attendre Backstage, la doc se prévisualise en local avec Zensical:
 
@@ -27,7 +27,7 @@ Première installation, une seule fois:
 python3 -m venv zensical/.venv && zensical/.venv/bin/pip install zensical
 ```
 
-### Organisation des fichiers
+### File layout
 
 | File                                     | Read by              | Role                                             |
 | ---------------------------------------- | -------------------- | ------------------------------------------------ |
@@ -44,7 +44,7 @@ Le menu est écrit deux fois, dans `mkdocs.yml` et dans `zensical.toml`: toute p
 
 La config Zensical doit être à la racine du repo: Zensical refuse un dossier de pages situé en dehors de son propre dossier (`docs_dir must be within project root`), même à travers un lien symbolique (testé le 2026-09-24 avec Zensical 0.0.64).
 
-## Fonctionnalités ajoutées
+## Added features
 
 Cinq fonctionnalités développées dans [Mathod95/zensical](https://github.com/Mathod95/zensical), installées le 2026-09-24 à partir des dossiers `example/` du repo. Chaque titre mène au README de la fonctionnalité, qui détaille son usage.
 

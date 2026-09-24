@@ -7,15 +7,15 @@ date: 2026-09-24
 todo: []
 ---
 
-# Thème (MUI et BUI)
+# Theme
 
 > Comment changer l'apparence de tout Backstage: couleurs, polices, arrondis, ombres, style des boutons, des cartes, des menus, des champs de saisie.
 
 Rien n'est encore appliqué: le thème actuel est celui de Backstage par défaut.
 
-Cette page couvre le **theming graphique**. Le **branding** (nom de l'application, nom de l'organisation, logos, icônes, textes) se règle ailleurs, surtout dans `app-config.yaml`: voir [Où sont les réglages](reglages.md#deux-familles-de-reglages).
+Cette page couvre le **theming graphique**. Le **branding** (nom de l'application, nom de l'organisation, logos, icônes, textes) se règle ailleurs, surtout dans `app-config.yaml`: voir [Settings](reglages.md#branding-and-theming).
 
-## Deux systèmes d'affichage en même temps
+## UI systems
 
 **Ce Backstage utilise un mélange de MUI et de BUI.** Les deux systèmes cohabitent pendant une période de transition, et MUI y est même présent en deux versions. Versions installées le 2026-09-24 (Backstage 1.55.0):
 
@@ -31,7 +31,7 @@ Le paquet `@backstage/theme` (0.7.3) fait le lien entre MUI v4 et MUI v5: un th�
 
 Selon l'élément de l'écran, c'est l'un ou l'autre qui le dessine. Pour le savoir, ouvrir l'inspecteur du navigateur: un élément dont les classes commencent par `bui-` vient de BUI, sinon c'est MUI.
 
-### On ne peut pas tout passer en BUI
+### Why not BUI only
 
 Ce n'est pas nous qui choisissons: les pages de Backstage (catalogue, templates, doc, recherche, paramètres...) sont des plugins écrits par l'équipe Backstage. C'est elle qui les passe de MUI à BUI, plugin par plugin. Retirer MUI casserait toutes les pages qui l'utilisent encore.
 
@@ -40,7 +40,7 @@ Ce qu'on contrôle:
 - **Notre propre code** (barre latérale, logos, widget d'accueil, futurs composants): on peut l'écrire en BUI dès maintenant, pour ne pas ajouter de MUI.
 - **Les mises à jour**: chaque montée de version (`yarn backstage-cli versions:bump`) apporte les pages que l'équipe a passées en BUI. La part de BUI augmente toute seule.
 
-## Un thème, deux fichiers
+## One theme, two files
 
 Pour que l'apparence soit la même partout, il faut régler les deux systèmes, avec les mêmes valeurs. Le dossier prévu est `packages/app/src/theme/`:
 
@@ -53,9 +53,9 @@ Pour que l'apparence soit la même partout, il faut régler les deux systèmes, 
 
 Une fois ces deux fichiers écrits, toutes les pages suivent le thème: celles en MUI comme celles en BUI, et les pages qui passeront de MUI à BUI plus tard garderont la même apparence sans rien retoucher. Il n'existe pas encore d'outil pour convertir un thème MUI en thème BUI (la doc officielle l'annonce, il n'est pas disponible).
 
-## Ce que le thème permet de changer
+## What the theme changes
 
-### L'apparence, presque tout
+### Appearance
 
 Couleurs, bordures, arrondis, espacements, polices, ombres, couleurs au survol, de chaque type d'élément, sur toutes les pages à la fois.
 
@@ -82,12 +82,12 @@ Exemple de la doc officielle pour BUI:
 }
 ```
 
-### Ce que le thème ne change pas
+### Limits
 
-- **Le contenu et la disposition**: ce qu'il y a dans un menu, l'ordre des éléments, l'emplacement de la barre de recherche. Pour ça, il faut remplacer le composant lui-même, comme on l'a fait pour la page de connexion (voir [Page de connexion](page-de-connexion.md)). La barre latérale est déjà dans notre code: `packages/app/src/modules/nav/Sidebar.tsx`.
+- **Le contenu et la disposition**: ce qu'il y a dans un menu, l'ordre des éléments, l'emplacement de la barre de recherche. Pour ça, il faut remplacer le composant lui-même, comme on l'a fait pour la page de connexion (voir [Sign-in page](page-de-connexion.md)). La barre latérale est déjà dans notre code: `packages/app/src/modules/nav/Sidebar.tsx`.
 - **Les plugins qui ignorent le thème**: certains plugins écrivent leurs couleurs en dur. C'est rare dans les plugins officiels, à traiter au cas par cas.
 
-## Exemple: le même style pour tous les boutons
+## Example: buttons
 
 Demande type: "boutons arrondis, avec une ombre, qui changent de couleur au survol, partout".
 
@@ -122,7 +122,7 @@ Demande type: "boutons arrondis, avec une ombre, qui changent de couleur au surv
 
 Les valeurs (arrondi, ombre, couleurs) sont les mêmes dans les deux fichiers. Même principe pour les cartes, les menus, les champs de saisie, les onglets.
 
-## Règles de bonne pratique
+## Good practices
 
 Tirées notamment de l'article [How to Customize Backstage UI Like a Pro](https://medium.com/@rameshavutu/how-to-customize-backstage-ui-like-a-pro-974f59528583) (avril 2026):
 

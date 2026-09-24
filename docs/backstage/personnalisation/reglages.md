@@ -1,56 +1,66 @@
 ---
 title: Settings
+description: Où se règle chaque élément personnalisable de l'interface
+icon: material/tune
 status: draft
 date: 2026-09-24
 todo:
-  - "[ ] Restructurer convenablement les tableaux"
-  - "[ ] Les titres des tableau en anglais"
+  - "[x] Restructurer convenablement les tableaux"
+  - "[x] Les titres des tableau en anglais"
 ---
 
-# Où sont les réglages
+# Settings
 
 > Carte de tout ce qu'on peut personnaliser dans l'interface, avec le fichier où ça se règle et la valeur actuelle.
 
-Rédigé le 2026-09-24 à partir du code du repo (Backstage 1.55.0, nouveau système frontend) et de la documentation officielle (liens en fin de document).
+État actuel: **rien n'est personnalisé**, tout est resté comme dans le modèle `create-app` (Backstage 1.55.0, nouveau système frontend).
 
-État au 2026-09-24: **rien n'est personnalisé**, tout est resté comme dans le modèle `create-app`.
+Tous ces réglages sont dans le code ou dans `app-config.yaml`, donc dans l'image: chaque changement demande un rebuild et un redéploiement (voir [Catalogue lu depuis GitHub](../../catalogue-depuis-github.md)). Le mieux est donc de regrouper les personnalisations dans un seul lot.
 
-Tous ces réglages sont dans le code ou dans `app-config.yaml`, donc dans l'image: chaque changement demande un rebuild et un redéploiement (voir [catalogue-depuis-github.md](../../catalogue-depuis-github.md)). Le mieux est donc de regrouper les personnalisations dans un seul lot.
-
-## Deux familles de réglages
+## Branding and theming
 
 La personnalisation se divise en deux parties, qui ne se règlent pas au même endroit:
 
-| Famille | Ce que c'est | Où ça se règle |
-|---|---|---|
-| **Branding** | L'identité: noms, textes, logos, icônes, liens | Surtout `app-config.yaml` (`app.title`, `organization.name`, `mcpActions`, `app.support`, widgets de la page d'accueil). Aussi les logos dans `packages/app/src/modules/nav/`, les icônes du navigateur dans `packages/app/public/`, et le texte de bienvenue dans `packages/app/src/modules/home/homeModule.tsx` |
-| **Theming graphique** | L'apparence: couleurs, polices, arrondis, ombres, style des boutons, cartes, menus | Le thème, dans le dossier prévu `packages/app/src/theme/` (`theme.ts` pour MUI, `theme.css` pour BUI). Voir [Thème (MUI et BUI)](theme.md) |
+| Family                | What                                    | Where                                    |
+| --------------------- | --------------------------------------- | ---------------------------------------- |
+| **Branding**          | L'identité: noms, textes, logos, icônes | Surtout `app-config.yaml`, voir la carte |
+| **Theming graphique** | L'apparence: couleurs, polices, formes  | Le thème, dans `packages/app/src/theme/` |
 
-Le branding se change en quelques lignes, sans rien savoir du thème. Le theming graphique demande d'écrire le thème une fois, puis s'applique à toutes les pages.
+Le branding se change en quelques lignes, sans rien savoir du thème. Le theming graphique demande d'écrire le thème une fois (`theme.ts` pour MUI, `theme.css` pour BUI), puis s'applique à toutes les pages: voir [Theme](theme.md).
 
-## La carte
+## Settings map
 
-| Élément | Fichier | Réglage | Valeur actuelle |
-|---|---|---|---|
-| Nom de l'application (onglet du navigateur, page de connexion) | `app-config.yaml` | `app.title` | `Scaffolded Backstage App` |
-| Nom de l'organisation (affiché dans certaines pages, par exemple le catalogue) | `app-config.yaml` | `organization.name` | `My Company` |
-| Nom et description pour les assistants IA (MCP) | `app-config.yaml` | `mcpActions.name`, `mcpActions.description` | `My Company Backstage` |
-| Lien "Support" (bouton d'aide et pages d'erreur) | `app-config.yaml` | `app.support.url`, `app.support.items` | Non défini (Backstage affiche "Add `app.support` config key") |
-| Page d'accueil (ce qui s'affiche sur `/`) | `app-config.yaml` | `app.extensions`, `page:catalog` ou `page:home` avec `path: /` | Le catalogue |
-| Widgets de la page Home (liens, horloges, blague...) | `app-config.yaml` | `app.extensions`, `home-page-widget:home/...` et `page:home` → `defaultConfig` | Liens vers backstage.io, horloges NYC, UTC, STO, TYO, blague aléatoire |
-| Carte "Getting Started" de la page Home | `packages/app/src/modules/home/homeModule.tsx` | Texte Markdown `content` | Texte de bienvenue Backstage en anglais |
-| Logo de la barre latérale, ouverte | `packages/app/src/modules/nav/LogoFull.tsx` | SVG et couleur (`fill`) | Logo Backstage, `#7df3e1` |
-| Logo de la barre latérale, repliée | `packages/app/src/modules/nav/LogoIcon.tsx` | SVG et couleur (`fill`) | Logo Backstage, `#7df3e1` |
-| Contenu et ordre du menu latéral | `packages/app/src/modules/nav/Sidebar.tsx` | Composant `SidebarContent` | Search, Home, Catalog, Create, puis le reste par ordre alphabétique, Settings en bas |
-| Icône de l'onglet du navigateur | `packages/app/public/` | `favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png`, `safari-pinned-tab.svg`, `apple-touch-icon.png`, `android-chrome-192x192.png` | Icônes Backstage |
-| Nom et couleurs quand on "installe" le site sur mobile | `packages/app/public/manifest.json` | `name`, `short_name`, `theme_color`, `background_color` | `Backstage`, noir et blanc |
-| Description de la page (moteurs de recherche) | `packages/app/public/index.html` | `<meta name="description">` | Texte du modèle |
-| Page de connexion (titre de la carte, texte) | `packages/app/src/App.tsx` | `SignInPage`, `provider.title` et `provider.message` | Titre de la page = `app.title`, carte "GitHub", texte "Sign in using GitHub". Voir [Page de connexion](page-de-connexion.md) |
-| Couleurs, polices, formes, thème clair et sombre | Nouveau dossier prévu `packages/app/src/theme/` | Voir [Thème (MUI et BUI)](theme.md) | Thèmes Backstage par défaut |
+Les chemins de fichiers sont relatifs à `packages/app/`.
 
-## Détails
+| Element                          | File                              | Setting                              | Current value                   |
+| -------------------------------- | --------------------------------- | ------------------------------------ | ------------------------------- |
+| Nom de l'application             | `app-config.yaml` (racine)        | `app.title`                          | `Scaffolded Backstage App`      |
+| Nom de l'organisation            | `app-config.yaml` (racine)        | `organization.name`                  | `My Company`                    |
+| Nom pour les assistants IA (MCP) | `app-config.yaml` (racine)        | `mcpActions.name`, `.description`    | `My Company Backstage`          |
+| Lien "Support"                   | `app-config.yaml` (racine)        | `app.support`                        | Non défini                      |
+| Page affichée sur `/`            | `app-config.yaml` (racine)        | `app.extensions`                     | Le catalogue                    |
+| Widgets de la page Home          | `app-config.yaml` (racine)        | `app.extensions`                     | Widgets du modèle               |
+| Carte "Getting Started"          | `src/modules/home/homeModule.tsx` | Texte `content`                      | Bienvenue Backstage, en anglais |
+| Logo, barre ouverte              | `src/modules/nav/LogoFull.tsx`    | SVG et `fill`                        | Logo Backstage, `#7df3e1`       |
+| Logo, barre repliée              | `src/modules/nav/LogoIcon.tsx`    | SVG et `fill`                        | Logo Backstage, `#7df3e1`       |
+| Menu latéral                     | `src/modules/nav/Sidebar.tsx`     | `SidebarContent`                     | Menu du modèle                  |
+| Icônes de l'onglet               | `public/`                         | Fichiers `favicon*`, etc.            | Icônes Backstage                |
+| Nom et couleurs sur mobile       | `public/manifest.json`            | `name`, `theme_color`...             | `Backstage`, noir et blanc      |
+| Description pour les moteurs     | `public/index.html`               | `<meta name="description">`          | Texte du modèle                 |
+| Page de connexion                | `src/App.tsx`                     | `provider.title`, `provider.message` | Carte "GitHub"                  |
+| Couleurs, polices, formes        | `src/theme/` (à créer)            | Voir [Theme](theme.md)               | Thème Backstage par défaut      |
 
-### Textes simples (`app-config.yaml`)
+Détails des valeurs actuelles:
+
+- **Lien "Support"**: sans réglage, Backstage affiche "Add `app.support` config key" dans son bouton d'aide et ses pages d'erreur.
+- **Widgets de la page Home**: liens vers backstage.io, horloges NYC, UTC, STO, TYO, blague aléatoire.
+- **Menu latéral**: Search, Home, Catalog, Create, puis le reste par ordre alphabétique, Settings en bas.
+- **Icônes de l'onglet**: `favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png`, `safari-pinned-tab.svg`, `apple-touch-icon.png`, `android-chrome-192x192.png`.
+- **Page de connexion**: le titre de la page est `app.title`, le texte de la carte "Sign in using GitHub". Voir [Sign-in page](page-de-connexion.md).
+
+## Details
+
+### Texts (`app-config.yaml`)
 
 Les plus faciles: trois lignes à changer.
 
@@ -81,7 +91,7 @@ app:
             title: GitHub Issues
 ```
 
-### Page d'accueil (`app-config.yaml` et `homeModule.tsx`)
+### Home page (`app-config.yaml`, `homeModule.tsx`)
 
 Aujourd'hui `/` affiche le catalogue. Pour afficher la page Home à la place, dans `app.extensions`, supprimer le bloc `page:catalog` avec `path: /` et décommenter celui de `page:home`:
 
@@ -125,30 +135,31 @@ Le texte de la carte "Getting Started" est une chaîne Markdown dans `packages/a
 ### Logos (`packages/app/src/modules/nav/`)
 
 Deux composants, affichés en haut de la barre latérale:
+
 - `LogoFull.tsx` quand la barre est ouverte;
 - `LogoIcon.tsx` quand elle est repliée.
 
 Ce sont des SVG dessinés directement dans le code. On peut les remplacer par un autre SVG, ou par une image: l'ancienne instance utilisait `packages/app/src/assets/mathod-logo.png`, toujours présent dans `~/backstage/packages/app/src/assets/`.
 
-### Menu latéral (`packages/app/src/modules/nav/Sidebar.tsx`)
+### Sidebar (`packages/app/src/modules/nav/Sidebar.tsx`)
 
 Définit ce qui apparaît dans la barre latérale et dans quel ordre. Chaque page s'appelle par son identifiant (`nav.take('page:catalog')`...), `nav.rest()` ajoute toutes les pages restantes.
 
-### Icônes du navigateur et du mobile (`packages/app/public/`)
+### Icons (`packages/app/public/`)
 
 Des fichiers image à remplacer par les siens, en gardant les mêmes noms et tailles. `manifest.json` donne le nom et les couleurs quand le site est ajouté à l'écran d'accueil d'un téléphone.
 
-### Thème: couleurs, polices, formes
+### Theme
 
-Ce Backstage mélange trois systèmes d'affichage: MUI v4 (`@material-ui/core` 4.12.4), MUI v5 (`@mui/material` 5.18.0) et BUI (`@backstage/ui` 0.18.0). Tout ce qui touche à l'apparence générale (couleurs, polices, arrondis, ombres, style des boutons, des cartes, des menus...) se règle dans le thème. Détails dans [Thème (MUI et BUI)](theme.md).
+Ce Backstage mélange trois systèmes d'affichage: MUI v4 (`@material-ui/core` 4.12.4), MUI v5 (`@mui/material` 5.18.0) et BUI (`@backstage/ui` 0.18.0). Tout ce qui touche à l'apparence générale (couleurs, polices, arrondis, ombres, style des boutons, des cartes, des menus...) se règle dans le thème. Détails dans [Theme](theme.md).
 
-### Page de connexion
+### Sign-in page
 
-Titre, carte, bouton, fond, disposition: voir [Page de connexion](page-de-connexion.md).
+Titre, carte, bouton, fond, disposition: voir [Sign-in page](page-de-connexion.md).
 
-## Ce qui était fait sur l'ancienne instance
+## Previous instance
 
-D'après [historique-ancienne-instance.md](../../historique-ancienne-instance.md): titre `Mathod.io` (`app.title`), logos de la barre latérale (`LogoFull.tsx`, `LogoIcon.tsx`) et page d'accueil personnalisée avec le logo (`homeModule.tsx`, image `mathod-logo.png`). Le code est encore dans `~/backstage` et peut servir de point de départ.
+D'après l'[historique de l'ancienne instance](../../historique-ancienne-instance.md): titre `Mathod.io` (`app.title`), logos de la barre latérale (`LogoFull.tsx`, `LogoIcon.tsx`) et page d'accueil personnalisée avec le logo (`homeModule.tsx`, image `mathod-logo.png`). Le code est encore dans `~/backstage` et peut servir de point de départ.
 
 ## Sources
 

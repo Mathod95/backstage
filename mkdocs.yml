@@ -4,10 +4,10 @@ repo_url: https://github.com/Mathod95/backstage
 edit_uri: edit/main/docs
 nav:
   - Backstage:
-      - Personnalisation:
-          - Où sont les réglages: backstage/personnalisation/reglages.md
-          - Thème (MUI et BUI): backstage/personnalisation/theme.md
-          - Page de connexion: backstage/personnalisation/page-de-connexion.md
+      - Customization:
+          - Settings: backstage/personnalisation/reglages.md
+          - Theme: backstage/personnalisation/theme.md
+          - Sign-in page: backstage/personnalisation/page-de-connexion.md
   - Zensical:
       - Configuration: zensical/configuration.md
       - Authoring: zensical/authoring.md
