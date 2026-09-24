@@ -3,22 +3,14 @@ site_description: Documentation du Backstage de backstage.mathod.fr
 repo_url: https://github.com/Mathod95/backstage
 edit_uri: edit/main/docs
 nav:
-  - Accueil: index.md
-  - Zensical:
-      - Authoring: zensical/authoring.md
-      - Configuration: zensical/configuration.md
-  - Pourquoi Backstage: pourquoi-backstage.md
-  - Todo: todo.md
-  - Historique de l'ancienne instance: historique-ancienne-instance.md
-  - Changements:
-      - Retirer les exemples et l'invité: retirer-exemples-et-invite.md
-      - Catalogue lu depuis GitHub: catalogue-depuis-github.md
-      - Retirer SQLite de l'image: retirer-sqlite-de-l-image.md
-      - TechDocs: techdocs.md
   - Backstage:
       - Personnalisation:
           - Où sont les réglages: backstage/personnalisation/reglages.md
           - Thème (MUI et BUI): backstage/personnalisation/theme.md
           - Page de connexion: backstage/personnalisation/page-de-connexion.md
+  - Zensical:
+      - Authoring: zensical/authoring.md
+      - Configuration: zensical/configuration.md
+
 plugins:
   - techdocs-core
