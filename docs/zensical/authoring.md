@@ -31,14 +31,14 @@ todo:
 
 ### Fields
 
-| Field         | Required              | Value                                                             |
-| ------------- | --------------------- | ----------------------------------------------------------------- |
-| `title`       | Oui                   | Titre court de la page                                            |
-| `description` | Oui, peut rester vide | Une phrase qui résume la page                                     |
-| `icon`        | Oui, peut rester vide | Icône devant le titre de la page dans le menu, ex. `material/cog` |
-| `status`      | Oui                   | `draft`, `review` ou `done` (voir plus bas)                       |
-| `date`        | Oui                   | Date de la dernière mise à jour, au format `AAAA-MM-JJ`           |
-| `todo`        | Oui                   | Ce qui reste à faire sur la page, `todo: []` s'il n'y a rien      |
+| Field         | Required              | Value                                                               |
+| ------------- | --------------------- | ------------------------------------------------------------------- |
+| `title`       | Oui                   | Titre court de la page                                              |
+| `description` | Oui, peut rester vide | Une phrase qui résume la page                                       |
+| `icon`        | Oui, peut rester vide | Icône devant le titre de la page dans le menu, ex. `material/cog`   |
+| `status`      | Oui                   | `draft`, `review` ou `done` (voir plus bas)                         |
+| `date`        | Oui                   | Date de la dernière mise à jour, au format `AAAA-MM-JJ`             |
+| `todo`        | Oui                   | Liste des tâches restantes sur la page, `todo: []` si elle est vide |
 
 Remplie, `description` devient la description de la page dans le HTML généré (`<meta name="description">`).
 
