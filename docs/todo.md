@@ -35,8 +35,8 @@ Procédure détaillée pour GitHub OAuth, le retrait de l'invité et des exemple
 
 ## 2. Application Backstage
 
-- [ ] Décider: branding (titre `Mathod.io`, logos, page d'accueil), fait sur l'ancienne instance. Carte de tous les réglages: [où sont les réglages](backstage/personnalisation/reglages.md). Page de connexion: maquette 2 retenue, voir [page de connexion](backstage/personnalisation/page-de-connexion.md)
-- [ ] Remplacer les valeurs par défaut du modèle dans `app-config.yaml`: `app.title` (`Scaffolded Backstage App`), `organization.name` et `mcpActions.name` (`My Company`)
+- [ ] Décider: branding (titre `Mathod`, logos, page d'accueil), fait sur l'ancienne instance. Carte de tous les réglages: [où sont les réglages](backstage/personnalisation/reglages.md). Page de connexion: maquette 2 retenue, voir [page de connexion](backstage/personnalisation/page-de-connexion.md)
+- [x] Remplacer les valeurs par défaut du modèle dans `app-config.yaml`: `app.title` et `organization.name` valent `Mathod`, `mcpActions.name` vaut `Mathod Backstage` (2026-09-24, à vérifier au déploiement)
 - [x] Remplacer le catalogue d'exemple par les vraies sources (`catalog.locations`), première étape décrite dans [retirer-exemples-et-invite.md](retirer-exemples-et-invite.md)
 - [x] TechDocs mis en place le 2026-09-24 avec génération par Backstage lui-même (choix de l'utilisateur, plutôt que CI et stockage externe), déployé et vérifié: voir [techdocs.md](techdocs.md)
 - [ ] Explorer les améliorations possibles de TechDocs: apparence (thème), addons (le paquet `@backstage/plugin-techdocs-module-addons-contrib` est déjà installé), plugins MkDocs et fonctionnalités. Attention: chaque plugin MkDocs ajouté compliquera le futur passage à Zensical

@@ -14,7 +14,7 @@ todo:
 
 > Carte de tout ce qu'on peut personnaliser dans l'interface, avec le fichier où ça se règle et la valeur actuelle.
 
-État actuel: **rien n'est personnalisé**, tout est resté comme dans le modèle `create-app` (Backstage 1.55.0, nouveau système frontend).
+État actuel: les noms (`app.title`, `organization.name`, `mcpActions.name`) et les logos sont personnalisés, le reste est resté comme dans le modèle `create-app` (Backstage 1.55.0, nouveau système frontend).
 
 Tous ces réglages sont dans le code ou dans `app-config.yaml`, donc dans l'image: chaque changement demande un rebuild et un redéploiement (voir [Catalogue lu depuis GitHub](../../catalogue-depuis-github.md)). Le mieux est donc de regrouper les personnalisations dans un seul lot.
 
@@ -35,9 +35,9 @@ Les chemins de fichiers sont relatifs à `packages/app/`.
 
 | Element                          | File                              | Setting                              | Current value                   |
 | -------------------------------- | --------------------------------- | ------------------------------------ | ------------------------------- |
-| Nom de l'application             | `app-config.yaml` (racine)        | `app.title`                          | `Scaffolded Backstage App`      |
-| Nom de l'organisation            | `app-config.yaml` (racine)        | `organization.name`                  | `My Company`                    |
-| Nom pour les assistants IA (MCP) | `app-config.yaml` (racine)        | `mcpActions.name`, `.description`    | `My Company Backstage`          |
+| Nom de l'application             | `app-config.yaml` (racine)        | `app.title`                          | `Mathod`                        |
+| Nom de l'organisation            | `app-config.yaml` (racine)        | `organization.name`                  | `Mathod`                        |
+| Nom pour les assistants IA (MCP) | `app-config.yaml` (racine)        | `mcpActions.name`, `.description`    | `Mathod Backstage`              |
 | Lien "Support"                   | `app-config.yaml` (racine)        | `app.support`                        | Non défini                      |
 | Page affichée sur `/`            | `app-config.yaml` (racine)        | `app.extensions`                     | Le catalogue                    |
 | Widgets de la page Home          | `app-config.yaml` (racine)        | `app.extensions`                     | Widgets du modèle               |
@@ -67,7 +67,7 @@ Les plus faciles: trois lignes à changer dans `app-config.yaml`, à la racine d
 
 ```yaml
 app:
-  title: Mathod.io
+  title: Mathod
 
 organization:
   name: Mathod

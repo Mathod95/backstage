@@ -17,7 +17,7 @@ todo:
 
 La page est dessinée par le composant `SignInPage` de Backstage, branché dans `packages/app/src/App.tsx` avec l'extension `SignInPageBlueprint` (mise en place avec GitHub OAuth, voir [Retirer les exemples et l'invité](../../retirer-exemples-et-invite.md)). Elle affiche:
 
-- en haut, le bandeau vert de Backstage avec le titre `app.title` ("Scaffolded Backstage App");
+- en haut, le bandeau vert de Backstage avec le titre `app.title` ("Mathod");
 - une carte "GitHub", le texte "Sign in using GitHub" et un bouton "SIGN IN".
 
 ## Customization levels
@@ -60,7 +60,7 @@ Quatre maquettes ont été faites le 2026-09-24 pour comparer des styles (caneva
 | 3. Terminal                   | Fond noir, police de code, fausse fenêtre de terminal      | Page sur mesure |
 | 4. Bandeau revisité           | Disposition actuelle avec d'autres couleurs et formes      | Thème seul      |
 
-**Retenue: la maquette 2** (choix du 2026-09-24, pas encore appliquée): rond avec l'initiale, "Bienvenue sur Mathod.io", un gros bouton plein "Se connecter avec GitHub" et un lien "Besoin d'aide ?". Sa couleur d'accent sera celle du thème. Le logo reste à fournir: l'initiale "M" est provisoire.
+**Retenue: la maquette 2** (choix du 2026-09-24, pas encore appliquée): rond avec l'initiale, "Bienvenue sur Mathod", un gros bouton plein "Se connecter avec GitHub" et un lien "Besoin d'aide ?". Sa couleur d'accent sera celle du thème. Le logo reste à fournir: l'initiale "M" est provisoire.
 
 ## Sources
 
