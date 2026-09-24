@@ -23,6 +23,7 @@ todo: []
 
 - Les titres sont en anglais: titre de page, titres de sections, entrées du menu (catégories comprises). Ils sont plus courts la plupart du temps.
 - Le texte de la page reste en français.
+- Pas de chemin de fichier entre parenthèses dans un titre: le chemin va dans le texte ou dans un tableau.
 
 ## Pages
 

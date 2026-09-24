@@ -61,7 +61,7 @@ Détails des valeurs actuelles:
 
 ## Details
 
-### Texts (`app-config.yaml`)
+### Texts
 
 Les plus faciles: trois lignes à changer.
 
@@ -92,7 +92,7 @@ app:
             title: GitHub Issues
 ```
 
-### Home page (`app-config.yaml`, `homeModule.tsx`)
+### Home page
 
 Aujourd'hui `/` affiche le catalogue. Pour afficher la page Home à la place, dans `app.extensions`, supprimer le bloc `page:catalog` avec `path: /` et décommenter celui de `page:home`:
 
@@ -133,7 +133,7 @@ app:
 
 Le texte de la carte "Getting Started" est une chaîne Markdown dans `packages/app/src/modules/home/homeModule.tsx`.
 
-### Logos (`packages/app/src/modules/nav/`)
+### Logos
 
 Deux composants, affichés en haut de la barre latérale:
 
@@ -142,11 +142,11 @@ Deux composants, affichés en haut de la barre latérale:
 
 Ce sont des SVG dessinés directement dans le code. On peut les remplacer par un autre SVG, ou par une image: l'ancienne instance utilisait `packages/app/src/assets/mathod-logo.png`, toujours présent dans `~/backstage/packages/app/src/assets/`.
 
-### Sidebar (`packages/app/src/modules/nav/Sidebar.tsx`)
+### Sidebar
 
 Définit ce qui apparaît dans la barre latérale et dans quel ordre. Chaque page s'appelle par son identifiant (`nav.take('page:catalog')`...), `nav.rest()` ajoute toutes les pages restantes.
 
-### Icons (`packages/app/public/`)
+### Icons
 
 Des fichiers image à remplacer par les siens, en gardant les mêmes noms et tailles. `manifest.json` donne le nom et les couleurs quand le site est ajouté à l'écran d'accueil d'un téléphone.
 
