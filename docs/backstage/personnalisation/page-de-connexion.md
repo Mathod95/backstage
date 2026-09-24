@@ -1,3 +1,13 @@
+---
+title: Sign-in page
+description: Personnaliser la page de connexion de Backstage
+icon: material/login
+status: draft
+date: 2026-09-24
+todo:
+  - "[ ] Appliquer la maquette 2"
+---
+
 # Page de connexion
 
 > Tout ce qui s'affiche sur la page de connexion est modifiable: titre, carte, bouton, texte, fond, bandeau, disposition.
@@ -5,6 +15,7 @@
 ## Aujourd'hui
 
 La page est dessinée par le composant `SignInPage` de Backstage, branché dans `packages/app/src/App.tsx` avec l'extension `SignInPageBlueprint` (mise en place avec GitHub OAuth, voir [Retirer les exemples et l'invité](../../retirer-exemples-et-invite.md)). Elle affiche:
+
 - en haut, le bandeau vert de Backstage avec le titre `app.title` ("Scaffolded Backstage App");
 - une carte "GitHub", le texte "Sign in using GitHub" et un bouton "SIGN IN".
 
@@ -20,6 +31,7 @@ Le composant `SignInPage` n'a pas de réglage de titre ni de centrage quand il n
 ### 2. Le thème
 
 Le thème change aussi cette page (voir [Thème (MUI et BUI)](theme.md)):
+
 - **Bandeau**: couleurs et forme, avec le thème de page `home` (`genPageTheme`).
 - **Couleur du fond**: `palette.background.default`.
 - **Forme de la carte**: arrondis, ombre, bordure (`MuiCard`, `BackstageInfoCard`).
@@ -40,11 +52,16 @@ Le composant donné à `SignInPageBlueprint` peut être n'importe quelle page Re
 
 Quatre maquettes ont été faites le 2026-09-24 pour comparer des styles (canevas privé: <https://claude.ai/artifact/FZ7Yya6u18rwZnhdnVY8vt>):
 
-| Maquette | Description | Ce qu'elle demande |
-|---|---|---|
-| 1. Split | Panneau sombre à gauche (logo, "Mathod.io", phrase d'accroche), connexion à droite sur fond clair | Page sur mesure |
-| **2. Carte centrée minimale** | Une carte très arrondie au milieu de l'écran sur fond gris clair, rond avec l'initiale, "Bienvenue sur Mathod.io", un gros bouton plein "Se connecter avec GitHub", un lien "Besoin d'aide ?" | Page sur mesure |
-| 3. Terminal | Fond noir, police de code, fausse fenêtre de terminal avec `$ backstage login` et un bouton `[ Entrée ] Se connecter avec GitHub` | Page sur mesure |
-| 4. Bandeau revisité | La disposition actuelle avec d'autres couleurs, d'autres formes dans le bandeau, une carte plus arrondie et un bouton en français | Thème seul |
+| Mockup                        | Description                                                | Requires        |
+| ----------------------------- | ---------------------------------------------------------- | --------------- |
+| 1. Split                      | Panneau sombre avec la marque à gauche, connexion à droite | Page sur mesure |
+| **2. Carte centrée minimale** | Une carte très arrondie au centre, sur fond gris clair     | Page sur mesure |
+| 3. Terminal                   | Fond noir, police de code, fausse fenêtre de terminal      | Page sur mesure |
+| 4. Bandeau revisité           | Disposition actuelle avec d'autres couleurs et formes      | Thème seul      |
 
-**Retenue: la maquette 2** (choix du 2026-09-24, pas encore appliquée). Sa couleur d'accent sera celle du thème. Le logo reste à fournir: l'initiale "M" est provisoire, l'ancienne instance avait `mathod-logo.png` (`~/backstage/packages/app/src/assets/`).
+**Retenue: la maquette 2** (choix du 2026-09-24, pas encore appliquée): rond avec l'initiale, "Bienvenue sur Mathod.io", un gros bouton plein "Se connecter avec GitHub" et un lien "Besoin d'aide ?". Sa couleur d'accent sera celle du thème. Le logo reste à fournir: l'initiale "M" est provisoire, l'ancienne instance avait `mathod-logo.png` (`~/backstage/packages/app/src/assets/`).
+
+## Sources
+
+- Authentification dans le nouveau système frontend: <https://backstage.io/docs/getting-started/config/authentication>
+- Réglages de `SignInPage`: `node_modules/@backstage/core-components/dist/index.d.ts` (types `SingleSignInPageProps` et `MultiSignInPageProps`)
