@@ -16,12 +16,12 @@ Liste condensée de tout ce qui reste à faire ou à décider. Contexte et déta
 Procédure détaillée pour GitHub OAuth, le retrait de l'invité et des exemples: [retirer-exemples-et-invite.md](retirer-exemples-et-invite.md).
 
 - [x] Activer GitHub OAuth (application OAuth GitHub, provider `github`, page de connexion, résolveur): déployé et vérifié le 2026-09-24
-- [ ] Photo de profil GitHub bloquée par la CSP: `img-src` corrigé dans `app-config.yaml`, à déployer et vérifier
+- [x] Photo de profil GitHub bloquée par la CSP: `img-src` corrigé dans `app-config.yaml`, déployé et vérifié le 2026-09-24
 - [x] Ajouter les utilisateurs au catalogue avec l'annotation `github.com/user-id` (le `node_id`, pas l'id numérique): `catalog/org.yaml`, utilisateur `mathod`, groupe `admins`
 - [x] Une fois OAuth validé: retirer la ligne `guest` de l'Inventory
 - [ ] Décider de garder ou non Authelia devant Backstage
 - [x] Une fois OAuth validé: remplacer `auth.providers.guest` par `github` dans `app-config.production.yaml` et retirer `plugin-auth-backend-module-guest-provider` de `packages/backend/src/index.ts`
-- [ ] Données du catalogue lues depuis GitHub (`catalog/` en `type: url`, hors image, hors pipeline): appliqué dans le repo, voir [catalogue-depuis-github.md](catalogue-depuis-github.md). Token `backstage-catalog-read` (sans expiration) créé et ajouté à l'Inventory le 2026-09-24. Reste à déployer et vérifier
+- [ ] Données du catalogue lues depuis GitHub (`catalog/` en `type: url`, hors image, hors pipeline): appliqué dans le repo, voir [catalogue-depuis-github.md](catalogue-depuis-github.md). Token `backstage-catalog-read` (sans expiration) créé et ajouté à l'Inventory, déployé et vérifié le 2026-09-24. Reste à tester l'ajout d'un groupe sans rebuild
 - [ ] Remplacer la politique de permissions `allow-all` (qui peut lancer quel template)
 - [ ] Configurer `backend.auth.keys`
 - [ ] Faire tourner l'ancien secret OAuth GitHub (considéré comme compromis)
@@ -49,6 +49,7 @@ Procédure détaillée pour GitHub OAuth, le retrait de l'invité et des exemple
 - [ ] Décider: groupes API Crossplane cluster-scoped (actuels) ou namespaced `.m.` (Crossplane v2)
 - [ ] Installer le provider AWS (Upbound) et son `ProviderConfig` sur le cluster de test
 - [ ] Valider les 9 skeletons contre les vraies CRD AWS
+- [ ] Créer le sommaire racine `catalog/all.yaml` et y faire pointer `app-config.production.yaml` (dernier rebuild pour le catalogue), puis un sommaire par thème dans `templates/` (voir [catalogue-depuis-github.md](catalogue-depuis-github.md#organisation-un-seul-catalogue-plusieurs-sommaires))
 - [ ] Templates enregistrés par URL GitHub dans `templates/`, pas copiés dans l'image (décidé le 2026-09-24, même principe que [catalogue-depuis-github.md](catalogue-depuis-github.md)): location `type: url` avec `allow: [Template]`. `templates/**` est déjà dans le `paths-ignore` du workflow
 - [ ] Tester le comportement des chemins relatifs `../../skeletons/...` avec un enregistrement par URL
 - [ ] Reprendre les templates un par un: `create-vpc`, `create-internet-gateway`, `create-route-table`, `create-subnet-pub`, `create-subnet-priv`, `create-security-group`, `create-eks-cluster`, `stack-network`

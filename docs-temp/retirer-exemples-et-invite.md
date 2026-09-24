@@ -357,7 +357,7 @@ Problème constaté après déploiement: la photo de profil GitHub ne s'affiche 
     img-src: ["'self'", 'data:', 'https://avatars.githubusercontent.com']
 ```
 
-Vérifié en local: l'en-tête `Content-Security-Policy` renvoyé par le backend contient bien `img-src 'self' data: https://avatars.githubusercontent.com`. À confirmer après déploiement.
+Vérifié en local: l'en-tête `Content-Security-Policy` renvoyé par le backend contient bien `img-src 'self' data: https://avatars.githubusercontent.com`. Confirmé après déploiement le 2026-09-24 (commit `8b4d626`): la photo de profil s'affiche.
 
 Évolution ultérieure: le catalogue est désormais lu depuis GitHub et n'est plus copié dans l'image (l'étape 6 sur le `Dockerfile` est donc remplacée), voir [catalogue-depuis-github.md](catalogue-depuis-github.md).
 

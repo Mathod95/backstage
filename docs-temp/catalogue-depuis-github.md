@@ -2,7 +2,7 @@
 
 Principe retenu le 2026-09-24: **tout ce qui est de la donnée (utilisateurs, groupes, templates) est lu sur GitHub au moment de l'exécution, et non copié dans l'image.** Ajouter un utilisateur ou modifier un template se fait par un simple push sur `main`, sans reconstruire ni redéployer l'image. Le code et la configuration (`app-config*.yaml`) restent dans l'image.
 
-Statut: **appliqué dans le repo le 2026-09-24, pas encore commité ni déployé.**
+Statut: **déployé et vérifié le 2026-09-24** (commit `8b4d626`). Reste à tester l'ajout d'une entité sans rebuild (voir Vérification).
 
 ## Ce qui est lu où
 
@@ -46,6 +46,61 @@ catalog:
 - Lors du premier déploiement de ce changement, les entités de l'ancienne location `file` deviennent orphelines et sont supprimées, puis recréées par la location `url`. La connexion peut échouer pendant quelques minutes le temps que le catalogue se stabilise.
 - Le repo est public: `catalog/org.yaml` est lisible par tous. Il ne doit contenir que des informations publiques (identifiant GitHub, `node_id`), jamais de secret.
 
+## Organisation: un seul catalogue, plusieurs sommaires
+
+Il n'y a qu'**un seul catalogue** par instance Backstage: c'est l'annuaire de tout ce qu'elle connaît (personnes, équipes, projets, templates...). On ne crée pas un catalogue Crossplane, un catalogue ArgoCD, etc. On range plutôt les choses à deux niveaux:
+
+1. **Dans le repo**, avec des dossiers et des "sommaires". Un sommaire est un fichier `kind: Location` qui liste d'autres fichiers à inscrire dans le catalogue.
+2. **Dans l'interface**, avec des filtres. Chaque template ou composant peut porter des `tags` (`crossplane`, `argocd`, `prometheus`) et un `spec.type`, et les pages Catalog et Create permettent de filtrer dessus. Plus tard, les entités `System` et `Domain` pourront regrouper les éléments par thème.
+
+Arborescence prévue:
+
+```
+catalog/
+├── all.yaml              ← sommaire racine, le seul connu de app-config
+├── org.yaml              ← personnes et équipes
+templates/
+├── crossplane.yaml       ← sommaire des templates Crossplane
+├── argocd.yaml           ← sommaire des templates ArgoCD
+├── prometheus.yaml       ← ...
+├── create-vpc/
+│   ├── template.yaml     ← le template (formulaire + étapes)
+│   └── skeleton/         ← fichiers modèles, lus par le template lui-même
+└── ...
+```
+
+Le sommaire racine `catalog/all.yaml` pointe vers `org.yaml` et vers les sommaires de `templates/`. Chaque sommaire de thème liste ses templates:
+
+```yaml
+# catalog/all.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: root
+spec:
+  targets:
+    - ./org.yaml
+    - ../templates/crossplane.yaml
+```
+
+```yaml
+# templates/crossplane.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: templates-crossplane
+spec:
+  targets:
+    - ./create-vpc/template.yaml
+    - ./create-subnet-pub/template.yaml
+```
+
+Les chemins de `targets` sont relatifs au fichier qui les contient, donc à son URL GitHub. Les skeletons ne sont jamais listés dans un sommaire: le template les récupère lui-même avec `fetch:template` et un chemin relatif (`url: ./skeleton`).
+
+Pourquoi ce modèle: `app-config.production.yaml` ne pointe qu'**une seule fois** vers `catalog/all.yaml`. Ajouter un template ou un thème revient à ajouter une ligne dans un sommaire et à pousser, sans toucher à la configuration, donc sans reconstruire l'image. Le changement de `app-config.production.yaml` pour passer de `org.yaml` à `all.yaml` (avec les règles `allow: [Location, User, Group, Template]`) coûte un dernier rebuild, à faire au plus tard avec le premier template.
+
+Alternative écartée pour l'instant: le module de découverte GitHub (`@backstage/plugin-catalog-backend-module-github`) scanne le repo et inscrit tout ce qui correspond à un motif comme `templates/*/template.yaml`, sans sommaire à tenir à jour. Il demande d'ajouter un module au backend (un rebuild) et un peu de config. Les sommaires suffisent tant que les templates se comptent en dizaines.
+
 ## Token GitHub (`GITHUB_TOKEN`)
 
 Sans token, Backstage lit GitHub en anonyme (la doc officielle: "If it is not supplied, anonymous access will be used"). L'API GitHub limite alors à 60 requêtes par heure et par IP, et chaque location relue toutes les 2 minutes environ en consomme une trentaine par heure. Ça passe pour `org.yaml` seul, mais pas une fois les templates ajoutés. Il faut donc fournir un token, via la variable `GITHUB_TOKEN` déjà prévue par `integrations.github` dans `app-config.yaml`.
@@ -80,8 +135,9 @@ Token `backstage-catalog-read` créé le 2026-09-24, sans expiration, et ajouté
 
 Faite en local le 2026-09-24: backend démarré avec la location `url` vers `main`, les logs du catalogue montrent `Processing user:default/mathod` et `Processing group:default/admins`, sans erreur de lecture.
 
-À faire après déploiement:
-- la connexion GitHub fonctionne toujours (après la stabilisation décrite plus haut);
+Après déploiement, le 2026-09-24: la connexion GitHub fonctionne avec le catalogue lu depuis GitHub.
+
+Reste à faire:
 - ajouter un groupe de test dans `catalog/org.yaml`, pousser: la pipeline ne se déclenche pas, et le groupe apparaît dans le catalogue en quelques minutes. Le retirer ensuite.
 
 ## Sources
