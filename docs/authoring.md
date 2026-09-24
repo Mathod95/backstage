@@ -1,5 +1,7 @@
 ---
 title: Authoring
+description: Comment créer et écrire une page de cette documentation
+icon: material/pencil
 status: draft
 date: 2026-09-24
 todo: []
