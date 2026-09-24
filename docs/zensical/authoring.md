@@ -14,13 +14,13 @@ todo:
 
 ## Front matter
 
-Chaque page commence par un en-tête YAML, le front matter, placé tout en haut du fichier entre deux lignes `---`. Il décrit la page elle-même: il ne s'affiche pas dans la page et ne change pas le titre du menu, qui est fixé dans `mkdocs.yml`.
+Chaque page commence par un en-tête YAML, le front matter, placé tout en haut du fichier entre deux lignes `---`. Il décrit la page elle-même et ne s'affiche pas dans la page.
 
 ```yaml
 ---
 title: Settings
-description: 
-icon: 
+description: Où se règle chaque élément personnalisable de l'interface
+icon: material/tune
 status: draft
 date: 2026-09-24
 todo:
@@ -36,13 +36,21 @@ todo:
 | `title`       | Oui      | Titre court de la page                                              |
 | `description` | Oui      | Une phrase qui résume la page                                       |
 | `icon`        | Oui      | Icône devant le titre de la page dans le menu, ex. `material/cog`   |
-| `status`      | Oui      | `draft`, `review` ou `done` (voir plus bas)                         |
+| `status`      | Oui      | `draft`, `review` ou `done`                                         |
 | `date`        | Oui      | Date de la dernière mise à jour, au format `AAAA-MM-JJ`             |
 | `todo`        | Oui      | Liste des tâches restantes sur la page, `todo: []` si elle est vide |
 
-Remplie, `description` devient la description de la page dans le HTML généré (`<meta name="description">`).
+### Title
 
-Les icônes disponibles pour `icon` sont celles fournies par mkdocs-material:
+Le titre court de la page, en anglais comme tous les titres (voir [Rules](rules.md#titles)). Il s'affiche dans l'onglet du navigateur et dans l'en-tête de la page. Il ne change pas le titre de la page dans le menu, qui est fixé dans `mkdocs.yml` et `zensical.toml`.
+
+### Description
+
+Une phrase qui résume la page. Elle devient la description de la page dans le HTML généré (`<meta name="description">`).
+
+### Icon
+
+L'icône affichée devant le titre de la page dans le menu, par son nom, par exemple `material/cog`. Les icônes disponibles sont celles fournies par mkdocs-material:
 
 | Family          | Prefix            | List                                     |
 | --------------- | ----------------- | ---------------------------------------- |
@@ -50,13 +58,17 @@ Les icônes disponibles pour `icon` sont celles fournies par mkdocs-material:
 | FontAwesome     | `fontawesome/...` | <https://fontawesome.com/search?ic=free> |
 | Octicons        | `octicons/...`    | <https://primer.style/foundations/icons> |
 
-### Statuses
+### Status
 
 | Status   | Meaning                                                              |
 | -------- | -------------------------------------------------------------------- |
 | `draft`  | Brouillon: la page est en cours d'écriture, son contenu peut changer |
 | `review` | À relire: la page est complète et attend une relecture               |
 | `done`   | Terminée: la page est relue et à jour                                |
+
+### Date
+
+La date de la dernière mise à jour de la page, au format `AAAA-MM-JJ` (par exemple `2026-09-24`). À changer à chaque modification de la page.
 
 ### Todo
 
