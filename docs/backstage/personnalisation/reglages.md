@@ -63,7 +63,7 @@ Détails des valeurs actuelles:
 
 ### Texts
 
-Les plus faciles: trois lignes à changer.
+Les plus faciles: trois lignes à changer dans `app-config.yaml`, à la racine du repo.
 
 ```yaml
 app:
@@ -94,7 +94,7 @@ app:
 
 ### Home page
 
-Aujourd'hui `/` affiche le catalogue. Pour afficher la page Home à la place, dans `app.extensions`, supprimer le bloc `page:catalog` avec `path: /` et décommenter celui de `page:home`:
+Aujourd'hui `/` affiche le catalogue. Pour afficher la page Home à la place, dans `app.extensions` de `app-config.yaml`, supprimer le bloc `page:catalog` avec `path: /` et décommenter celui de `page:home`:
 
 ```yaml
 app:
@@ -135,7 +135,7 @@ Le texte de la carte "Getting Started" est une chaîne Markdown dans `packages/a
 
 ### Logos
 
-Deux composants, affichés en haut de la barre latérale:
+Deux composants, dans `packages/app/src/modules/nav/`, affichés en haut de la barre latérale:
 
 - `LogoFull.tsx` quand la barre est ouverte;
 - `LogoIcon.tsx` quand elle est repliée.
@@ -144,11 +144,11 @@ Ce sont des SVG dessinés directement dans le code. On peut les remplacer par un
 
 ### Sidebar
 
-Définit ce qui apparaît dans la barre latérale et dans quel ordre. Chaque page s'appelle par son identifiant (`nav.take('page:catalog')`...), `nav.rest()` ajoute toutes les pages restantes.
+`packages/app/src/modules/nav/Sidebar.tsx` définit ce qui apparaît dans la barre latérale et dans quel ordre. Chaque page s'appelle par son identifiant (`nav.take('page:catalog')`...), `nav.rest()` ajoute toutes les pages restantes.
 
 ### Icons
 
-Des fichiers image à remplacer par les siens, en gardant les mêmes noms et tailles. `manifest.json` donne le nom et les couleurs quand le site est ajouté à l'écran d'accueil d'un téléphone.
+Des fichiers image dans `packages/app/public/`, à remplacer par les siens, en gardant les mêmes noms et tailles. `manifest.json` donne le nom et les couleurs quand le site est ajouté à l'écran d'accueil d'un téléphone.
 
 ### Theme
 
