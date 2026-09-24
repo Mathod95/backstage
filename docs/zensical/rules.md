@@ -1,0 +1,47 @@
+---
+title: Rules
+description: Règles de rédaction de cette documentation
+icon: material/format-list-checks
+status: draft
+date: 2026-09-24
+todo: []
+---
+
+# Rules
+
+Les règles à suivre pour écrire cette documentation. Elles s'ajoutent au fil des demandes, et s'appliquent à toute page créée ou modifiée. La façon technique de créer une page (front matter, syntaxe des tableaux) est dans [Authoring](authoring.md).
+
+## Structure
+
+- La navigation est organisée en **catégories et sous-catégories**.
+- Une page ne traite que de son sujet: ce qui relève d'un autre sujet va dans sa propre page (par exemple, l'aperçu local est dans [Configuration](configuration.md), pas dans Authoring).
+- Pas de comparatif ni de justification de choix d'outil dans la doc (par exemple "Pourquoi Backstage").
+- Chaque template aura sa propre page de doc, accessible depuis le template lui-même.
+
+## Pages
+
+- Chaque page commence par un front matter complet: `title`, `description`, `icon`, `status`, `date`, `todo` (détails dans [Authoring](authoring.md#front-matter)).
+
+## Tableaux
+
+- Les titres des colonnes sont en anglais, le contenu des cellules reste en français.
+- Dans le fichier, les colonnes sont alignées (les `|` les uns sous les autres), comme dans la doc Zensical.
+- Les cellules restent courtes: une explication longue va dans un paragraphe sous le tableau.
+
+## Exemples
+
+- Plusieurs variantes d'un même exemple (par exemple les alignements gauche, centre, droite) vont dans des **onglets**, chacun avec le code puis son rendu, comme dans la doc Zensical. Pas de doublon: un même exemple n'apparaît qu'une fois.
+
+## Contenu
+
+- Pour un outil ou une fonctionnalité documentée ailleurs, une **brève description** suffit, avec un lien vers la source (README, doc officielle) plutôt que de réexpliquer son usage.
+- Chaque titre qui présente un élément externe (plugin, fonctionnalité d'un repo) est un lien vers sa source, pour y arriver en un clic.
+- Les sources sont citées en fin de page.
+- Les fonctionnalités propres à Zensical (par exemple les tableaux triables) sont signalées, mais pas utilisées tant que la doc est rendue par TechDocs.
+
+## Écriture
+
+- Des mots simples, des phrases courtes, peu de jargon.
+- Un paragraphe tient sur une seule ligne dans le fichier, sans retour à la ligne forcé.
+- Pas d'espace avant les deux-points.
+- Pas de tiret cadratin.
