@@ -30,22 +30,32 @@ todo:
 
 ### Champs
 
-| Champ | Obligatoire | Valeur |
-|---|---|---|
-| `title` | Oui | Titre court de la page |
-| `description` | Oui, peut rester vide | Une phrase qui résume la page. Remplie, elle devient la description de la page dans le HTML généré (`<meta name="description">`) |
-| `icon` | Oui, peut rester vide | Icône affichée devant le titre de la page dans le menu, par son nom, par exemple `material/cog`. Icônes disponibles: celles de Material Design (`material/...`, liste sur <https://pictogrammers.com/library/mdi/>), FontAwesome (`fontawesome/...`) et Octicons (`octicons/...`), fournies par mkdocs-material |
-| `status` | Oui | `draft`, `review` ou `done` (voir plus bas) |
-| `date` | Oui | Date de la dernière mise à jour, au format `AAAA-MM-JJ` (par exemple `2026-09-24`) |
-| `todo` | Oui | Ce qui reste à faire sur la page. Liste vide s'il n'y a rien: `todo: []` |
+| Champ         | Obligatoire           | Valeur                                                            |
+| ------------- | --------------------- | ----------------------------------------------------------------- |
+| `title`       | Oui                   | Titre court de la page                                            |
+| `description` | Oui, peut rester vide | Une phrase qui résume la page                                     |
+| `icon`        | Oui, peut rester vide | Icône devant le titre de la page dans le menu, ex. `material/cog` |
+| `status`      | Oui                   | `draft`, `review` ou `done` (voir plus bas)                       |
+| `date`        | Oui                   | Date de la dernière mise à jour, au format `AAAA-MM-JJ`           |
+| `todo`        | Oui                   | Ce qui reste à faire sur la page, `todo: []` s'il n'y a rien      |
+
+Remplie, `description` devient la description de la page dans le HTML généré (`<meta name="description">`).
+
+Les icônes disponibles pour `icon` sont celles fournies par mkdocs-material:
+
+| Famille         | Préfixe           | Liste                                    |
+| --------------- | ----------------- | ---------------------------------------- |
+| Material Design | `material/...`    | <https://pictogrammers.com/library/mdi/> |
+| FontAwesome     | `fontawesome/...` | <https://fontawesome.com/search?ic=free> |
+| Octicons        | `octicons/...`    | <https://primer.style/foundations/icons> |
 
 ### Statuts
 
-| Statut | Sens |
-|---|---|
-| `draft` | Brouillon: la page est en cours d'écriture, son contenu peut être incomplet ou changer |
-| `review` | À relire: la page est complète et attend une relecture |
-| `done` | Terminée: la page est relue et à jour |
+| Statut   | Sens                                                                 |
+| -------- | -------------------------------------------------------------------- |
+| `draft`  | Brouillon: la page est en cours d'écriture, son contenu peut changer |
+| `review` | À relire: la page est complète et attend une relecture               |
+| `done`   | Terminée: la page est relue et à jour                                |
 
 ### Écrire la liste `todo`
 
@@ -86,3 +96,58 @@ Après avoir écrit ou modifié un front matter, construire la doc en local et v
 python3 -m venv .venv && .venv/bin/pip install mkdocs-techdocs-core==1.7.1
 .venv/bin/mkdocs serve
 ```
+
+## Data tables
+
+Les tableaux s'écrivent en Markdown, avec des `|` entre les colonnes et une ligne de séparation sous l'en-tête. Ils acceptent du Markdown dans les cellules, par exemple du `code`. Source: [Data tables, doc Zensical](https://zensical.org/docs/authoring/data-tables/).
+
+### Usage
+
+Dans le fichier, les colonnes sont **alignées**: chaque cellule est complétée par des espaces pour que les `|` tombent les uns sous les autres, avec un espace de chaque côté. Le rendu est le même, mais le fichier reste lisible:
+
+```markdown
+| Method   | Description     |
+| -------- | --------------- |
+| `GET`    | Fetch resource  |
+| `PUT`    | Update resource |
+| `DELETE` | Delete resource |
+```
+
+Garder des cellules courtes: une explication longue va dans un paragraphe sous le tableau plutôt que dans une cellule.
+
+### Column alignment
+
+L'alignement du texte dans une colonne se règle avec des `:` dans la ligne de séparation.
+
+À gauche (`:` à gauche):
+
+```markdown
+| Method   | Description     |
+| :------- | :-------------- |
+| `GET`    | Fetch resource  |
+| `PUT`    | Update resource |
+| `DELETE` | Delete resource |
+```
+
+Centré (`:` des deux côtés):
+
+```markdown
+|  Method  |   Description   |
+| :------: | :-------------: |
+|  `GET`   | Fetch resource  |
+|  `PUT`   | Update resource |
+| `DELETE` | Delete resource |
+```
+
+À droite (`:` à droite):
+
+```markdown
+|   Method |     Description |
+| -------: | --------------: |
+|    `GET` |  Fetch resource |
+|    `PUT` | Update resource |
+| `DELETE` | Delete resource |
+```
+
+!!! note "Tableaux triables"
+    Zensical permet de rendre un tableau triable en cliquant sur l'en-tête d'une colonne (bibliothèque tablesort, ajoutée par `extra_javascript`). On ne l'utilisera qu'une fois la doc passée sur Zensical: voir [TechDocs, avenir de MkDocs et Zensical](techdocs.md#avenir-de-mkdocs-et-zensical).
