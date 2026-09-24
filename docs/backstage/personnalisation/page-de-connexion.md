@@ -3,7 +3,8 @@ title: Sign-in page
 description: Personnaliser la page de connexion de Backstage
 icon: material/login
 status: draft
-date: 2026-09-24
+createdAt: 2026-09-24
+modifyAt: 2026-09-24
 todo:
   - "[ ] Appliquer la maquette 2"
 ---

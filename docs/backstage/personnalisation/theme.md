@@ -3,7 +3,8 @@ title: Theme
 description: Changer l'apparence de tout Backstage avec un thème MUI et BUI
 icon: material/palette
 status: draft
-date: 2026-09-24
+createdAt: 2026-09-24
+modifyAt: 2026-09-24
 todo: []
 ---
 

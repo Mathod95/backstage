@@ -3,7 +3,8 @@ title: Settings
 description: Où se règle chaque élément personnalisable de l'interface
 icon: material/tune
 status: draft
-date: 2026-09-24
+createdAt: 2026-09-24
+modifyAt: 2026-09-24
 todo:
   - "[x] Restructurer convenablement les tableaux"
   - "[x] Les titres des tableau en anglais"

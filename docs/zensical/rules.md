@@ -3,7 +3,8 @@ title: Rules
 description: Règles de rédaction de cette documentation
 icon: material/format-list-checks
 status: draft
-date: 2026-09-24
+createdAt: 2026-09-24
+modifyAt: 2026-09-24
 todo: []
 ---
 
