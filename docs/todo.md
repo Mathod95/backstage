@@ -44,6 +44,12 @@ Procédure détaillée pour GitHub OAuth, le retrait de l'invité et des exemple
 - [x] Une fois TechDocs en place: migrer `docs-temp/` vers `docs/` avec un `mkdocs.yml` et annoter `catalog-info.yaml`
 - [ ] Plus tard, si la doc grossit ou si plusieurs instances existent: passer à la génération en CI et à un stockage externe (recommandation officielle)
 - [ ] Suivre l'arrivée de Zensical comme moteur TechDocs ([PR #35322](https://github.com/backstage/backstage/pull/35322), [PR #35781](https://github.com/backstage/backstage/pull/35781)) et migrer quand il sera disponible. D'ici là, garder `mkdocs-techdocs-core` fixé et la doc en Markdown simple, voir [techdocs.md](techdocs.md#avenir-de-mkdocs-et-zensical)
+- [ ] Écrire notre propre plugin Zensical pour remplacer TechDocs (souhaité le 2026-09-24: les petits soucis visuels de TechDocs dérangent). Un plugin backend et un plugin frontend:
+  - Backend: récupérer `docs/` sur GitHub pour chaque fiche, lancer `zensical build` (Zensical à installer dans l'image), stocker les pages et savoir quand les refaire, les servir uniquement aux personnes connectées, alimenter la recherche (optionnel)
+  - Frontend: un onglet sur les fiches du catalogue qui affiche les pages. Soit en iframe (simple, mais apparence de Zensical et non du thème Backstage, liens et navigation à surveiller), soit intégrées comme TechDocs (le gros du travail)
+  - Alternative plus légère: remplacer seulement le générateur de TechDocs par un module backend (`techdocsGeneratorExtensionPoint`, présent dans la version installée), mais l'affichage de TechDocs attend des pages MkDocs et risque de mal rendre celles de Zensical
+  - Démarche: un essai dans une branche Git à part, sans toucher à `main` ni à TechDocs, testé en local d'abord (Zensical dans un environnement Python jetable), puis décision de continuer ou non. Ordre de grandeur: essai en quelques heures, équivalent complet de TechDocs sur plusieurs séances, puis entretien à chaque mise à jour de Backstage
+  - À comparer avec la version officielle en cours (PR #35322 et #35781): si elle arrive avant, elle remplace ce chantier
 - [ ] Décider: sauvegardes planifiées de Postgres
 - [ ] Décider: healthcheck du conteneur (`/.backstage/health/v1/readiness`)
 - [ ] Maintenance régulière: monter la version de Backstage (`yarn backstage-cli versions:bump`) et redéployer
