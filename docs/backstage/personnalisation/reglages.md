@@ -42,8 +42,8 @@ Les chemins de fichiers sont relatifs à `packages/app/`.
 | Page affichée sur `/`            | `app-config.yaml` (racine)        | `app.extensions`                     | Le catalogue                    |
 | Widgets de la page Home          | `app-config.yaml` (racine)        | `app.extensions`                     | Widgets du modèle               |
 | Carte "Getting Started"          | `src/modules/home/homeModule.tsx` | Texte `content`                      | Bienvenue Backstage, en anglais |
-| Logo, barre ouverte              | `src/modules/nav/LogoFull.tsx`    | SVG et `fill`                        | Logo Backstage, `#7df3e1`       |
-| Logo, barre repliée              | `src/modules/nav/LogoIcon.tsx`    | SVG et `fill`                        | Logo Backstage, `#7df3e1`       |
+| Logo, barre ouverte              | `src/modules/nav/LogoFull.tsx`    | SVG                                  | Logo `mathod`, `#10b981`        |
+| Logo, barre repliée              | `src/modules/nav/LogoIcon.tsx`    | SVG                                  | Icône terminal, `#10b981`       |
 | Menu latéral                     | `src/modules/nav/Sidebar.tsx`     | `SidebarContent`                     | Menu du modèle                  |
 | Icônes de l'onglet               | `public/`                         | Fichiers `favicon*`, etc.            | Icônes Backstage                |
 | Nom et couleurs sur mobile       | `public/manifest.json`            | `name`, `theme_color`...             | `Backstage`, noir et blanc      |
@@ -141,6 +141,14 @@ Deux composants, dans `packages/app/src/modules/nav/`, affichés en haut de la b
 - `LogoIcon.tsx` quand elle est repliée.
 
 Ce sont des SVG dessinés directement dans le code. On peut les remplacer par un autre SVG, ou par une image.
+
+Logo retenu le 2026-09-24 parmi plusieurs maquettes (canevas privé: <https://claude.ai/artifact/3QJf169uD7fs1yw2xS5uXa>):
+
+- **Icône**: une fenêtre de terminal avec une invite `>_`, en vert émeraude `#10b981` (constante `LOGO_COLOR` dans `LogoIcon.tsx`).
+- **Logo complet**: l'icône suivie du texte `mathod`, en JetBrains Mono Bold, blanc sur la barre latérale sombre.
+- **Pas de police à charger**: le texte `mathod` est converti en tracé SVG dans `LogoFull.tsx`. Pour changer le texte, il faut regénérer ce tracé.
+
+Appliqué dans le repo, pas encore déployé ni vérifié dans Backstage.
 
 ### Sidebar
 
