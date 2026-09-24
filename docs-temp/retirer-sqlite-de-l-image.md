@@ -1,6 +1,6 @@
 # Retirer SQLite de l'image
 
-Changement du 2026-09-24. Statut: **appliqué dans le repo et vérifié en local, pas encore déployé**.
+Changement du 2026-09-24. Statut: **déployé et vérifié le 2026-09-24** (commit `3b3e345`, image construite sur `6313ec5`).
 
 ## Pourquoi
 
@@ -26,7 +26,6 @@ L'image ne sert qu'en production, donc SQLite n'y servait à rien. Pourtant le m
 
 Pas de Docker disponible dans l'environnement de travail: l'image elle-même sera construite et vérifiée par la pipeline puis par le déploiement.
 
-## À vérifier après déploiement
+## Vérification après déploiement
 
-- La pipeline est verte.
-- `sb install mod-backstage` puis Backstage fonctionne comme avant (connexion, catalogue).
+Le 2026-09-24: pipeline verte (2 min 17, contre 2 min 30 avant, l'étape `apt-get` en moins), puis `sb install mod-backstage`. Backstage fonctionne comme avant: connexion GitHub, photo de profil, catalogue.

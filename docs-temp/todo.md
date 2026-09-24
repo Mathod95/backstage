@@ -45,7 +45,7 @@ Procédure détaillée pour GitHub OAuth, le retrait de l'invité et des exemple
 - [ ] Maintenance régulière: monter la version de Backstage (`yarn backstage-cli versions:bump`) et redéployer
 - [ ] Décider: épingler l'image par sha dans l'Inventory pour des déploiements reproductibles
 - [ ] Vérifier la version minimale de Postgres supportée par Backstage (17-alpine choisi sans vérification)
-- [ ] Retirer SQLite de l'image: supprimer l'installation de `libsqlite3-dev` du `Dockerfile` et passer `better-sqlite3` en `devDependencies`: appliqué le 2026-09-24, reste à déployer et vérifier, voir [retirer-sqlite-de-l-image.md](retirer-sqlite-de-l-image.md)
+- [x] Retirer SQLite de l'image: supprimer l'installation de `libsqlite3-dev` du `Dockerfile` et passer `better-sqlite3` en `devDependencies`: déployé et vérifié le 2026-09-24, voir [retirer-sqlite-de-l-image.md](retirer-sqlite-de-l-image.md)
 - [ ] Plus tard, pour tester l'image en local: activer l'intégration WSL de Docker Desktop pour la distribution de travail (Docker Desktop tourne sous Windows mais `/mnt/wsl/docker-desktop/cli-tools` est vide côté WSL, constaté le 2026-09-24), puis construire l'image et la lancer avec un Postgres jetable
 - [ ] Ajouter un build de vérification sur les pull requests (`yarn tsc`, `yarn build:backend`, sans publication d'image)
 
