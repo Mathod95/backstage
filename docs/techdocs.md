@@ -117,7 +117,9 @@ Pour vérifier en local avant de pousser: `python3 -m venv .venv && .venv/bin/pi
 
 Le 2026-09-24: pipeline verte (3 min 28, contre 2 min 17 avant, à cause de l'installation de Python et MkDocs), puis `sb install mod-backstage`. Le catalogue affiche le composant `backstage` avec le propriétaire `admins`, son onglet Docs affiche cette documentation, et la connexion fonctionne.
 
-Reste à tester: modifier une page et pousser, vérifier qu'aucune pipeline ne part et que la modification apparaît dans Backstage.
+Mise à jour sans rebuild vérifiée le même jour: la page "Pourquoi Backstage", ajoutée par un push qui ne touchait que `docs/` et `mkdocs.yml`, est apparue dans Backstage sans pipeline ni redéploiement.
+
+Défaut constaté: les tableaux larges (4 colonnes ou plus, avec du texte long) sont coupés à droite dans la colonne de contenu de TechDocs. En attendant une correction, préférer des tableaux courts.
 
 ## Sources
 
