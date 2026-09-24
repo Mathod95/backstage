@@ -84,23 +84,6 @@ todo:
 
 Sans tâche, écrire `todo: []`. Un `todo:` laissé vide fonctionne aussi (vérifié), mais `[]` montre clairement que la liste est vide.
 
-### Empty fields
-
-Un champ vide ne casse pas la page. Vérifié le 2026-09-24 avec le générateur de Backstage (`mkdocs-techdocs-core` 1.7.1), sur toutes ces formes:
-
-```yaml
-description:
-icon:
-todo:
-todo: []
-description: ""
-icon: ""
-```
-
-Dans tous les cas, la page se construit sans erreur ni avertissement, l'en-tête reste invisible et le contenu s'affiche normalement. Un champ vide n'a simplement aucun effet (pas d'icône, pas de description).
-
-Testé aussi avec des champs remplis: `description: Une description` apparaît bien dans le HTML généré, et `icon: material/cog` affiche l'icône devant le titre dans le menu. Ces deux effets ont été vérifiés sur le site généré par MkDocs, pas encore dans l'affichage de TechDocs dans Backstage.
-
 ### Checking
 
 Après avoir écrit ou modifié un front matter, vérifier dans l'aperçu local que l'en-tête n'apparaît pas en haut de la page (voir [Configuration](configuration.md#local-preview)).
