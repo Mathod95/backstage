@@ -140,7 +140,7 @@ Deux composants, dans `packages/app/src/modules/nav/`, affichés en haut de la b
 - `LogoFull.tsx` quand la barre est ouverte;
 - `LogoIcon.tsx` quand elle est repliée.
 
-Ce sont des SVG dessinés directement dans le code. On peut les remplacer par un autre SVG, ou par une image: l'ancienne instance utilisait `packages/app/src/assets/mathod-logo.png`, toujours présent dans `~/backstage/packages/app/src/assets/`.
+Ce sont des SVG dessinés directement dans le code. On peut les remplacer par un autre SVG, ou par une image.
 
 ### Sidebar
 
