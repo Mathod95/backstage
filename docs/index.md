@@ -6,6 +6,7 @@ Le code est sur GitHub: [Mathod95/backstage](https://github.com/Mathod95/backsta
 
 ## Pages
 
+- [Pourquoi Backstage](pourquoi-backstage.md): alternatives regardées et raisons du choix.
 - [Todo](todo.md): tout ce qui reste à faire ou à décider.
 - [Historique de l'ancienne instance](historique-ancienne-instance.md): ce qui existait avant ce repo et ce qui est à reprendre.
 - [Retirer les exemples et l'invité](retirer-exemples-et-invite.md): passage à la connexion GitHub uniquement.

@@ -4,6 +4,7 @@ repo_url: https://github.com/Mathod95/backstage
 edit_uri: edit/main/docs
 nav:
   - Accueil: index.md
+  - Pourquoi Backstage: pourquoi-backstage.md
   - Todo: todo.md
   - Historique de l'ancienne instance: historique-ancienne-instance.md
   - Changements:
