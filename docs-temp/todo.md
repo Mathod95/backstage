@@ -19,14 +19,15 @@ Procédure détaillée pour GitHub OAuth, le retrait de l'invité et des exemple
 - [x] Photo de profil GitHub bloquée par la CSP: `img-src` corrigé dans `app-config.yaml`, déployé et vérifié le 2026-09-24
 - [x] Ajouter les utilisateurs au catalogue avec l'annotation `github.com/user-id` (le `node_id`, pas l'id numérique): `catalog/org.yaml`, utilisateur `mathod`, groupe `admins`
 - [x] Une fois OAuth validé: retirer la ligne `guest` de l'Inventory
-- [ ] Décider de garder ou non Authelia devant Backstage
+- [x] Décider de garder ou non Authelia devant Backstage: on le garde (décidé le 2026-09-24), double barrière avec GitHub OAuth. Spécifique à l'hôte Saltbox
 - [x] Une fois OAuth validé: remplacer `auth.providers.guest` par `github` dans `app-config.production.yaml` et retirer `plugin-auth-backend-module-guest-provider` de `packages/backend/src/index.ts`
 - [ ] Données du catalogue lues depuis GitHub (`catalog/` en `type: url`, hors image, hors pipeline): appliqué dans le repo, voir [catalogue-depuis-github.md](catalogue-depuis-github.md). Token `backstage-catalog-read` (sans expiration) créé et ajouté à l'Inventory, déployé et vérifié le 2026-09-24. Reste à tester l'ajout d'un groupe sans rebuild
 - [ ] Plus tard, **avant d'ajouter une deuxième personne** dans `catalog/org.yaml` (reporté le 2026-09-24, seul sur le projet pour l'instant): gestion des droits et des groupes
   - Remplacer la politique de permissions `allow-all`: aujourd'hui toute personne connectée a tous les droits, le groupe `admins` n'est qu'une étiquette
   - Définir les groupes (par exemple `admins` et un groupe d'utilisateurs) et qui peut faire quoi: lancer quels templates (par tag ou par thème), inscrire ou supprimer des entités du catalogue
   - Rappel: la connexion est déjà limitée aux personnes présentes dans `catalog/org.yaml` (résolveur GitHub), et Authelia filtre en amont sur l'hôte Saltbox
-- [ ] Configurer `backend.auth.keys`
+- [x] ~~Configurer `backend.auth.keys`~~: pas nécessaire (vérifié le 2026-09-24 sur <https://backstage.io/docs/auth/service-to-service-auth>). C'est un réglage de l'ancien système backend. Avec le nouveau, les plugins s'authentifient entre eux automatiquement, avec des clés générées et stockées dans Postgres. Le commentaire du modèle dans `app-config.yaml` est un reste
+- [ ] Plus tard, si un script ou une CI doit appeler l'API de Backstage: configurer `backend.auth.externalAccess` (token statique limité à certains plugins)
 - [x] Faire tourner l'ancien secret OAuth GitHub (considéré comme compromis): nouvelle application créée, ancienne supprimée le 2026-09-24
 - [ ] Réduire le token d'intégration GitHub du scaffolder (fine-grained, `Contents` et `Administration`)
 - [ ] Secrets uniquement en variables d'environnement, jamais dans le repo
