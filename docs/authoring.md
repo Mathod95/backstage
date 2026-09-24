@@ -110,12 +110,11 @@ python3 -m venv zensical/.venv && zensical/.venv/bin/pip install zensical
 
 Comment c'est organisé:
 
-| Fichier         | Lu par               | Rôle                                      |
-| --------------- | -------------------- | ----------------------------------------- |
-| `docs/`         | MkDocs et Zensical   | Les pages, un seul exemplaire             |
-| `mkdocs.yml`    | TechDocs (Backstage) | Doc publiée dans Backstage                |
-| `zensical.toml` | Zensical             | Aperçu local                              |
-| `overrides/`    | Zensical             | Retouches du thème Zensical pour l'aperçu |
+| Fichier         | Lu par               | Rôle                          |
+| --------------- | -------------------- | ----------------------------- |
+| `docs/`         | MkDocs et Zensical   | Les pages, un seul exemplaire |
+| `mkdocs.yml`    | TechDocs (Backstage) | Doc publiée dans Backstage    |
+| `zensical.toml` | Zensical             | Aperçu local                  |
 
 Le menu est écrit deux fois, dans `mkdocs.yml` et dans `zensical.toml`: toute page ajoutée doit l'être dans les deux.
 
