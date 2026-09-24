@@ -34,7 +34,7 @@ Procédure détaillée pour GitHub OAuth, le retrait de l'invité et des exemple
 
 ## 2. Application Backstage
 
-- [ ] Décider: branding (titre `Mathod.io`, logos, page d'accueil), fait sur l'ancienne instance
+- [ ] Décider: branding (titre `Mathod.io`, logos, page d'accueil), fait sur l'ancienne instance. Carte de tous les réglages: [personnalisation.md](personnalisation.md)
 - [ ] Remplacer les valeurs par défaut du modèle dans `app-config.yaml`: `app.title` (`Scaffolded Backstage App`), `organization.name` et `mcpActions.name` (`My Company`)
 - [x] Remplacer le catalogue d'exemple par les vraies sources (`catalog.locations`), première étape décrite dans [retirer-exemples-et-invite.md](retirer-exemples-et-invite.md)
 - [ ] TechDocs: passer en génération CI et stockage externe (le mode `local` est déconseillé en production)
