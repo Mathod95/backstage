@@ -11,6 +11,8 @@ on:
       - 'docs/**'
       - 'mkdocs.yml'
       - 'catalog-info.yaml'
+      - 'zensical.toml'
+      - 'overrides/**'
   workflow_dispatch: {}
 
 env:

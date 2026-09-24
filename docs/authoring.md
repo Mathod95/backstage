@@ -90,12 +90,39 @@ Testé aussi avec des champs remplis: `description: Une description` apparaît b
 
 ### Vérifier
 
-Après avoir écrit ou modifié un front matter, construire la doc en local et vérifier que l'en-tête n'apparaît pas en haut de la page:
+Après avoir écrit ou modifié un front matter, vérifier dans l'aperçu local que l'en-tête n'apparaît pas en haut de la page (voir [Aperçu local](#apercu-local)).
+
+## Aperçu local
+
+Pour voir une page sans pousser ni attendre Backstage, la doc se prévisualise en local avec Zensical:
 
 ```bash
-python3 -m venv .venv && .venv/bin/pip install mkdocs-techdocs-core==1.7.1
-.venv/bin/mkdocs serve
+zensical/.venv/bin/zensical serve -f zensical.toml
 ```
+
+Puis ouvrir <http://localhost:8000>. La page se met à jour à chaque enregistrement.
+
+Première installation, une seule fois:
+
+```bash
+python3 -m venv zensical/.venv && zensical/.venv/bin/pip install zensical
+```
+
+Comment c'est organisé:
+
+| Fichier         | Lu par               | Rôle                                      |
+| --------------- | -------------------- | ----------------------------------------- |
+| `docs/`         | MkDocs et Zensical   | Les pages, un seul exemplaire             |
+| `mkdocs.yml`    | TechDocs (Backstage) | Doc publiée dans Backstage                |
+| `zensical.toml` | Zensical             | Aperçu local                              |
+| `overrides/`    | Zensical             | Retouches du thème Zensical pour l'aperçu |
+
+Le menu est écrit deux fois, dans `mkdocs.yml` et dans `zensical.toml`: toute page ajoutée doit l'être dans les deux.
+
+!!! warning "Aperçu différent de Backstage"
+    L'aperçu montre la doc telle que Zensical la rend. Tant que Backstage utilise TechDocs (MkDocs), le rendu dans Backstage reste différent: voir [TechDocs](techdocs.md).
+
+La config Zensical doit être à la racine du repo: Zensical refuse un dossier de pages situé en dehors de son propre dossier (`docs_dir must be within project root`), même à travers un lien symbolique (testé le 2026-09-24 avec Zensical 0.0.64).
 
 ## Data tables
 
