@@ -1,0 +1,736 @@
+.codeblock[data-blur] .blurred {
+  filter: blur(4px);
+  transition: filter 0.15s ease;
+}
+
+.codeblock[data-blur]:hover .blurred {
+  filter: none;
+}
+.highlight.codeblock {
+  position: relative;
+  border-radius: var(--md-code-radius, 4px);
+  overflow: hidden;
+}
+
+/* Zensical's own spacing between consecutive code blocks lives on the
+   *inner* <pre> (".md-typeset pre{margin-top:1em;margin-bottom:1em}") or
+   <table class="highlighttable"> (native "margin:1em 0"), not on the
+   outer .highlight div itself, which has none of its own. In transcript
+   mode, collapsible-code.js wipes and rebuilds that inner content
+   (container.innerHTML = ""), so the <pre> that used to carry this
+   margin is gone, and two adjacent transcript blocks ended up touching
+   directly, no gap, looking like one merged block. Moving the margin to
+   the outer .highlight.codeblock (never destroyed, common to every mode)
+   fixes that; zeroing it back out on the inner pre/table it used to sit
+   on avoids doubling it in plain-file mode, where that inner element is
+   left untouched. */
+.highlight.codeblock {
+  margin: 1em 0;
+}
+
+.highlight.codeblock pre,
+.highlight.codeblock .highlighttable {
+  margin: 0;
+}
+
+/* A bit more breathing room between lines than Zensical's native 1.5
+   (.md-typeset pre): applies to every .codeblock regardless of
+   data-theme, a spacing preference rather than a color one. Both
+   contexts named explicitly (plain-file <code> and transcript
+   .code-output) since neither inherits the other's line-height. */
+.highlight.codeblock code,
+.highlight.codeblock .code-output {
+  line-height: 1.7;
+}
+
+/* Token layer: every color a .codeblock rule uses below is read through
+   one of these --cb-* custom properties, defaulting 1:1 to Zensical's own
+   theme variables, so a plain .codeblock with no data-theme renders
+   exactly as before (zero visual change). data-theme="..." (see the three
+   palettes further down) overrides just these properties, which cascades
+   into every rule automatically without touching them individually. */
+.highlight.codeblock {
+  --cb-bg: var(--md-code-bg-color);
+  --cb-banner-bg: var(--md-code-bg-color);
+  --cb-border: var(--md-default-fg-color--lightest);
+  --cb-fg: var(--md-code-fg-color);
+  --cb-fg-dim: var(--md-default-fg-color--light);
+  --cb-accent: var(--md-accent-fg-color);
+  --cb-zebra: color-mix(in srgb, var(--cb-bg), var(--cb-fg-dim) 5%);
+}
+
+/* Three ready-made palettes, opt-in via data-theme (requires .codeblock
+   like every other option, e.g. `{ .yaml .codeblock data-theme="obsidian-violet" }`).
+   Values in kebab-case exactly as written here (obsidian-violet, not
+   ObsidianViolet): CSS attribute-value matching is a plain case-sensitive
+   string comparison, there is no normalization step. --cb-key/--cb-str/
+   --cb-num/--cb-comment only exist on these three blocks (undefined,
+   hence unused, on a plain .codeblock with no data-theme): the Pygments
+   token recolor rules further down are scoped to [data-theme] for exactly
+   that reason.
+
+   Each bare name (e.g. "pine-frost") auto-switches with the site's own
+   light/dark toggle, same as every other themed element on the page. A
+   "-l"/"-d" suffix (e.g. "pine-frost-l", "pine-frost-d") pins that one
+   block to always render as the light or dark variant, regardless of the
+   site's current mode, for whenever a fixed look matters more than
+   following the toggle. No new color values for these: the selector
+   lists below just add the suffixed name as an extra match on the exact
+   same rule that already defines that variant's colors, so a "-l"/"-d"
+   pin can never drift out of sync with the auto-switching version. */
+.highlight.codeblock[data-theme="obsidian-violet"],
+.highlight.codeblock[data-theme="obsidian-violet-l"] {
+  --cb-bg: #faf9fb;
+  --cb-banner-bg: #f1eef6;
+  --cb-border: #e0dae8;
+  --cb-fg: #2a2438;
+  --cb-fg-dim: #8b8298;
+  --cb-accent: #6c4fd6;
+  --cb-key: #6c4fd6;
+  --cb-str: #1f7a5c;
+  --cb-num: #b1461f;
+  --cb-comment: #8b8298;
+  --cb-zebra: rgba(108, 79, 214, 0.05);
+}
+
+body[data-md-color-scheme="slate"] .highlight.codeblock[data-theme="obsidian-violet"],
+.highlight.codeblock[data-theme="obsidian-violet-d"] {
+  --cb-bg: #17151d;
+  --cb-banner-bg: #201c2b;
+  --cb-border: #322c41;
+  --cb-fg: #e7e3ee;
+  --cb-fg-dim: #8f849f;
+  --cb-accent: #a78bfa;
+  --cb-key: #b09dfa;
+  --cb-str: #5fdba9;
+  --cb-num: #f0975a;
+  --cb-comment: #8f849f;
+  --cb-zebra: rgba(167, 139, 250, 0.07);
+}
+
+.highlight.codeblock[data-theme="pine-frost"],
+.highlight.codeblock[data-theme="pine-frost-l"] {
+  --cb-bg: #f6f8f9;
+  --cb-banner-bg: #eef2f4;
+  --cb-border: #dbe3e7;
+  --cb-fg: #1f2d33;
+  --cb-fg-dim: #71858c;
+  --cb-accent: #1d6fa5;
+  --cb-key: #1d6fa5;
+  --cb-str: #2f8f6f;
+  --cb-num: #b3591f;
+  --cb-comment: #71858c;
+  --cb-zebra: rgba(29, 111, 165, 0.05);
+}
+
+body[data-md-color-scheme="slate"] .highlight.codeblock[data-theme="pine-frost"],
+.highlight.codeblock[data-theme="pine-frost-d"] {
+  --cb-bg: #131a1d;
+  --cb-banner-bg: #1a2327;
+  --cb-border: #263136;
+  --cb-fg: #dde6e9;
+  --cb-fg-dim: #83959c;
+  --cb-accent: #6fb7e6;
+  --cb-key: #7cc2ee;
+  --cb-str: #68d9b1;
+  --cb-num: #e2a15f;
+  --cb-comment: #83959c;
+  --cb-zebra: rgba(111, 183, 230, 0.07);
+}
+
+.highlight.codeblock[data-theme="ember-graphite"],
+.highlight.codeblock[data-theme="ember-graphite-l"] {
+  --cb-bg: #faf8f6;
+  --cb-banner-bg: #f2ede8;
+  --cb-border: #e4dcd3;
+  --cb-fg: #2b241d;
+  --cb-fg-dim: #93887a;
+  --cb-accent: #c96a1c;
+  --cb-key: #b8560f;
+  --cb-str: #4c7a3e;
+  --cb-num: #a13f3f;
+  --cb-comment: #93887a;
+  --cb-zebra: rgba(184, 86, 15, 0.05);
+}
+
+body[data-md-color-scheme="slate"] .highlight.codeblock[data-theme="ember-graphite"],
+.highlight.codeblock[data-theme="ember-graphite-d"] {
+  --cb-bg: #1c1815;
+  --cb-banner-bg: #26201b;
+  --cb-border: #3a3128;
+  --cb-fg: #ece5dc;
+  --cb-fg-dim: #a3957f;
+  --cb-accent: #f0a05a;
+  --cb-key: #f0a05a;
+  --cb-str: #9bd188;
+  --cb-num: #e88080;
+  --cb-comment: #a3957f;
+  --cb-zebra: rgba(240, 160, 90, 0.06);
+}
+
+/* Fourth palette, not hand-picked like the first three: built directly
+   from VS Code's own default terminal ANSI colors (Dark+/Light+), the
+   real values registered in "src/vs/workbench/contrib/terminal/common/
+   terminalColorRegistry.ts" in the vscode repo, not guessed or
+   approximated. --cb-key/--cb-accent reuse ansiBlue, --cb-str reuses
+   ansiGreen, --cb-num reuses ansiYellow, --cb-comment reuses
+   ansiBrightBlack (VS Code's own muted/dim terminal color, so comments
+   read the same as a real terminal's secondary text) — the closest
+   1-to-1 mapping from 16 ANSI slots onto this component's existing
+   roles, not a new color scheme invented on top. --cb-banner-bg/--cb-
+   border/--cb-zebra have no ANSI equivalent to source, so they're
+   derived with color-mix() from the two colors that do (bg, fg, accent),
+   same proportions as the other three palettes, rather than invented
+   hex values of their own. */
+.highlight.codeblock[data-theme="vscode-terminal"],
+.highlight.codeblock[data-theme="vscode-terminal-l"] {
+  --cb-bg: #ffffff;
+  --cb-fg: #333333;
+  --cb-fg-dim: #666666;
+  --cb-accent: #0451a5;
+  --cb-key: #0451a5;
+  --cb-str: #107c10;
+  --cb-num: #949800;
+  --cb-comment: #666666;
+  --cb-banner-bg: color-mix(in srgb, var(--cb-bg), var(--cb-fg) 4%);
+  --cb-border: color-mix(in srgb, var(--cb-bg), var(--cb-fg) 14%);
+  --cb-zebra: color-mix(in srgb, var(--cb-accent), transparent 95%);
+}
+
+body[data-md-color-scheme="slate"] .highlight.codeblock[data-theme="vscode-terminal"],
+.highlight.codeblock[data-theme="vscode-terminal-d"] {
+  --cb-bg: #1e1e1e;
+  --cb-fg: #cccccc;
+  --cb-fg-dim: #666666;
+  --cb-accent: #2472c8;
+  --cb-key: #2472c8;
+  --cb-str: #0dbc79;
+  --cb-num: #e5e510;
+  --cb-comment: #666666;
+  --cb-banner-bg: color-mix(in srgb, var(--cb-bg), var(--cb-fg) 6%);
+  --cb-border: color-mix(in srgb, var(--cb-bg), var(--cb-fg) 16%);
+  --cb-zebra: color-mix(in srgb, var(--cb-accent), transparent 93%);
+}
+
+/* Recolors the real Pygments token classes (not our own markup) inside a
+   themed block: .nt, .k and .kn cover YAML/most-lexer keywords; .s, .s1
+   and .s2 cover strings; .m, .mi and .mf cover numbers; .c, .c1 and .cm
+   cover comments. Only when [data-theme] is set: a plain .codeblock keeps
+   whatever syntax colors the site's native Pygments style already
+   provides, exactly as before this feature existed. */
+.highlight.codeblock[data-theme] .nt,
+.highlight.codeblock[data-theme] .k,
+.highlight.codeblock[data-theme] .kn,
+.highlight.codeblock[data-theme] .kt {
+  color: var(--cb-key);
+}
+
+.highlight.codeblock[data-theme] .s,
+.highlight.codeblock[data-theme] .s1,
+.highlight.codeblock[data-theme] .s2,
+.highlight.codeblock[data-theme] .sb {
+  color: var(--cb-str);
+}
+
+.highlight.codeblock[data-theme] .m,
+.highlight.codeblock[data-theme] .mi,
+.highlight.codeblock[data-theme] .mf {
+  color: var(--cb-num);
+}
+
+.highlight.codeblock[data-theme] .c,
+.highlight.codeblock[data-theme] .c1,
+.highlight.codeblock[data-theme] .cm {
+  color: var(--cb-comment);
+}
+
+/* Title banner (span.filename) isn't our markup, it's Zensical's own
+   native element: its background AND text color are themed here (color
+   was missing from the first pass: the banner text kept the site's
+   generic --md-default-fg-color, which reads as mismatched/wrong against
+   a now-colored background, especially on the darker palettes). Border
+   themed too so it doesn't stay the native neutral line against a
+   colored banner. Everything else (padding, layout, radius) stays
+   whatever the theme already set on it. Left untouched (--cb-* not
+   overridden) on a plain .codeblock, so this changes nothing without
+   data-theme. */
+.highlight.codeblock[data-theme] span.filename {
+  background-color: var(--cb-banner-bg);
+  color: var(--cb-fg);
+  border-bottom-color: var(--cb-border);
+}
+
+/* The actual visible canvas of a plain-file-content block (no $ command,
+   never rebuilt by collapsible-code.js) was missing entirely from the
+   first pass: its background comes from Zensical's own native rule
+   (.md-typeset code{background-color:var(--md-code-bg-color)}), not from
+   anything in this file, so a themed block still showed the untouched
+   native background behind themed text, looking basically unstyled.
+   .highlighttable .linenos (the separate line-number gutter column that
+   exists alongside <code> when linenums= is combined with title=) needs
+   the same override, or it stays visibly native-colored next to a now
+   themed code column. Element-qualified (not bare .highlight.codeblock)
+   so it wins over the native ".md-typeset code" rule on specificity. */
+.highlight.codeblock[data-theme] code,
+.highlight.codeblock[data-theme] .highlighttable .linenos {
+  background-color: var(--cb-bg);
+}
+
+/* Line numbers are real <a href="#__codelineno-...."> permalinks, and
+   Zensical colors every <a> with the site's own link color plus an
+   underline (".md-typeset a{color:var(--md-typeset-a-color);
+   text-decoration:underline}"), never tied to code coloring at all: on a
+   themed block this read as illegible (the site's link color, picked for
+   contrast against the PAGE background, has no relationship to this
+   block's own palette) instead of a plain muted gutter number. */
+.highlight.codeblock[data-theme] .linenos a {
+  color: var(--cb-fg-dim);
+  text-decoration: none;
+}
+
+/* Terminal icon recolored to the palette's accent on a themed block, same
+   override mechanism the dark-mode fallback below already relies on: an
+   SVG's inline fill="..." (burned in by JS, see renderIconSvg) is a
+   presentation attribute, the lowest-priority author style, so any real
+   CSS rule targeting the same property wins over it. Real per-language
+   file-type icons (the Simple Icons brand colors) are deliberately left
+   alone: "real brand colors" is the documented feature, theming would
+   contradict it. */
+.highlight.codeblock[data-theme] .command-icon svg path {
+  fill: var(--cb-accent);
+}
+
+/* .codeblock always ships its own copy button (per command, or for a plain
+   file's content), so the native Zensical controls (copy AND line-selection,
+   both rendered as .md-code__button inside the same .md-code__nav) are
+   always redundant here, in both modes: transcript mode already destroys
+   them (full DOM rebuild), this rule covers the plain-file mode where they
+   otherwise survive untouched. Hiding the whole nav (not just the copy
+   button) also covers any future .md-code__button the theme might add.
+   Makes .no-copy unnecessary on a .codeblock header. */
+.highlight.codeblock .md-code__nav {
+  display: none;
+}
+
+/* Tag-qualified on purpose: with title= + linenums= combined, the outer
+   <th> wrapping the real <span class="filename"> also carries the
+   "filename" class (<th class="filename"><span class="filename">...).
+   An untagged ".filename" selector matches both and forces display:flex
+   onto the <th> too, breaking the table layout that gives it its
+   full-width background. Only the inner <span> should get the icon's
+   flex layout. */
+.highlight.codeblock span.filename {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.highlight.codeblock .file-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* GNOME Terminal's real brand color (#241F31) is a near-black, fine on the
+   light theme but all but invisible on the dark one: fall back to the
+   theme's own text color there instead. Scoped to data-md-color-scheme
+   (the theme's own dark/light toggle), not prefers-color-scheme: the
+   toggle can override the OS preference, and this must follow the toggle,
+   not the OS. Only applies on an un-themed block: a themed block already
+   gets its own accent color from the rule above, in both modes. */
+body[data-md-color-scheme="slate"] .highlight.codeblock:not([data-theme]) .command-icon svg path {
+  fill: currentColor;
+}
+
+/* Shared by both floating (non-flex-row) copy buttons on the page: the
+   "plain file content" one (no command row exists to carry it there) and
+   the peek-mode output one (no flex row there either). Both float over
+   their code area's corner, vertically centered on a real code/output
+   line via inline "top" set in JS. font-size matches .code-command's
+   (0.85em) on purpose: without it, each inherits .highlight's own
+   (larger) font-size, so "right: 1em" resolves to more actual pixels
+   here than the "1em" in .code-command's own padding does, landing it
+   further from the edge than every other copy button on the page even
+   though both say "1em". */
+.highlight.codeblock .plain-copy-btn,
+.highlight.codeblock .code-output-copy-btn {
+  position: absolute;
+  right: 1em;
+  font-size: 0.85em;
+}
+
+.highlight.codeblock .plain-copy-btn {
+  display: inline-flex;
+  cursor: pointer;
+  color: var(--cb-fg-dim);
+  flex-shrink: 0;
+}
+
+.highlight.codeblock .plain-copy-btn:hover {
+  color: var(--cb-accent);
+}
+
+/* Fallback for data-filetype values with no matching Simple Icons entry:
+   a plain text tag, same idea as before real icons were added. */
+.highlight.codeblock .file-badge {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: var(--cb-fg-dim);
+  color: var(--cb-bg);
+  letter-spacing: 0.02em;
+}
+
+/* align-items: flex-start (not center): a multi-line "$ curl ... \" command
+   wraps onto several visual rows within .code-command, growing its total
+   height. "center" would then center the icon/copy button on that whole
+   grown height, landing them next to some middle wrapped row instead of
+   the first one. flex-start anchors them to the top, matching the first
+   visual line regardless of how many more follow. */
+.highlight.codeblock .code-command {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0.5em 1em;
+  /* Left padding pinned to the theme's own span.filename padding (15px,
+     computed) instead of 1em (12.75px here): the two paddings don't scale
+     the same way, so a plain "1em" leaves the command-row icon column 2px
+     off from the title-banner icon column above it, on every titled block. */
+  padding-left: 15px;
+  background: var(--cb-bg);
+  color: var(--cb-fg);
+  font-family: var(--md-code-font, monospace);
+  font-size: 0.85em;
+  font-weight: 600;
+  border-bottom: 1px solid var(--cb-border);
+}
+
+.highlight.codeblock .code-command-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+}
+
+/* .code-command-left uses align-items: flex-start (see its own comment
+   above) so the icon anchors to a multi-line command's first line, not the
+   vertical center of the whole wrapped block. That pins the 16px icon flush
+   to the top of that first line's box instead, which is taller (1.8em,
+   measured) than the icon: this margin re-centers it on that one line
+   without touching the flex-start the multi-line case still needs. */
+.highlight.codeblock .command-icon {
+  margin-top: calc((1.8em - 16px) / 2);
+}
+
+/* A multi-line "$ curl ... \" command joins its continuation lines with
+   real "\n" characters (see collapsible-code.js), but default
+   white-space:normal collapses those (and any leading indentation) away,
+   so the browser re-wrapped the whole thing on its own at arbitrary word
+   boundaries instead of the actual "\" break points and indentation from
+   the source. pre-wrap keeps both the real line breaks and the original
+   leading spaces on each continuation line, while still allowing a
+   genuinely too-long single line to wrap rather than overflow. */
+.highlight.codeblock .code-command-text {
+  white-space: pre-wrap;
+}
+
+/* linenums= line-number gutter for a transcript block (command rows and
+   output lines both): pymdownx normally renders this as a whole separate
+   .linenos <table> column, discarded once a transcript block is rebuilt
+   into .code-command/.code-output. Rendered here as a CSS ::before instead
+   (content: attr(...)) rather than real text, so it's purely visual: never
+   part of a copy button's copied text, since none of them read from the
+   DOM's rendered content, only from JS variables set before the number was
+   ever added. Fixed width + right-aligned, same idea as Pygments' own
+   .linenos column, so numbers of different digit counts still line up. */
+.highlight.codeblock [data-line-number]::before {
+  content: attr(data-line-number);
+  color: var(--cb-fg-dim);
+  user-select: none;
+}
+
+.highlight.codeblock .code-command-left[data-line-number]::before {
+  flex-shrink: 0;
+  min-width: 1.5em;
+  text-align: right;
+}
+
+.highlight.codeblock .code-output [data-line-number]::before {
+  display: inline-block;
+  min-width: 2.5em;
+  margin-right: 1em;
+  text-align: right;
+}
+
+.highlight.codeblock .code-command:first-child {
+  border-top: none;
+}
+
+.highlight.codeblock .code-command + .code-command {
+  border-top: 1px solid var(--cb-border);
+}
+
+/* Same fix as .command-icon just above: .code-command uses
+   align-items: flex-start (needed for multi-line commands, see its own
+   comment), which otherwise leaves this 16px button flush to the top of
+   the row instead of centered on the first command line (1.8em tall). */
+.highlight.codeblock .code-copy-btn {
+  display: inline-flex;
+  cursor: pointer;
+  color: var(--cb-fg-dim);
+  flex-shrink: 0;
+  margin-top: calc((1.8em - 16px) / 2);
+}
+
+.highlight.codeblock .code-copy-btn:hover {
+  color: var(--cb-accent);
+}
+
+.highlight.codeblock .code-collapse-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  user-select: none;
+  padding: 0.375em 1em;
+  font-size: 0.7rem;
+  color: var(--cb-fg-dim);
+  background: color-mix(in srgb, var(--cb-bg), var(--cb-fg-dim) 6%);
+  border-bottom: 1px solid var(--cb-border);
+}
+
+.highlight.codeblock .code-collapse-toggle::before {
+  content: "\25B8";
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.highlight.codeblock .code-collapse-toggle.is-open::before {
+  transform: rotate(90deg);
+}
+
+/* Scrolls horizontally instead of .code-output itself: a Pygments
+   highlighted-line span (hl_lines=) is display:block with width:auto,
+   which resolves against its own containing block's *visible* width when
+   that box has overflow-x:auto directly on it, not the true (scrollable)
+   content width, so the highlight background stopped partway across a
+   wide line instead of reaching its end. Giving .code-output itself
+   "width: max-content" instead (sized to its real content) fixes that,
+   but then something else has to scroll/clip it, hence this wrapper. */
+.highlight.codeblock .code-output-scroll {
+  overflow-x: auto;
+}
+
+/* white-space: pre (not pre-wrap) + width: max-content, matching Zensical's
+   own native code blocks: a wide output line scrolls horizontally (via the
+   wrapper above) instead of wrapping onto extra visual rows. This also
+   keeps the "N lignes" toggle/peek label accurate, since every
+   line-counting/height-measuring piece of JS counts real DOM line elements
+   (one per Pygments-rendered source line), not wrapped visual rows:
+   pre-wrap made a single wide line (e.g. a docker ps table row) visually
+   span two rows, so a "2 lignes" block could visibly show 4 rows on
+   screen. box-sizing: border-box so min-width: 100% already accounts for
+   the padding/border below, instead of adding on top of it (which would
+   make even a perfectly-fitting short block scroll by a few pixels). */
+.highlight.codeblock .code-output {
+  display: none;
+  box-sizing: border-box;
+  width: max-content;
+  min-width: 100%;
+  margin: 0;
+  padding: 0.8em 1em;
+  font-size: 0.85em;
+  color: var(--cb-fg);
+  background: var(--cb-bg);
+  white-space: pre;
+  border: 1px solid var(--cb-border);
+  border-top: none;
+}
+
+/* Pygments gives "generic output" tokens (.go and its siblings .ge/.gh/.gp/
+   .gr/.gs/.gt/.gu, used by the console/bash lexers on every output line) a
+   dimmed color of their own, more specific than .code-output's color above:
+   override just those so output text matches the normal code color used
+   everywhere else. Other tokens (.m numbers, .k keywords, etc., which the
+   bash lexer does assign on some output lines) keep their own distinct
+   Pygments color untouched (or the themed recolor rules above, on a
+   themed block). */
+.highlight.codeblock .code-output .go,
+.highlight.codeblock .code-output .ge,
+.highlight.codeblock .code-output .gh,
+.highlight.codeblock .code-output .gp,
+.highlight.codeblock .code-output .gr,
+.highlight.codeblock .code-output .gs,
+.highlight.codeblock .code-output .gt,
+.highlight.codeblock .code-output .gu {
+  color: var(--cb-fg);
+}
+
+.highlight.codeblock .code-output.is-open {
+  display: block;
+}
+
+/* Peek mode (data-peek="N"): content is always visible, cropped to N
+   lines via an inline max-height set in JS (measured from the real
+   rendered lines, not guessed). overflow-y:hidden clips the rest
+   vertically; the fade below signals there's more. Only the Y axis: the
+   cropped element is sometimes a .code-output-scroll wrapper that also
+   needs its own overflow-x:auto to keep scrolling horizontally while
+   peeked (a wide line shouldn't lose its horizontal scrollbar just because
+   the block is also collapsed vertically). Untagged on purpose: the
+   cropped element is that wrapper in transcript mode, but a plain native
+   <pre> or a whole <table class="highlighttable"> (title= + linenums=
+   combo) in plain-file-content mode, so this can't be scoped to one
+   tag/class. */
+.highlight.codeblock .peeked {
+  overflow-y: hidden;
+}
+
+.highlight.codeblock .code-peek-fade {
+  position: relative;
+  z-index: 1;
+  height: 2.5em;
+  margin-top: -2.5em;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 0.4em;
+  background: linear-gradient(to bottom, transparent, var(--cb-bg) 75%);
+  pointer-events: none;
+}
+
+.highlight.codeblock .code-peek-expand {
+  pointer-events: auto;
+  cursor: pointer;
+  border: none;
+  border-radius: 999px;
+  padding: 0.2em 0.8em;
+  font-size: 0.7rem;
+  font-family: inherit;
+  background: color-mix(in srgb, var(--cb-bg), var(--cb-fg-dim) 14%);
+  color: var(--cb-fg-dim);
+}
+
+.highlight.codeblock .code-peek-expand:hover {
+  color: var(--cb-accent);
+}
+
+/* Once expanded (no more content hidden), the gradient/overlap trick has
+   nothing left to fade over: fall back to a plain, non-overlapping row so
+   the "Réduire" control doesn't float over real output text. */
+.highlight.codeblock .code-peek-fade.is-expanded {
+  margin-top: 0;
+  height: auto;
+  padding: 0.4em 0;
+  background: none;
+}
+
+/* position/right/font-size for .code-output-copy-btn come from the shared
+   rule above; z-index is its own concern, needed because this button is a
+   sibling of the (later, statically-positioned) output <pre> rather than
+   a child of .highlight like .plain-copy-btn, so it needs an explicit
+   stacking order to paint above it. */
+.highlight.codeblock .code-output-copy-btn {
+  z-index: 2;
+}
+
+/* Zebra striping (.zebra, opt-in, requires .codeblock like every other
+   option): one line in two gets a slightly different background, to help
+   track alignment across a wide/long block. Two selectors, not one:
+   plain-file-content mode keeps the original pymdownx.highlight line spans
+   as direct children of <code> itself, while transcript mode moves them
+   into a separate .code-output <pre> per command segment (see
+   collapsible-code.js), so striping restarts at each command rather than
+   continuing across the whole block. --cb-zebra keeps it theme-aware
+   (light/dark, and per data-theme) without a hardcoded color.
+   display:block (each line span is inline by default) so the background
+   covers the full row width instead of just the text itself, same trick
+   Zensical's own native .hll (hl_lines) already relies on: short lines
+   otherwise show an obviously cut-off band instead of a clean stripe. */
+/* display:block alone stops the stripe short of the card's true edges:
+   a block child's auto width fills its parent's *content* box, not the
+   padding around it, so the background reached only as far as
+   code's/.code-output's own inner text area (measured: ~32px short on
+   each side, exactly code's own horizontal padding) and visibly stopped
+   before the rounded corners. The negative-margin/matching-padding pair
+   is the same trick Zensical's own native .hll (hl_lines) already uses
+   for the identical problem: pulling the block box out by the parent's
+   own padding, then re-adding that same amount as the span's own
+   padding, so the text sits at the exact same spot as before while the
+   background now bleeds all the way to the real edges. Two separate
+   values, not one shared with .code-output below: code's native padding
+   is .8203125em 1.25em (pymdownx/Zensical, ".md-typeset pre>code"),
+   .code-output's is the project's own 0.8em 1em (see its own rule
+   further down) — reusing one figure for both would under- or
+   over-shoot depending on which element it landed on. */
+.highlight.codeblock.zebra code > span:nth-child(even) {
+  display: block;
+  margin: 0 -1.25em;
+  padding: 0 1.25em;
+  background: var(--cb-zebra);
+}
+
+.highlight.codeblock.zebra .code-output > span:nth-child(even) {
+  display: block;
+  margin: 0 -1em;
+  padding: 0 1em;
+  background: var(--cb-zebra);
+}
+
+/* Extends the stripe into the separate .linenos gutter column that exists
+   when linenums= is combined with title= (a whole other <td>, in the same
+   <tr>, not inside <code> at all, so the rule above never reaches it on
+   its own): without this, the stripe stopped at the code column's left
+   edge instead of running the full row width. Relies on codeBlock.js
+   having already rehomed each line's trailing "\n" (originally a sibling
+   text node here, unlike code's own convention of keeping it inside the
+   span) into the end of its preceding span, so this DOM now matches
+   code's exactly: without that normalization, mixing display:block spans
+   with the untouched sibling "\n" text nodes doubled every row's height
+   (measured: each pair rendered at 43px instead of the expected ~22px).
+   Indices don't match code's own span:nth-child(even) either way:
+   .linenos' <pre> keeps its own leading empty <span></span> anchor
+   placeholder as a direct child (code's equivalent empty span is <pre>'s
+   own child, a sibling of <code>, not inside it), which shifts every
+   real numbered line one position later, so line 2 (where code's own
+   stripe starts) sits at nth-child(3) here, line 4 at nth-child(5), etc:
+   "odd, but not the very first child" lands on exactly that same set of
+   physical lines. */
+/* Same negative-margin/matching-padding trick as code's own zebra rule
+   above, left side only: .linenos' native padding (Zensical's own
+   ".highlighttable .linenos" rule) is asymmetric, 1.25em on the left and
+   none on the right, so only the left edge needs pulling out, the right
+   edge already reaches the column's true boundary on its own.
+
+   display:block on every span here, striped or not, in its own rule:
+   giving it only to the striped (odd) subset, leaving the rest at their
+   native inline display, left an inline/block mix that still rendered at
+   two different heights (measured: 17px inline vs ~22px block) even
+   after codeBlock.js's newline normalization above removed the *other*
+   cause of misalignment (the doubled row from a separate sibling "\n").
+   Code's own equivalent rule can get away with striping only half the
+   spans because it never suffers from this mix in the first place: every
+   code line is already display:block on its own, natively, so nothing
+   there is really "inline" to clash with. */
+.highlight.codeblock.zebra .linenos pre > span {
+  display: block;
+}
+
+.highlight.codeblock.zebra .linenos pre > span:nth-child(odd):not(:first-child) {
+  margin-left: -1.25em;
+  padding-left: 1.25em;
+  background: var(--cb-zebra);
+}
+
+/* Keeps the two columns' lines vertically aligned: .code-output/code
+   above already got a taller line-height than Zensical's native 1.5, the
+   .linenos gutter needs the exact same value or its numbers drift out of
+   sync with their code line over a long enough block. */
+.highlight.codeblock .linenos pre {
+  line-height: 1.7;
+}

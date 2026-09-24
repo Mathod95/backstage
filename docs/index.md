@@ -17,6 +17,6 @@ Le code est sur GitHub: [Mathod95/backstage](https://github.com/Mathod95/backsta
 
 ## Modifier cette documentation
 
-Les règles pour créer et écrire une page sont dans [Authoring](authoring.md).
+Les règles pour créer et écrire une page sont dans [Authoring](zensical/authoring.md), l'aperçu local et la config Zensical dans [Configuration](zensical/configuration.md).
 
 Les pages sont des fichiers Markdown dans `docs/`, la navigation est dans `mkdocs.yml` à la racine du repo. Un push sur `main` suffit: Backstage relit la doc sur GitHub et la régénère, sans reconstruire l'image.

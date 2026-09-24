@@ -1,0 +1,38 @@
+.var-placeholder {
+  display: inline-block;
+  min-width: 2ch;
+  padding: 0 0.3em;
+  border-radius: 0.2em;
+  background: color-mix(in srgb, var(--md-accent-fg-color), transparent 85%);
+  border-bottom: 1px dashed var(--md-accent-fg-color);
+  cursor: text;
+  outline: none;
+}
+
+.var-placeholder:hover {
+  background: color-mix(in srgb, var(--md-accent-fg-color), transparent 75%);
+}
+
+.var-placeholder:focus {
+  background: color-mix(in srgb, var(--md-accent-fg-color), transparent 70%);
+  border-bottom-style: solid;
+}
+
+.placeholder-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  padding: 0.2em 0.7em;
+  border: none;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 0.7rem;
+  color: var(--md-default-fg-color--light) !important;
+  background: color-mix(in srgb, var(--md-code-bg-color), var(--md-default-fg-color) 8%);
+  text-decoration: none !important;
+  cursor: pointer;
+}
+
+.placeholder-reset:hover {
+  color: var(--md-accent-fg-color) !important;
+}

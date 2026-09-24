@@ -90,38 +90,7 @@ Testé aussi avec des champs remplis: `description: Une description` apparaît b
 
 ### Vérifier
 
-Après avoir écrit ou modifié un front matter, vérifier dans l'aperçu local que l'en-tête n'apparaît pas en haut de la page (voir [Aperçu local](#apercu-local)).
-
-## Aperçu local
-
-Pour voir une page sans pousser ni attendre Backstage, la doc se prévisualise en local avec Zensical:
-
-```bash
-zensical/.venv/bin/zensical serve -f zensical.toml
-```
-
-Puis ouvrir <http://localhost:8000>. La page se met à jour à chaque enregistrement.
-
-Première installation, une seule fois:
-
-```bash
-python3 -m venv zensical/.venv && zensical/.venv/bin/pip install zensical
-```
-
-Comment c'est organisé:
-
-| Fichier         | Lu par               | Rôle                          |
-| --------------- | -------------------- | ----------------------------- |
-| `docs/`         | MkDocs et Zensical   | Les pages, un seul exemplaire |
-| `mkdocs.yml`    | TechDocs (Backstage) | Doc publiée dans Backstage    |
-| `zensical.toml` | Zensical             | Aperçu local                  |
-
-Le menu est écrit deux fois, dans `mkdocs.yml` et dans `zensical.toml`: toute page ajoutée doit l'être dans les deux.
-
-!!! warning "Aperçu différent de Backstage"
-    L'aperçu montre la doc telle que Zensical la rend. Tant que Backstage utilise TechDocs (MkDocs), le rendu dans Backstage reste différent: voir [TechDocs](techdocs.md).
-
-La config Zensical doit être à la racine du repo: Zensical refuse un dossier de pages situé en dehors de son propre dossier (`docs_dir must be within project root`), même à travers un lien symbolique (testé le 2026-09-24 avec Zensical 0.0.64).
+Après avoir écrit ou modifié un front matter, vérifier dans l'aperçu local que l'en-tête n'apparaît pas en haut de la page (voir [Configuration](configuration.md#apercu-local)).
 
 ## Data tables
 
@@ -216,4 +185,4 @@ L'alignement du texte dans une colonne se règle avec des `:` dans la ligne de s
     </div>
 
 !!! note "Tableaux triables"
-    Zensical permet de rendre un tableau triable en cliquant sur l'en-tête d'une colonne (bibliothèque tablesort, ajoutée par `extra_javascript`). On ne l'utilisera qu'une fois la doc passée sur Zensical: voir [TechDocs, avenir de MkDocs et Zensical](techdocs.md#avenir-de-mkdocs-et-zensical).
+    Zensical permet de rendre un tableau triable en cliquant sur l'en-tête d'une colonne (bibliothèque tablesort, ajoutée par `extra_javascript`). On ne l'utilisera qu'une fois la doc passée sur Zensical: voir [TechDocs, avenir de MkDocs et Zensical](../techdocs.md#avenir-de-mkdocs-et-zensical).
