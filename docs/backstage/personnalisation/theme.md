@@ -2,6 +2,8 @@
 
 Comment changer l'apparence de tout Backstage: couleurs, polices, arrondis, ombres, style des boutons, des cartes, des menus, des champs de saisie. Rien n'est encore appliqué: le thème actuel est celui de Backstage par défaut.
 
+Cette page couvre le **theming graphique**. Le **branding** (nom de l'application, nom de l'organisation, logos, icônes, textes) se règle ailleurs, surtout dans `app-config.yaml`: voir [Où sont les réglages](reglages.md#deux-familles-de-reglages).
+
 ## Deux systèmes d'affichage en même temps
 
 **Ce Backstage utilise un mélange de MUI et de BUI.** Les deux systèmes cohabitent pendant une période de transition, et MUI y est même présent en deux versions. Versions installées le 2026-09-24 (Backstage 1.55.0):

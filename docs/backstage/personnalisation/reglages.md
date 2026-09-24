@@ -6,6 +6,17 @@ Carte de tout ce qu'on peut personnaliser dans l'interface, avec le fichier où 
 
 Tous ces réglages sont dans le code ou dans `app-config.yaml`, donc dans l'image: chaque changement demande un rebuild et un redéploiement (voir [catalogue-depuis-github.md](../../catalogue-depuis-github.md)). Le mieux est donc de regrouper les personnalisations dans un seul lot.
 
+## Deux familles de réglages
+
+La personnalisation se divise en deux parties, qui ne se règlent pas au même endroit:
+
+| Famille | Ce que c'est | Où ça se règle |
+|---|---|---|
+| **Branding** | L'identité: noms, textes, logos, icônes, liens | Surtout `app-config.yaml` (`app.title`, `organization.name`, `mcpActions`, `app.support`, widgets de la page d'accueil). Aussi les logos dans `packages/app/src/modules/nav/`, les icônes du navigateur dans `packages/app/public/`, et le texte de bienvenue dans `packages/app/src/modules/home/homeModule.tsx` |
+| **Theming graphique** | L'apparence: couleurs, polices, arrondis, ombres, style des boutons, cartes, menus | Le thème, dans le dossier prévu `packages/app/src/theme/` (`theme.ts` pour MUI, `theme.css` pour BUI). Voir [Thème (MUI et BUI)](theme.md) |
+
+Le branding se change en quelques lignes, sans rien savoir du thème. Le theming graphique demande d'écrire le thème une fois, puis s'applique à toutes les pages.
+
 ## La carte
 
 | Élément | Fichier | Réglage | Valeur actuelle |
