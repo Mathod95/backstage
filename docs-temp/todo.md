@@ -22,9 +22,12 @@ Procédure détaillée pour GitHub OAuth, le retrait de l'invité et des exemple
 - [ ] Décider de garder ou non Authelia devant Backstage
 - [x] Une fois OAuth validé: remplacer `auth.providers.guest` par `github` dans `app-config.production.yaml` et retirer `plugin-auth-backend-module-guest-provider` de `packages/backend/src/index.ts`
 - [ ] Données du catalogue lues depuis GitHub (`catalog/` en `type: url`, hors image, hors pipeline): appliqué dans le repo, voir [catalogue-depuis-github.md](catalogue-depuis-github.md). Token `backstage-catalog-read` (sans expiration) créé et ajouté à l'Inventory, déployé et vérifié le 2026-09-24. Reste à tester l'ajout d'un groupe sans rebuild
-- [ ] Remplacer la politique de permissions `allow-all` (qui peut lancer quel template)
+- [ ] Plus tard, **avant d'ajouter une deuxième personne** dans `catalog/org.yaml` (reporté le 2026-09-24, seul sur le projet pour l'instant): gestion des droits et des groupes
+  - Remplacer la politique de permissions `allow-all`: aujourd'hui toute personne connectée a tous les droits, le groupe `admins` n'est qu'une étiquette
+  - Définir les groupes (par exemple `admins` et un groupe d'utilisateurs) et qui peut faire quoi: lancer quels templates (par tag ou par thème), inscrire ou supprimer des entités du catalogue
+  - Rappel: la connexion est déjà limitée aux personnes présentes dans `catalog/org.yaml` (résolveur GitHub), et Authelia filtre en amont sur l'hôte Saltbox
 - [ ] Configurer `backend.auth.keys`
-- [ ] Faire tourner l'ancien secret OAuth GitHub (considéré comme compromis)
+- [x] Faire tourner l'ancien secret OAuth GitHub (considéré comme compromis): nouvelle application créée, ancienne supprimée le 2026-09-24
 - [ ] Réduire le token d'intégration GitHub du scaffolder (fine-grained, `Contents` et `Administration`)
 - [ ] Secrets uniquement en variables d'environnement, jamais dans le repo
 
