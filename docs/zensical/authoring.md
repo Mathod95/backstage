@@ -58,7 +58,7 @@ Les icônes disponibles pour `icon` sont celles fournies par mkdocs-material:
 | `review` | À relire: la page est complète et attend une relecture               |
 | `done`   | Terminée: la page est relue et à jour                                |
 
-### Writing the `todo` list
+### Todo
 
 Chaque tâche est une ligne entre guillemets, qui commence par `[ ]` (à faire) ou `[x]` (fait):
 
