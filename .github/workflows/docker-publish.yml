@@ -3,8 +3,11 @@ name: Build and publish container image
 on:
   push:
     branches: [main]
+    # Catalog data is read from GitHub at runtime, changing it needs no new image
     paths-ignore:
       - '**.md'
+      - 'catalog/**'
+      - 'templates/**'
   workflow_dispatch: {}
 
 env:

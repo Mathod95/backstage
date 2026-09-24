@@ -113,6 +113,9 @@ backend:
     # host: 127.0.0.1
   csp:
     connect-src: ["'self'", 'http:', 'https:']
+    # Default Helmet img-src is 'self' data:, which blocks GitHub profile pictures once the
+    # app is served by the backend (production image). The dev server (yarn start) has no CSP.
+    img-src: ["'self'", 'data:', 'https://avatars.githubusercontent.com']
     # Content-Security-Policy directives follow the Helmet format: https://helmetjs.github.io/#reference
     # Default Helmet Content-Security-Policy values can be removed by setting the key to false
   cors:

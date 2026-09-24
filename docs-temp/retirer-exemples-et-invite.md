@@ -349,7 +349,17 @@ Vérifications faites en local:
 - Entités de `catalog/org.yaml` validées avec les politiques de `@backstage/catalog-model`: OK.
 - Backend démarré avec des identifiants factices: le fournisseur `github` est configuré (`Configuring auth provider: github`), `/api/auth/github/start` redirige vers `github.com/login/oauth/authorize` avec la bonne URL de callback, `/api/auth/guest/refresh` répond 404.
 
-Reste à faire: commit, déploiement (étape 8, dont la suppression de la ligne invité dans l'Inventory), vérification réelle (étape 9).
+Déploiement et vérification réelle (étapes 8 et 9) faits par l'utilisateur le 2026-09-24: la connexion GitHub fonctionne.
+
+Problème constaté après déploiement: la photo de profil GitHub ne s'affiche pas. Cause: une fois l'application servie par le backend (image de production), la Content Security Policy par défaut de Helmet limite les images à `img-src 'self' data:`, ce qui bloque `avatars.githubusercontent.com`. L'ancienne instance tournait avec `yarn start`, dont le serveur de développement n'applique pas cette politique, d'où la différence. Correction dans `app-config.yaml`, `backend.csp`:
+
+```yaml
+    img-src: ["'self'", 'data:', 'https://avatars.githubusercontent.com']
+```
+
+Vérifié en local: l'en-tête `Content-Security-Policy` renvoyé par le backend contient bien `img-src 'self' data: https://avatars.githubusercontent.com`. À confirmer après déploiement.
+
+Évolution ultérieure: le catalogue est désormais lu depuis GitHub et n'est plus copié dans l'image (l'étape 6 sur le `Dockerfile` est donc remplacée), voir [catalogue-depuis-github.md](catalogue-depuis-github.md).
 
 ## Retour arrière
 
