@@ -119,8 +119,6 @@ Le 2026-09-24: pipeline verte (3 min 28, contre 2 min 17 avant, à cause de l'in
 
 Mise à jour sans rebuild vérifiée le même jour: la page "Pourquoi Backstage", ajoutée par un push qui ne touchait que `docs/` et `mkdocs.yml`, est apparue dans Backstage sans pipeline ni redéploiement.
 
-Défaut constaté: les tableaux larges (4 colonnes ou plus, avec du texte long) sont coupés à droite dans la colonne de contenu de TechDocs. En attendant une correction, préférer des tableaux courts.
-
 ## Sources
 
 - Mise en place de TechDocs: <https://backstage.io/docs/features/techdocs/getting-started>
