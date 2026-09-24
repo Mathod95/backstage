@@ -103,9 +103,9 @@ Les tableaux s'écrivent en Markdown, avec des `|` entre les colonnes et une lig
 
 ### Usage
 
-Dans le fichier, les colonnes sont **alignées**: chaque cellule est complétée par des espaces pour que les `|` tombent les uns sous les autres, avec un espace de chaque côté. Le rendu est le même, mais le fichier reste lisible:
+Dans le fichier, les colonnes sont **alignées**: chaque cellule est complétée par des espaces pour que les `|` tombent les uns sous les autres, avec un espace de chaque côté. Le rendu est le même, mais le fichier reste lisible.
 
-```markdown
+``` markdown title="Data table"
 | Method   | Description     |
 | -------- | --------------- |
 | `GET`    | Fetch resource  |
@@ -113,41 +113,81 @@ Dans le fichier, les colonnes sont **alignées**: chaque cellule est complétée
 | `DELETE` | Delete resource |
 ```
 
+<div class="result" markdown>
+
+| Method   | Description     |
+| -------- | --------------- |
+| `GET`    | Fetch resource  |
+| `PUT`    | Update resource |
+| `DELETE` | Delete resource |
+
+</div>
+
 Garder des cellules courtes: une explication longue va dans un paragraphe sous le tableau plutôt que dans une cellule.
 
 ### Column alignment
 
-L'alignement du texte dans une colonne se règle avec des `:` dans la ligne de séparation.
+L'alignement du texte dans une colonne se règle avec des `:` dans la ligne de séparation: au début pour aligner à gauche, aux deux bouts pour centrer, à la fin pour aligner à droite.
 
-À gauche (`:` à gauche):
+=== "Left"
 
-```markdown
-| Method   | Description     |
-| :------- | :-------------- |
-| `GET`    | Fetch resource  |
-| `PUT`    | Update resource |
-| `DELETE` | Delete resource |
-```
+    ``` markdown hl_lines="2" title="Data table, columns aligned to left"
+    | Method   | Description     |
+    | :------- | :-------------- |
+    | `GET`    | Fetch resource  |
+    | `PUT`    | Update resource |
+    | `DELETE` | Delete resource |
+    ```
 
-Centré (`:` des deux côtés):
+    <div class="result" markdown>
 
-```markdown
-|  Method  |   Description   |
-| :------: | :-------------: |
-|  `GET`   | Fetch resource  |
-|  `PUT`   | Update resource |
-| `DELETE` | Delete resource |
-```
+    | Method   | Description     |
+    | :------- | :-------------- |
+    | `GET`    | Fetch resource  |
+    | `PUT`    | Update resource |
+    | `DELETE` | Delete resource |
 
-À droite (`:` à droite):
+    </div>
 
-```markdown
-|   Method |     Description |
-| -------: | --------------: |
-|    `GET` |  Fetch resource |
-|    `PUT` | Update resource |
-| `DELETE` | Delete resource |
-```
+=== "Center"
+
+    ``` markdown hl_lines="2" title="Data table, columns centered"
+    |  Method  |   Description   |
+    | :------: | :-------------: |
+    |  `GET`   | Fetch resource  |
+    |  `PUT`   | Update resource |
+    | `DELETE` | Delete resource |
+    ```
+
+    <div class="result" markdown>
+
+    |  Method  |   Description   |
+    | :------: | :-------------: |
+    |  `GET`   | Fetch resource  |
+    |  `PUT`   | Update resource |
+    | `DELETE` | Delete resource |
+
+    </div>
+
+=== "Right"
+
+    ``` markdown hl_lines="2" title="Data table, columns aligned to right"
+    |   Method |     Description |
+    | -------: | --------------: |
+    |    `GET` |  Fetch resource |
+    |    `PUT` | Update resource |
+    | `DELETE` | Delete resource |
+    ```
+
+    <div class="result" markdown>
+
+    |   Method |     Description |
+    | -------: | --------------: |
+    |    `GET` |  Fetch resource |
+    |    `PUT` | Update resource |
+    | `DELETE` | Delete resource |
+
+    </div>
 
 !!! note "Tableaux triables"
     Zensical permet de rendre un tableau triable en cliquant sur l'en-tête d'une colonne (bibliothèque tablesort, ajoutée par `extra_javascript`). On ne l'utilisera qu'une fois la doc passée sur Zensical: voir [TechDocs, avenir de MkDocs et Zensical](techdocs.md#avenir-de-mkdocs-et-zensical).
