@@ -12,7 +12,7 @@ todo: []
 
 > Comment cette documentation est fabriquée et affichée dans Backstage.
 
-Déployé et vérifié le 2026-09-24 (commits `4f0e9e5` et `586cecb`). La doc s'affiche sur la fiche du composant `backstage` (onglet "Docs") et dans la recherche.
+La doc s'affiche sur la fiche du composant `backstage` (onglet "Docs") et dans la recherche.
 
 ## Overview
 

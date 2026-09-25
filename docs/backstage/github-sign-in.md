@@ -12,7 +12,7 @@ todo: []
 
 > Comment la connexion invité a été remplacée par GitHub OAuth, et les données d'exemple retirées.
 
-Déployé et vérifié le 2026-09-24. Ce qui suit est la procédure suivie, d'après la documentation officielle (voir [Sources](#sources)) et le code du repo (Backstage 1.55.0, nouveau système frontend). La configuration qui en résulte est décrite dans [Settings](settings.md#authentication).
+Ce qui suit est la procédure suivie, d'après la documentation officielle (voir [Sources](#sources)) et le code du repo (Backstage 1.55.0, nouveau système frontend). La configuration qui en résulte est décrite dans [Settings](settings.md#authentication).
 
 ## Before starting
 

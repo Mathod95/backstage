@@ -13,7 +13,7 @@ todo:
 
 > Les données du catalogue (utilisateurs, groupes, templates) sont lues sur GitHub, sans reconstruire l'image.
 
-Déployé et vérifié le 2026-09-24. Ajouter un utilisateur ou modifier un template se fait par un simple push sur `main`, sans reconstruire ni redéployer l'image. Le code et la configuration (`app-config*.yaml`) restent dans l'image.
+Ajouter un utilisateur ou modifier un template se fait par un simple push sur `main`, sans reconstruire ni redéployer l'image. Le code et la configuration (`app-config*.yaml`) restent dans l'image.
 
 ## What lives where
 

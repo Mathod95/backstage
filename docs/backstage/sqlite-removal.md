@@ -12,8 +12,6 @@ todo: []
 
 > Pourquoi et comment SQLite a été retiré de l'image de production.
 
-Déployé et vérifié le 2026-09-24 (commit `3b3e345`).
-
 ## Why
 
 Backstage a besoin d'une base de données. Le modèle `create-app` en prévoit deux:

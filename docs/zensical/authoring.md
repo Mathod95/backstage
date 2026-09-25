@@ -4,7 +4,7 @@ description: Comment créer et écrire une page de cette documentation
 icon: material/pencil
 status: draft
 createdAt: 2026-09-24
-modifyAt: 2026-09-24
+modifyAt: 2026-09-25
 todo:
   - "[ ] Ajouter une ligne technique: toujours une ligne vide avant une liste"
 ---
@@ -94,6 +94,60 @@ Sans tâche, écrire `todo: []`. Un `todo:` laissé vide fonctionne aussi (véri
 ### Checking
 
 Après avoir écrit ou modifié un front matter, vérifier dans l'aperçu local que l'en-tête n'apparaît pas en haut de la page (voir [Configuration](configuration.md#local-preview)).
+
+## Page templates
+
+Squelettes de pages à copier. Quand utiliser chacun: voir [Rules](rules.md#pages).
+
+### Custom element
+
+Pour documenter un élément de Backstage remplacé par une version sur mesure (carte, page de connexion, composant...). Chaque section est remplie au fil du travail, en suivant le [process](rules.md#process). Exemple rempli: [Template cards](../backstage/personnalisation/custom/template-cards.md).
+
+````markdown
+---
+title: Element name
+description: Une phrase qui résume l'élément et sa version sur mesure
+icon: material/...
+status: draft
+createdAt: AAAA-MM-JJ
+modifyAt: AAAA-MM-JJ
+todo: []
+---
+
+# Element name
+
+> Ce qu'est l'élément, et où il apparaît dans Backstage.
+
+## Features
+
+Inventaire de l'élément d'origine, lu dans son code (`node_modules/...`), avant toute modification: chaque information affichée, lien, bouton, état, comportement. La version sur mesure les reprend toutes, ou la page dit lesquelles sont abandonnées et pourquoi.
+
+## Options
+
+Les façons de le personnaliser (thème, configuration, élément sur mesure) et ce que chacune demande (rebuild ou non).
+
+## Scope
+
+Ce que la version sur mesure change, et ce qui reste au thème.
+
+## Design
+
+Disposition, choix faits en cours de conception, logos ou icônes et leurs sources.
+
+## Light and dark
+
+Les couleurs de chaque version.
+
+## Implementation
+
+Fichiers, manière dont l'élément est branché, d'où viennent ses données.
+
+## Mockups
+
+Lien vers les maquettes et contenu de chaque planche.
+
+## Sources
+````
 
 ## Data tables
 

@@ -4,7 +4,7 @@ description: Règles de rédaction de cette documentation
 icon: material/format-list-checks
 status: draft
 createdAt: 2026-09-24
-modifyAt: 2026-09-24
+modifyAt: 2026-09-25
 todo: []
 ---
 
@@ -36,6 +36,16 @@ todo: []
     ```
 
 - Chaque page commence par un front matter complet: `title`, `description`, `icon`, `status`, `createdAt`, `modifyAt`, `todo` (détails dans [Authoring](authoring.md#front-matter)).
+- Pas de date ni de statut dans le texte de la page ("Déployé le...", "Codé le..."): `createdAt`, `modifyAt`, `status` et `todo` du front matter suffisent.
+- Une page qui documente un élément sur mesure (Customization > Custom) part du squelette [Custom element](authoring.md#custom-element) d'Authoring.
+
+## Process
+
+- Pour chaque modification hors thème, la doc se remplit au fil de l'eau, dans cet ordre:
+
+    1. **Avant**: documenter l'existant concerné (pour un élément sur mesure, l'inventaire des fonctionnalités de l'original, section Features du squelette).
+    2. **Pendant**: noter les choix faits et les options écartées.
+    3. **Après**: mettre à jour la page (contenu, `modifyAt`, `status`, `todo`) et la todo de l'accueil.
 
 ## Tables
 
