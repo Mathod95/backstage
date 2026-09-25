@@ -41,11 +41,11 @@ todo: []
 
 ## Process
 
-- Pour chaque modification hors thème, la doc se remplit au fil de l'eau, dans cet ordre:
+Pour chaque modification hors thème, la doc se remplit au fil de l'eau, dans cet ordre:
 
-    1. **Avant**: documenter l'existant concerné (pour un élément sur mesure, l'inventaire des fonctionnalités de l'original, section Features du squelette).
-    2. **Pendant**: noter les choix faits et les options écartées.
-    3. **Après**: mettre à jour la page (contenu, `modifyAt`, `status`, `todo`) et la todo de l'accueil.
+1. **Avant**: documenter l'existant concerné (pour un élément sur mesure, l'inventaire des fonctionnalités de l'original, section Features du squelette).
+2. **Pendant**: noter les choix faits et les options écartées.
+3. **Après**: mettre à jour la page (contenu, `modifyAt`, `status`, `todo`) et la todo de l'accueil.
 
 ## Tables
 
