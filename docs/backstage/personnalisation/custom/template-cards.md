@@ -76,7 +76,7 @@ De haut en bas:
 2. **Description** (`metadata.description`).
 3. **Étiquettes** (`metadata.tags`).
 4. **Propriétaire et auteur**, collés à gauche: `admins:mathod` (voir [Owner and author](#owner-and-author)).
-5. **Boutons**, sur une ligne et dans le même format: Docs et Star en icône seule, Choose avec son texte.
+5. **Boutons**, sur une ligne et dans le même format: page du template, Docs et Star en icône seule, Choose avec son texte.
 
 Choix faits en cours de conception:
 
@@ -115,13 +115,14 @@ metadata:
 
 ### Buttons
 
-| Button | Content        | Action                                |
-| ------ | -------------- | ------------------------------------- |
-| Docs   | Icône document | Ouvre la page du template dans la doc |
-| Star   | Icône étoile   | Ajoute le template aux favoris        |
-| Choose | Icône et texte | Ouvre le formulaire du template       |
+| Button | Content        | Action                                      |
+| ------ | -------------- | ------------------------------------------- |
+| Page   | Icône fiche    | Ouvre la page du template dans le catalogue |
+| Docs   | Icône document | Ouvre la page du template dans la doc       |
+| Star   | Icône étoile   | Ajoute le template aux favoris              |
+| Choose | Icône et texte | Ouvre le formulaire du template             |
 
-Docs et Star n'ont pas de texte visible: ils portent un nom caché (`aria-label`) pour les lecteurs d'écran. Le lien Docs suit les annotations `backstage.io/techdocs-entity` et `backstage.io/techdocs-entity-path` (voir [Create repository](../../../templates/github/create-repository.md)).
+Le bouton Page remplace l'icône en haut à droite de la carte standard: même lien (`entityRouteRef`), oublié dans la première version du composant et ajouté le 2026-09-25. Page, Docs et Star n'ont pas de texte visible: ils portent un nom caché (`aria-label`) pour les lecteurs d'écran. Le lien Docs suit les annotations `backstage.io/techdocs-entity` et `backstage.io/techdocs-entity-path` (voir [Create repository](../../../templates/github/create-repository.md)).
 
 ### Hover effects
 
@@ -182,6 +183,7 @@ Comment la carte trouve ses informations:
 - **Logo**: l'annotation `mathod.fr/icon` du template si elle existe, sinon la première étiquette qui correspond à un logo connu (`github`, `argocd`, `crossplane`). Sans logo, la tuile reste vide.
 - **Auteur**: l'annotation `mathod.fr/author`, affichée après le groupe propriétaire (`admins:mathod`).
 - **Docs**: le lien TechDocs que la page Create fournit déjà à la carte. Sans doc, le bouton n'apparaît pas.
+- **Page**: la fiche du template dans le catalogue, avec le même lien que la carte standard (`entityRouteRef`).
 - **Star**: les favoris de Backstage (`useStarredEntity`), étoile pleine quand le template est en favori.
 - **Police**: JetBrains Mono n'est pas chargée par l'app. La carte utilise la police de code du système en attendant.
 
