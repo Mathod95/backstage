@@ -49,6 +49,7 @@ todo: []
 
 ## Code blocks
 
+- Pour montrer une configuration, un extrait exact du fichier, dans un bloc de code, plutôt qu'un tableau: on voit exactement ce qu'il y a dans le fichier.
 - Un bloc de code qui reprend le contenu d'un fichier porte un titre avec le chemin et le nom du fichier:
 
     ````markdown
