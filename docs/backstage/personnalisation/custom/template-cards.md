@@ -6,17 +6,18 @@ status: draft
 createdAt: 2026-09-25
 modifyAt: 2026-09-25
 todo:
-  - "[ ] Choisir l'effet au survol"
-  - "[ ] Ajouter l'annotation d'auteur aux templates"
-  - "[ ] Vérifier les conditions d'usage des icônes AWS"
-  - "[ ] Écrire le composant et le déployer"
+  - "[ ] Choisir un effet au survol (aucun pour l'instant)"
+  - "[x] Ajouter l'annotation d'auteur aux templates"
+  - "[ ] Vérifier les conditions d'usage des icônes AWS, puis ajouter le logo AWS"
+  - "[x] Écrire le composant"
+  - "[ ] Déployer et vérifier dans Backstage"
 ---
 
 # Template cards
 
 > La conception des cartes sur mesure qui présentent les templates sur la page Create.
 
-Conçu le 2026-09-25 à partir de maquettes (canevas privé: <https://claude.ai/artifact/2mok8w9CPDgE7QMym7m8N2>). **Pas encore codé**: cette page décrit la carte à réaliser.
+Conçu le 2026-09-25 à partir de maquettes (canevas privé: <https://claude.ai/artifact/2mok8w9CPDgE7QMym7m8N2>). **Codé le 2026-09-25, pas encore déployé** (voir [Implementation](#implementation)).
 
 ## Default card
 
@@ -104,7 +105,7 @@ Backstage n'a pas de champ "auteur" pour un template: la carte standard affiche 
 - **Mettre `spec.owner: user:mathod`** afficherait "mathod", mais le template ne serait plus la responsabilité du groupe: à reprendre sur chaque template le jour où quelqu'un rejoint `admins`.
 - **Retenu: garder le groupe comme propriétaire et ajouter l'auteur** dans une annotation du template, lue par la carte sur mesure. Affichage: `admins:mathod`, collé à gauche.
 
-Annotation proposée, à ajouter à chaque template:
+Annotation ajoutée à chaque template:
 
 ```yaml
 metadata:
@@ -124,7 +125,7 @@ Docs et Star n'ont pas de texte visible: ils portent un nom caché (`aria-label`
 
 ### Hover effects
 
-Trois effets proposés, un seul à retenir:
+Aucun effet au survol pour l'instant (choix du 2026-09-25). Trois effets avaient été proposés:
 
 | Effect      | Description                                                                  |
 | ----------- | ---------------------------------------------------------------------------- |
@@ -149,6 +150,53 @@ Deux versions de la même carte, une pour chaque thème de Backstage:
 | Texte des boutons | `#06281d` | `#ffffff` |
 
 En version claire, l'accent est un vert émeraude plus foncé, pour que le texte blanc des boutons reste lisible.
+
+## Implementation
+
+Le composant remplace la carte standard pour tous les templates de la page Create. Il n'est pas vérifié en local (pas de build local): la pipeline le compilera au push.
+
+| File                                                           | Content                                       |
+| -------------------------------------------------------------- | --------------------------------------------- |
+| `packages/app/src/modules/templateCard/MathodTemplateCard.tsx` | La carte                                      |
+| `packages/app/src/modules/templateCard/logos.ts`               | Les tracés SVG des logos                      |
+| `packages/app/src/modules/templateCard/index.ts`               | L'extension qui remplace `TemplateCard`       |
+| `packages/app/src/App.tsx`                                     | Le module ajouté aux fonctionnalités de l'app |
+
+Le remplacement passe par un module du plugin `app`, seul autorisé à utiliser `SwappableComponentBlueprint`:
+
+```ts title="packages/app/src/modules/templateCard/index.ts"
+const templateCard = SwappableComponentBlueprint.make({
+  name: 'template-card',
+  params: define =>
+    define({
+      component: TemplateCard,
+      loader: () =>
+        import('./MathodTemplateCard').then(m => m.MathodTemplateCard),
+    }),
+});
+```
+
+Comment la carte trouve ses informations:
+
+- **Thème**: la version claire ou sombre suit le thème choisi dans Backstage (`palette.type`).
+- **Logo**: l'annotation `mathod.fr/icon` du template si elle existe, sinon la première étiquette qui correspond à un logo connu (`github`, `argocd`, `crossplane`). Sans logo, la tuile reste vide.
+- **Auteur**: l'annotation `mathod.fr/author`, affichée après le groupe propriétaire (`admins:mathod`).
+- **Docs**: le lien TechDocs que la page Create fournit déjà à la carte. Sans doc, le bouton n'apparaît pas.
+- **Star**: les favoris de Backstage (`useStarredEntity`), étoile pleine quand le template est en favori.
+- **Police**: JetBrains Mono n'est pas chargée par l'app. La carte utilise la police de code du système en attendant.
+
+Deux paquets sont déclarés dans `packages/app/package.json` pour la carte: `@backstage/plugin-scaffolder-react` et `@backstage/plugin-catalog-react`. Le logo AWS n'est pas inclus tant que ses conditions d'usage ne sont pas vérifiées.
+
+Le template `github-create-repo` porte l'annotation d'auteur:
+
+```yaml title="templates/github/create-repo/template.yaml"
+  annotations:
+    # Docs are a page of the main documentation (docs/templates/github/create-repository.md)
+    backstage.io/techdocs-entity: component:default/backstage
+    backstage.io/techdocs-entity-path: /templates/github/create-repository/
+    # Author shown on the template card, next to the owner group
+    mathod.fr/author: user:mathod
+```
 
 ## Mockups
 

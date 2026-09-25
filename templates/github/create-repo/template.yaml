@@ -11,6 +11,8 @@ metadata:
     # Docs are a page of the main documentation (docs/templates/github/create-repository.md)
     backstage.io/techdocs-entity: component:default/backstage
     backstage.io/techdocs-entity-path: /templates/github/create-repository/
+    # Author shown on the template card, next to the owner group
+    mathod.fr/author: user:mathod
 spec:
   owner: group:admins
   type: repository
