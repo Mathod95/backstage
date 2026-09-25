@@ -117,7 +117,7 @@ Pour vérifier en local avant de pousser: `python3 -m venv .venv && .venv/bin/pi
 
 Le 2026-09-24: pipeline verte (3 min 28, contre 2 min 17 avant, à cause de l'installation de Python et MkDocs), puis `sb install mod-backstage`. Le catalogue affiche le composant `backstage` avec le propriétaire `admins`, son onglet Docs affiche cette documentation, et la connexion fonctionne.
 
-Mise à jour sans rebuild vérifiée le même jour: la page "Pourquoi Backstage", ajoutée par un push qui ne touchait que `docs/` et `mkdocs.yml`, est apparue dans Backstage sans pipeline ni redéploiement.
+Mise à jour sans rebuild vérifiée le même jour: une nouvelle page, ajoutée par un push qui ne touchait que `docs/` et `mkdocs.yml`, est apparue dans Backstage sans pipeline ni redéploiement.
 
 ## Sources
 

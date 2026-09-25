@@ -24,7 +24,7 @@ Les pages sont des fichiers Markdown dans `docs/`, la navigation est dans `mkdoc
 
 Liste condensée de tout ce qui reste à faire ou à décider. Contexte et détails dans [historique-ancienne-instance.md](historique-ancienne-instance.md). Cette documentation s'affiche dans Backstage (TechDocs), voir [techdocs.md](techdocs.md). Les lignes "Décider" sont des choix à faire avant d'agir.
 
-### Fait
+### Done
 
 - [x] Backstage stock généré (`create-app`), build de production et image validés en local
 - [x] Pipeline GitHub Actions qui publie `ghcr.io/mathod95/backstage` (public)
@@ -33,7 +33,9 @@ Liste condensée de tout ce qui reste à faire ou à décider. Contexte et déta
 - [x] Rôle `tracearr` récupéré depuis Sandbox et ajouté au repo `saltbox`
 - [x] Skill `saltbox/create-custom-role` et script de lint
 
-### 1. Sécurité et authentification (prioritaire)
+### 1. Security and authentication
+
+Prioritaire.
 
 Procédure détaillée pour GitHub OAuth, le retrait de l'invité et des exemples: [retirer-exemples-et-invite.md](retirer-exemples-et-invite.md).
 
@@ -55,7 +57,7 @@ Procédure détaillée pour GitHub OAuth, le retrait de l'invité et des exemple
 - [ ] Réduire le token d'intégration GitHub du scaffolder (fine-grained, `Contents` et `Administration`)
 - [ ] Secrets uniquement en variables d'environnement, jamais dans le repo
 
-### 2. Application Backstage
+### 2. Backstage app
 
 - [ ] Décider: branding (titre `Mathod`, logos, page d'accueil), fait sur l'ancienne instance. Carte de tous les réglages: [settings](backstage/settings.md), [branding](backstage/personnalisation/branding.md). Page de connexion: maquette 2 retenue, voir [page de connexion](backstage/personnalisation/page-de-connexion.md)
 - [x] Remplacer les valeurs par défaut du modèle dans `app-config.yaml`: `app.title` et `organization.name` valent `Mathod`, `mcpActions.name` vaut `Mathod Backstage` (2026-09-24, à vérifier au déploiement)
@@ -83,7 +85,9 @@ Procédure détaillée pour GitHub OAuth, le retrait de l'invité et des exemple
 - [ ] Plus tard, pour tester l'image en local: activer l'intégration WSL de Docker Desktop pour la distribution de travail (Docker Desktop tourne sous Windows mais `/mnt/wsl/docker-desktop/cli-tools` est vide côté WSL, constaté le 2026-09-24), puis construire l'image et la lancer avec un Postgres jetable
 - [ ] Ajouter un build de vérification sur les pull requests (`yarn tsc`, `yarn build:backend`, sans publication d'image)
 
-### 3. Templates (reprise de l'ancienne instance)
+### 3. Templates
+
+Reprise des templates de l'ancienne instance.
 
 - [ ] Décider: groupes API Crossplane cluster-scoped (actuels) ou namespaced `.m.` (Crossplane v2)
 - [ ] Installer le provider AWS (Upbound) et son `ProviderConfig` sur le cluster de test
@@ -98,7 +102,9 @@ Procédure détaillée pour GitHub OAuth, le retrait de l'invité et des exemple
 - [ ] Vérifier la position du champ `description` de `publish:gitlab` si GitLab est utilisé
 - [ ] Tester la condition de concurrence connue de `catalog:register` (backstage#8597)
 
-### 4. Plateforme Crossplane, ArgoCD (projet d'origine)
+### 4. Crossplane and ArgoCD platform
+
+Le projet d'origine.
 
 - [ ] Première Composition en XR namespaced (sans Claim), valider `provider-helm`
 - [ ] Composition de création d'EKS
@@ -112,13 +118,15 @@ Procédure détaillée pour GitHub OAuth, le retrait de l'invité et des exemple
 - [ ] Mettre à jour le brief initial (contredit les décisions prises)
 - [ ] Optionnel, hors MVP: plugin Crossplane TeraSky, fournisseur d'identité local Dex
 
-### 5. Hôte Saltbox et rôles
+### 5. Saltbox host and roles
 
 - [ ] Décider: déployer `tracearr` sur l'hôte (`sb update`, copie du rôle, enregistrement, déploiement, tag `tracearr-claim`)
 - [ ] Vérifier `sb install mod-<tag>` dans le binaire `sb` (pour l'instant tiré du README de `saltbox_mod`)
 - [ ] Autres plateformes (Docker Desktop, Kubernetes), le moment venu: définir comment fournir les variables secrètes (`AUTH_GITHUB_CLIENT_ID`, `AUTH_GITHUB_CLIENT_SECRET`, `POSTGRES_*`), surcharger `app.baseUrl` et `backend.baseUrl` (fixées à `backstage.mathod.fr` dans `app-config.production.yaml`), ajouter la Redirect URI correspondante dans l'application OAuth GitHub, pas d'Authelia côté Kubernetes. L'Inventory Saltbox est spécifique à l'hôte actuel
 
-### 6. Skills et outillage (dépôt `Mathod95/skills`)
+### 6. Skills and tooling
+
+Dans le dépôt `Mathod95/skills`.
 
 - [ ] Réécrire proprement le skill `create-docs` (zensical)
 - [ ] Décider: créer le skill `crossplane/manage-lifecycle` (candidat noté)
