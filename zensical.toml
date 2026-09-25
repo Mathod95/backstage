@@ -26,6 +26,9 @@ nav = [
       { "Branding" = "backstage/personnalisation/branding.md" },
       { "Theme" = "backstage/personnalisation/theme.md" },
       { "Sign-in page" = "backstage/personnalisation/page-de-connexion.md" },
+      { "Custom" = [
+        { "Template cards" = "backstage/personnalisation/custom/template-cards.md" },
+      ] },
     ] },
   ] },
   { "Templates" = [
