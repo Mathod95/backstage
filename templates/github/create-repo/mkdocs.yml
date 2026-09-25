@@ -1,0 +1,8 @@
+site_name: Create a GitHub repository
+site_description: Documentation of the github-create-repo template
+
+nav:
+  - Home: index.md
+
+plugins:
+  - techdocs-core

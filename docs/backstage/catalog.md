@@ -98,20 +98,27 @@ spec:
   targets:
     - ./org.yaml
     - ../catalog-info.yaml
+    - ../templates/github.yaml
 ```
 
-Arborescence prévue pour les templates:
+Arborescence des templates (le sommaire `github.yaml` existe, les autres sont prévus):
 
 ```text
 catalog/
 ├── all.yaml              ← sommaire principal
 ├── org.yaml              ← personnes et équipes
 templates/
-├── crossplane.yaml       ← sommaire des templates Crossplane
-├── create-vpc/
-│   ├── template.yaml     ← le template (formulaire + étapes)
-│   └── skeleton/         ← fichiers modèles, lus par le template lui-même
-└── ...
+├── github.yaml           ← sommaire des templates GitHub
+├── github/
+│   └── create-repo/
+│       ├── template.yaml ← le template (formulaire + étapes)
+│       ├── mkdocs.yml    ← sa doc
+│       └── docs/
+├── crossplane.yaml       ← sommaire des templates Crossplane (prévu)
+└── crossplane/
+    └── create-vpc/
+        ├── template.yaml
+        └── skeleton/     ← fichiers modèles, lus par le template lui-même
 ```
 
 Chaque sommaire de thème sera ajouté à `targets` dans `catalog/all.yaml`. Les chemins de `targets` sont relatifs au fichier qui les contient, donc à son URL GitHub. Les skeletons ne sont jamais listés: le template les récupère lui-même avec `fetch:template` et un chemin relatif (`url: ./skeleton`).

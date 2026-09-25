@@ -1,0 +1,61 @@
+# https://backstage.io/docs/features/software-templates/writing-templates
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: github-create-repo
+  title: Create a GitHub repository
+  description: Creates an empty GitHub repository in a client organization.
+  tags:
+    - github
+  annotations:
+    # Docs live next to this template (mkdocs.yml and docs/)
+    backstage.io/techdocs-ref: dir:.
+spec:
+  owner: group:admins
+  type: repository
+  parameters:
+    - title: Repository
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository location
+          description: Client organization (owner) and name of the new repository.
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+        description:
+          title: Description
+          type: string
+        repoVisibility:
+          title: Visibility
+          type: string
+          enum:
+            - private
+            - public
+          default: private
+    - title: Access
+      required:
+        - token
+      properties:
+        token:
+          title: GitHub token
+          description: Token allowed to create repositories in the client organization. Never stored.
+          type: string
+          ui:field: Secret
+  steps:
+    - id: create
+      name: Create repository
+      # Creates the repository only: nothing is pushed, it stays empty (autoInit is false)
+      action: github:repo:create
+      input:
+        repoUrl: ${{ parameters.repoUrl }}
+        description: ${{ parameters.description }}
+        repoVisibility: ${{ parameters.repoVisibility }}
+        token: ${{ secrets.token }}
+  output:
+    links:
+      - title: Repository
+        url: https://github.com/${{ (parameters.repoUrl | parseRepoUrl).owner }}/${{ (parameters.repoUrl | parseRepoUrl).repo }}
