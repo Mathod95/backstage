@@ -91,7 +91,7 @@ Procédure détaillée pour GitHub OAuth, le retrait de l'invité et des exemple
 
 Reprise des templates de l'ancienne instance.
 
-- [x] Premier template `github-create-repo`: crée un repo GitHub vide chez un client, jeton saisi à chaque utilisation (2026-09-25), doc dans `templates/github/create-repo/docs/`
+- [x] Premier template `github-create-repo`: crée un repo GitHub vide chez un client, jeton saisi à chaque utilisation (2026-09-25), doc dans [Create repository](templates/github/create-repository.md)
 - [ ] Tester `github-create-repo` sur une organisation de test, et vérifier la permission du jeton fine-grained (`Administration` ou `Repository creation`)
 - [ ] Jeton par client: jeton fine-grained limité à l'organisation du client aujourd'hui. Étudier une GitHub App installée chez chaque client
 - [ ] Décider: groupes API Crossplane cluster-scoped (actuels) ou namespaced `.m.` (Crossplane v2)

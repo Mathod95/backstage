@@ -73,7 +73,7 @@ techdocs:
 
 Autres fichiers touchés:
 
-- **`mkdocs.yml`** (racine du repo): nom du site, navigation, plugin `techdocs-core`.
+- **`mkdocs.yml`** (racine du repo): nom du site, navigation, plugin `techdocs-core`. MkDocs exclut toujours un dossier `docs/templates/`, réservé aux gabarits de thème: la ligne `exclude_docs: !/templates/` le réintègre, pour que la catégorie Templates soit publiée.
 - **`catalog-info.yaml`**: la fiche du repo, avec l'annotation `backstage.io/techdocs-ref` (voir [Settings](settings.md#catalog)).
 - **`catalog/all.yaml`**: le sommaire principal du catalogue, qui inscrit la fiche du repo (voir [Catalog](catalog.md)).
 - **`.github/workflows/docker-publish.yml`**: `docs/**`, `mkdocs.yml` et `catalog-info.yaml` sont dans le `paths-ignore`.

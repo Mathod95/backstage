@@ -2,6 +2,11 @@ site_name: Backstage Mathod
 site_description: Documentation du Backstage de backstage.mathod.fr
 repo_url: https://github.com/Mathod95/backstage
 edit_uri: edit/main/docs
+# MkDocs always excludes docs/templates/ (reserved for theme templates):
+# re-include it, gitignore-style, so the Templates pages are built
+exclude_docs: |
+  !/templates/
+
 nav:
   - Backstage:
       - Settings: backstage/settings.md
@@ -15,6 +20,9 @@ nav:
           - Branding: backstage/personnalisation/branding.md
           - Theme: backstage/personnalisation/theme.md
           - Sign-in page: backstage/personnalisation/page-de-connexion.md
+  - Templates:
+      - GitHub:
+          - Create repository: templates/github/create-repository.md
   - Zensical:
       - Configuration: zensical/configuration.md
       - Authoring: zensical/authoring.md

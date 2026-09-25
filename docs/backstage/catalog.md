@@ -111,9 +111,7 @@ templates/
 ├── github.yaml           ← sommaire des templates GitHub
 ├── github/
 │   └── create-repo/
-│       ├── template.yaml ← le template (formulaire + étapes)
-│       ├── mkdocs.yml    ← sa doc
-│       └── docs/
+│       └── template.yaml ← le template (formulaire + étapes)
 ├── crossplane.yaml       ← sommaire des templates Crossplane (prévu)
 └── crossplane/
     └── create-vpc/

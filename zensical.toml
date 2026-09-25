@@ -28,6 +28,11 @@ nav = [
       { "Sign-in page" = "backstage/personnalisation/page-de-connexion.md" },
     ] },
   ] },
+  { "Templates" = [
+    { "GitHub" = [
+      { "Create repository" = "templates/github/create-repository.md" },
+    ] },
+  ] },
   { "Zensical" = [
     { "Configuration" = "zensical/configuration.md" },
     { "Authoring" = "zensical/authoring.md" },

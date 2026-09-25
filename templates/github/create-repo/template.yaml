@@ -8,8 +8,9 @@ metadata:
   tags:
     - github
   annotations:
-    # Docs live next to this template (mkdocs.yml and docs/)
-    backstage.io/techdocs-ref: dir:.
+    # Docs are a page of the main documentation (docs/templates/github/create-repository.md)
+    backstage.io/techdocs-entity: component:default/backstage
+    backstage.io/techdocs-entity-path: /templates/github/create-repository/
 spec:
   owner: group:admins
   type: repository

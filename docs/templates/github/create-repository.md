@@ -1,5 +1,5 @@
 ---
-title: Create a GitHub repository
+title: Create repository
 description: Template qui crée un repo GitHub vide dans l'organisation d'un client
 icon: material/github
 status: draft
@@ -9,11 +9,11 @@ todo:
   - "[ ] Tester le template sur une organisation de test"
 ---
 
-# Create a GitHub repository
+# Create repository
 
 > Crée un repo GitHub vide dans l'organisation d'un client.
 
-Premier template, pour tester la chaîne formulaire, action GitHub et catalogue. Le repo créé est vraiment vide: aucun fichier, aucun commit.
+Template `github-create-repo`, défini dans `templates/github/create-repo/template.yaml`. Premier template, pour tester la chaîne formulaire, action GitHub et catalogue. Le repo créé est vraiment vide: aucun fichier, aucun commit.
 
 ## Form
 
