@@ -1,21 +1,21 @@
 ---
-title: Sign-in page
+title: Login screen
 description: Personnaliser la page de connexion de Backstage
 icon: material/login
 status: draft
 createdAt: 2026-09-24
-modifyAt: 2026-09-24
+modifyAt: 2026-09-25
 todo:
   - "[ ] Appliquer la maquette 2"
 ---
 
-# Sign-in page
+# Login screen
 
 > Tout ce qui s'affiche sur la page de connexion est modifiable: titre, carte, bouton, texte, fond, bandeau, disposition.
 
 ## Current state
 
-La page est dessinée par le composant `SignInPage` de Backstage, branché dans `packages/app/src/App.tsx` avec l'extension `SignInPageBlueprint` (mise en place avec GitHub OAuth, voir [Retirer les exemples et l'invité](../github-sign-in.md)). Elle affiche:
+La page est dessinée par le composant `SignInPage` de Backstage, branché dans `packages/app/src/App.tsx` avec l'extension `SignInPageBlueprint` (mise en place avec GitHub OAuth, voir [Retirer les exemples et l'invité](../../github-sign-in.md)). Elle affiche:
 
 - en haut, le bandeau vert de Backstage avec le titre `app.title` ("Mathod");
 - une carte "GitHub", le texte "Sign in using GitHub" et un bouton "SIGN IN".
@@ -31,7 +31,7 @@ Le composant `SignInPage` n'a pas de réglage de titre ni de centrage quand il n
 
 ### 2. Theme
 
-Le thème change aussi cette page (voir [Theme](theme.md)):
+Le thème change aussi cette page (voir [Theme](../theme.md)):
 
 - **Bandeau**: couleurs et forme, avec le thème de page `home` (`genPageTheme`).
 - **Couleur du fond**: `palette.background.default`.

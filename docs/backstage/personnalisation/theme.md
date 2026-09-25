@@ -85,7 +85,7 @@ Exemple de la doc officielle pour BUI:
 
 ### Limits
 
-- **Le contenu et la disposition**: ce qu'il y a dans un menu, l'ordre des éléments, l'emplacement de la barre de recherche. Pour ça, il faut remplacer le composant lui-même, comme on l'a fait pour la page de connexion (voir [Sign-in page](page-de-connexion.md)). La barre latérale est déjà dans notre code: `packages/app/src/modules/nav/Sidebar.tsx`.
+- **Le contenu et la disposition**: ce qu'il y a dans un menu, l'ordre des éléments, l'emplacement de la barre de recherche. Pour ça, il faut remplacer le composant lui-même, comme on l'a fait pour la page de connexion (voir [Login screen](custom/login-screen.md)). La barre latérale est déjà dans notre code: `packages/app/src/modules/nav/Sidebar.tsx`.
 - **Les plugins qui ignorent le thème**: certains plugins écrivent leurs couleurs en dur. C'est rare dans les plugins officiels, à traiter au cas par cas.
 
 ## Example: buttons

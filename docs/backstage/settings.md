@@ -14,7 +14,7 @@ todo:
 
 > La configuration technique de l'instance: où se trouve chaque réglage et sa valeur actuelle.
 
-La configuration est dans le repo, donc dans l'image: chaque changement demande un rebuild et un redéploiement. Les secrets n'y sont jamais: ils arrivent par des variables d'environnement (voir [Secrets](#secrets)). L'apparence et l'identité visible sont dans [Branding](personnalisation/branding.md), [Theme](personnalisation/theme.md) et [Sign-in page](personnalisation/page-de-connexion.md).
+La configuration est dans le repo, donc dans l'image: chaque changement demande un rebuild et un redéploiement. Les secrets n'y sont jamais: ils arrivent par des variables d'environnement (voir [Secrets](#secrets)). L'apparence et l'identité visible sont dans [Branding](personnalisation/branding.md), [Theme](personnalisation/theme.md) et [Login screen](personnalisation/custom/login-screen.md).
 
 ## Files
 
