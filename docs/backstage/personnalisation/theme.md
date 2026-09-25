@@ -14,7 +14,7 @@ todo: []
 
 Rien n'est encore appliqué: le thème actuel est celui de Backstage par défaut.
 
-Cette page couvre le **theming graphique**. Le **branding** (nom de l'application, nom de l'organisation, logos, icônes, textes) se règle ailleurs, surtout dans `app-config.yaml`: voir [Settings](reglages.md#branding-and-theming).
+Cette page couvre le **theming graphique**. Le **branding** (nom de l'application, nom de l'organisation, logos, icônes, textes) se règle ailleurs, surtout dans `app-config.yaml`: voir [Branding](branding.md).
 
 ## UI systems
 

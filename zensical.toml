@@ -15,8 +15,9 @@ edit_uri = "edit/main/docs/"
 # Same navigation as mkdocs.yml, keep both in sync
 nav = [
   { "Backstage" = [
+    { "Settings" = "backstage/settings.md" },
     { "Customization" = [
-      { "Settings" = "backstage/personnalisation/reglages.md" },
+      { "Branding" = "backstage/personnalisation/branding.md" },
       { "Theme" = "backstage/personnalisation/theme.md" },
       { "Sign-in page" = "backstage/personnalisation/page-de-connexion.md" },
     ] },

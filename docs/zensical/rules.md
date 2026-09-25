@@ -35,7 +35,7 @@ todo: []
     > Comment créer et écrire une page de cette documentation.
     ```
 
-- Chaque page commence par un front matter complet: `title`, `description`, `icon`, `status`, `date`, `todo` (détails dans [Authoring](authoring.md#front-matter)).
+- Chaque page commence par un front matter complet: `title`, `description`, `icon`, `status`, `createdAt`, `modifyAt`, `todo` (détails dans [Authoring](authoring.md#front-matter)).
 
 ## Tables
 
@@ -46,6 +46,17 @@ todo: []
 ## Examples
 
 - Plusieurs variantes d'un même exemple (par exemple les alignements gauche, centre, droite) vont dans des **onglets**, chacun avec le code puis son rendu, comme dans la doc Zensical. Pas de doublon: un même exemple n'apparaît qu'une fois.
+
+## Code blocks
+
+- Un bloc de code qui reprend le contenu d'un fichier porte un titre avec le chemin et le nom du fichier:
+
+    ````markdown
+    ```yaml title="app-config.yaml"
+    app:
+      title: Mathod
+    ```
+    ````
 
 ## Content
 

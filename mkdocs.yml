@@ -4,8 +4,9 @@ repo_url: https://github.com/Mathod95/backstage
 edit_uri: edit/main/docs
 nav:
   - Backstage:
+      - Settings: backstage/settings.md
       - Customization:
-          - Settings: backstage/personnalisation/reglages.md
+          - Branding: backstage/personnalisation/branding.md
           - Theme: backstage/personnalisation/theme.md
           - Sign-in page: backstage/personnalisation/page-de-connexion.md
   - Zensical:

@@ -12,7 +12,7 @@ Le code est sur GitHub: [Mathod95/backstage](https://github.com/Mathod95/backsta
 - [Retirer les exemples et l'invité](retirer-exemples-et-invite.md): passage à la connexion GitHub uniquement.
 - [Catalogue lu depuis GitHub](catalogue-depuis-github.md): pourquoi ajouter un utilisateur ou un template ne demande pas de reconstruire l'image.
 - [Retirer SQLite de l'image](retirer-sqlite-de-l-image.md).
-- Backstage, Personnalisation: [où sont les réglages](backstage/personnalisation/reglages.md), [theme](backstage/personnalisation/theme.md), [page de connexion](backstage/personnalisation/page-de-connexion.md).
+- Backstage, Personnalisation: [settings](backstage/settings.md), [branding](backstage/personnalisation/branding.md), [theme](backstage/personnalisation/theme.md), [page de connexion](backstage/personnalisation/page-de-connexion.md).
 - [TechDocs](techdocs.md): comment cette documentation est fabriquée et affichée.
 
 ## Modifier cette documentation
