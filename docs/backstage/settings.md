@@ -18,7 +18,7 @@ La configuration est dans le repo, donc dans l'image: chaque changement demande 
 
 ## Files
 
-La configuration est écrite en YAML et découpée en plusieurs fichiers: un fichier commun, puis un fichier par environnement qui remplace certaines valeurs. Backstage les lit dans l'ordre et fusionne leur contenu: pour une même clé, c'est le dernier fichier chargé qui gagne.
+La configuration est écrite en YAML et découpée en plusieurs fichiers: un fichier commun, puis un fichier par environnement qui remplace certaines valeurs. Backstage les lit dans l'ordre et fusionne leur contenu: pour une même clé, c'est le dernier fichier chargé qui gagne. Les objets sont fusionnés en profondeur, mais une liste est remplacée en entier: par exemple, les `catalog.rules` de `app-config.production.yaml` remplacent toutes celles de `app-config.yaml`.
 
 | File                         | Used for                                  | In the image |
 | ---------------------------- | ----------------------------------------- | ------------ |
@@ -26,13 +26,15 @@ La configuration est écrite en YAML et découpée en plusieurs fichiers: un fic
 | `app-config.production.yaml` | Production: remplace les valeurs communes | Oui          |
 | `app-config.local.yaml`      | Réglages personnels en local (optionnel)  | Non          |
 
-`app-config.local.yaml` est ignoré par git et par l'image (`.dockerignore`). Il n'existe pas aujourd'hui.
+`app-config.local.yaml` est ignoré par git et par l'image (`.dockerignore`). Il n'existe pas aujourd'hui. Il n'est chargé automatiquement que si aucun fichier n'est donné avec `--config`, donc jamais dans l'image.
 
-Dans l'image, les deux fichiers sont chargés explicitement au démarrage, avec `--config`, plutôt que par la variable `BACKSTAGE_ENV`:
+Dans l'image, les deux fichiers sont chargés explicitement au démarrage, avec `--config`. Sans `--config`, Backstage charge `app-config.yaml`, puis `app-config.<env>.yaml` pour chaque environnement listé dans la variable `BACKSTAGE_ENV`, puis `app-config.local.yaml`. Ce mécanisme ne sert donc pas dans l'image:
 
 ```dockerfile title="packages/backend/Dockerfile"
 CMD ["node", "packages/backend", "--config", "app-config.yaml", "--config", "app-config.production.yaml"]
 ```
+
+Une valeur peut aussi être remplacée par une variable d'environnement `APP_CONFIG_<clé>`, où les `_` remplacent les `.` (par exemple `APP_CONFIG_app_title`). Elle passe avant tous les fichiers. Ce projet ne s'en sert pas: la configuration reste dans le repo.
 
 ## App
 
@@ -54,7 +56,7 @@ La section `app` règle la partie navigateur de Backstage (le front).
     ```
 
 - **`app.title`**: le nom de l'application, affiché dans l'onglet du navigateur et sur la page de connexion.
-- **`app.baseUrl`**: l'adresse où le front est servi. En local `http://localhost:3000`, en production l'adresse publique. Elle compte pour les retours de la connexion GitHub, les liens et la navigation: une erreur ici casse la connexion.
+- **`app.baseUrl`**: l'adresse où le front est servi. En local `http://localhost:3000`, en production l'adresse publique. Le module de connexion s'en sert pour savoir où renvoyer la personne connectée: une erreur ici casse la connexion.
 - **`app.support`**: le lien d'aide. Il n'est pas défini ici, donc Backstage affiche "Add `app.support` config key" dans son bouton d'aide et ses pages d'erreur (voir [Branding](personnalisation/branding.md#support-link)).
 
 ## Backend
@@ -90,7 +92,7 @@ La section `backend` règle le serveur de Backstage: son adresse, son port, sa s
       listen: ':7007'
     ```
 
-- **`backend.baseUrl`**: l'adresse où le navigateur joint le serveur. En production, le front et le back sont servis par la même adresse publique, même si le serveur écoute en interne sur le port `7007` (`backend.listen`).
+- **`backend.baseUrl`**: l'adresse où le navigateur joint le serveur. Elle sert aussi à former l'adresse de retour de GitHub après la connexion: `<backend.baseUrl>/api/auth/github/handler/frame`, à déclarer dans l'application OAuth GitHub. En production, le front et le back sont servis par la même adresse publique, même si le serveur écoute en interne sur le port `7007` (`backend.listen`).
 - **CORS**: autorise le front à appeler le back quand ils ne sont pas à la même adresse, ce qui est le cas en local (ports `3000` et `7007`). En production, il doit être limité aux adresses de confiance. Ici, la valeur est celle du développement local. En production, le front et le back sont servis par la même adresse, donc ce n'est pas bloquant, mais c'est à nettoyer (voir le todo).
 - **CSP**: la liste de ce que le navigateur a le droit de charger (images, connexions...). `img-src` autorise les photos de profil GitHub, bloquées par la politique par défaut.
 - **Actions**: plugins que les assistants IA peuvent utiliser par le protocole MCP (voir [MCP](#mcp)).
@@ -125,7 +127,7 @@ Nom et description sous lesquels Backstage se présente à un assistant IA qui s
 
 ## Integrations
 
-Les intégrations relient Backstage aux outils qui hébergent le code. Grâce à elles, Backstage lit les fichiers du catalogue, les templates, la doc (TechDocs) et les infos des repos. Sans intégration, Backstage reste coupé des repos.
+Les intégrations relient Backstage aux outils qui hébergent le code. Grâce à elles, Backstage lit les fichiers du catalogue, les templates, la doc (TechDocs) et les infos des repos. Sans configuration, Backstage lit quand même GitHub en anonyme, mais l'API GitHub le limite alors à 60 requêtes par heure: d'où le token.
 
 ```yaml title="app-config.yaml"
 integrations:
@@ -138,7 +140,7 @@ Le token n'est jamais écrit dans le fichier: `${GITHUB_TOKEN}` est remplacé au
 
 ## Catalog
 
-Le catalogue est le registre de tout ce que Backstage connaît: composants, APIs, systèmes, ressources, utilisateurs, groupes, templates, et qui possède quoi. Chaque élément est décrit par un fichier YAML, en général rangé avec le code qu'il décrit.
+Le catalogue est le registre de tout ce que Backstage connaît: composants, APIs, systèmes, ressources, utilisateurs, groupes, templates, et qui possède quoi. Chaque élément est décrit par un fichier YAML, en général à la racine du repo qu'il décrit (ce n'est pas obligatoire).
 
 === "app-config.yaml"
 
@@ -290,7 +292,7 @@ En production, Postgres est déployé par le rôle Saltbox `backstage` (conteneu
 
 ## Proxy
 
-Le proxy permet au navigateur d'appeler une API externe en passant par le serveur de Backstage, sans exposer son token dans le front. Mal réglé, il peut ouvrir un accès involontaire à un service interne.
+Le proxy permet au front d'appeler une API externe en passant par le serveur de Backstage, sans exposer son token dans le navigateur. Par défaut, chaque endpoint exige d'être connecté à Backstage, et le proxy ne transmet que des en-têtes sans risque: un en-tête sensible comme `Authorization` doit être autorisé explicitement (`allowedHeaders`). Le réglage `credentials: dangerously-allow-unauthenticated` retire la connexion obligatoire: à éviter.
 
 Non utilisé ici: le bloc `proxy` de `app-config.yaml` ne contient que des commentaires. 
 ## TechDocs
@@ -310,7 +312,7 @@ La doc est fabriquée dans le conteneur, à la visite (voir [TechDocs](../techdo
 
 ## Secrets
 
-Aucun secret n'est écrit dans les fichiers de configuration: ils contiennent `${NOM_DE_VARIABLE}`, remplacé au démarrage par la variable d'environnement du même nom. La configuration reste ainsi réutilisable, et aucun identifiant ne fuit dans Git.
+Aucun secret n'est écrit dans les fichiers de configuration: ils contiennent `${NOM_DE_VARIABLE}`, remplacé au démarrage par la variable d'environnement du même nom. La configuration reste ainsi réutilisable, et aucun identifiant ne fuit dans Git. Si une variable manque, toute la valeur qui l'utilise devient vide. Une valeur par défaut peut être donnée avec `${NOM_DE_VARIABLE:-valeur}`.
 
 Variables attendues par l'image:
 
@@ -325,5 +327,12 @@ Sur une autre plateforme (Docker Desktop, Kubernetes), ces variables devront êt
 ## Sources
 
 - [Day 183: Creating a Backstage Instance and Understanding Backstage Configuration](https://medium.com/@alokrahuldevops/day-183-creating-a-backstage-instance-and-understanding-backstage-configuration-801fd320e621), Alok Rahul, juillet 2026: structure d'une instance et principaux réglages de `app-config.yaml`
+- Écrire la configuration (fusion des fichiers, `--config`, `${VAR}`, `APP_CONFIG_`): <https://backstage.io/docs/conf/writing>
+- Chargement par `BACKSTAGE_ENV`: code de `@backstage/config-loader` (`ConfigSources`), la doc officielle ne le décrit pas
+- Proxy: <https://backstage.io/docs/plugins/proxying>
+- Catalogue: <https://backstage.io/docs/features/software-catalog/> et <https://backstage.io/docs/features/software-catalog/configuration>
+- Intégration GitHub, accès anonyme: <https://backstage.io/docs/integrations/github/locations>
+- MCP: <https://backstage.io/docs/ai/mcp-actions>
+- `catalog.import`: README et schéma de `@backstage/plugin-catalog-import`
 - Organisation: code des plugins `plugin-catalog`, `plugin-api-docs`, `plugin-techdocs` et `plugin-catalog-react` dans `node_modules/@backstage/` (clé `organization.name`)
 - Réglages `app.*`: schéma `node_modules/@backstage/core-app-api/config.schema.json`
