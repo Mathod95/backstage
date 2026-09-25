@@ -326,7 +326,7 @@ sed -i '/APP_CONFIG_auth_providers_guest_dangerouslyAllowOutsideDevelopment/d' "
 
 Puis le déploiement habituel: pousser sur `main`, attendre que la pipeline soit verte, relancer `sb install mod-backstage`.
 
-Authelia reste devant Backstage à ce stade. Le callback OAuth passe par Authelia sans problème, puisque l'utilisateur a déjà une session Authelia quand il clique sur "Sign in". Garder ou non Authelia est une décision séparée (voir [todo.md](todo.md)).
+Authelia reste devant Backstage à ce stade. Le callback OAuth passe par Authelia sans problème, puisque l'utilisateur a déjà une session Authelia quand il clique sur "Sign in". Garder ou non Authelia est une décision séparée (voir [todo](index.md#todo)).
 
 ## 9. Vérification
 

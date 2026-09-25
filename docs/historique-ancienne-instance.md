@@ -2,7 +2,7 @@
 
 Ce document garde la trace de l'ancienne instance Backstage locale (dossier `~/backstage`, jamais poussé sur ce repo) pour pouvoir reprendre le travail sans dépendre de l'historique d'une conversation. Le repo actuel est volontairement un Backstage stock (sortie inchangée de `@backstage/create-app`), déployé via le rôle Saltbox du repo `Mathod95/saltbox`.
 
-La liste des tâches est dans [todo.md](todo.md).
+La liste des tâches est dans [todo](index.md#todo).
 
 Rédigé le 2026-09-24. Tout ce qui est décrit comme "existant" a été relu sur disque à cette date, ce qui n'a pas été vérifié est signalé comme tel.
 

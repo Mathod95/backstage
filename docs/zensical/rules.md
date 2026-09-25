@@ -16,7 +16,7 @@ todo: []
 
 - La navigation est organisée en **catégories et sous-catégories**.
 - Une page ne traite que de son sujet: ce qui relève d'un autre sujet va dans sa propre page (par exemple, le local preview est dans [Configuration](configuration.md), pas dans Authoring).
-- Pas de comparatif ni de justification de choix d'outil dans la doc (par exemple "Pourquoi Backstage").
+- Pas de comparatif ni de justification de choix d'outil dans la doc (par exemple une comparaison avec d'autres outils).
 - Chaque template aura sa propre page de doc, accessible depuis le template lui-même.
 
 ## Titles
