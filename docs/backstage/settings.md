@@ -34,24 +34,53 @@ CMD ["node", "packages/backend", "--config", "app-config.yaml", "--config", "app
 
 ## App
 
-| Setting       | File                         | Current value                 |
-| ------------- | ---------------------------- | ----------------------------- |
-| `app.title`   | `app-config.yaml`            | `Mathod`                      |
-| `app.baseUrl` | `app-config.production.yaml` | `https://backstage.mathod.fr` |
-| `app.support` | `app-config.yaml`            | Non défini                    |
+=== "app-config.yaml"
 
-`app.title` s'affiche dans l'onglet du navigateur et sur la page de connexion. Sans `app.support`, Backstage affiche "Add `app.support` config key" dans son bouton d'aide et ses pages d'erreur (voir [Branding](personnalisation/branding.md#support-link)).
+    ```yaml title="app-config.yaml"
+    app:
+      title: Mathod
+      baseUrl: http://localhost:3000
+    ```
+
+=== "app-config.production.yaml"
+
+    ```yaml title="app-config.production.yaml"
+    app:
+      baseUrl: https://backstage.mathod.fr
+    ```
+
+`app.title` s'affiche dans l'onglet du navigateur et sur la page de connexion. `app.support` n'est pas défini: Backstage affiche alors "Add `app.support` config key" dans son bouton d'aide et ses pages d'erreur (voir [Branding](personnalisation/branding.md#support-link)).
 
 ## Backend
 
-| Setting                         | File                         | Current value                     |
-| ------------------------------- | ---------------------------- | --------------------------------- |
-| `backend.baseUrl`               | `app-config.production.yaml` | `https://backstage.mathod.fr`     |
-| `backend.listen`                | `app-config.production.yaml` | `:7007`                           |
-| `backend.cors.origin`           | `app-config.yaml`            | `http://localhost:3000`           |
-| `backend.csp.img-src`           | `app-config.yaml`            | Le site et les avatars GitHub     |
-| `backend.csp.connect-src`       | `app-config.yaml`            | Le site, et tout `http:`/`https:` |
-| `backend.actions.pluginSources` | `app-config.yaml`            | `auth`, `catalog`, `scaffolder`   |
+=== "app-config.yaml"
+
+    ```yaml title="app-config.yaml"
+    backend:
+      baseUrl: http://localhost:7007
+      listen:
+        port: 7007
+      csp:
+        connect-src: ["'self'", 'http:', 'https:']
+        img-src: ["'self'", 'data:', 'https://avatars.githubusercontent.com']
+      cors:
+        origin: http://localhost:3000
+        methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
+        credentials: true
+      actions:
+        pluginSources:
+          - auth
+          - catalog
+          - scaffolder
+    ```
+
+=== "app-config.production.yaml"
+
+    ```yaml title="app-config.production.yaml"
+    backend:
+      baseUrl: https://backstage.mathod.fr
+      listen: ':7007'
+    ```
 
 - **CORS**: la valeur est celle du développement local. En production, le front et le back sont servis par la même adresse, donc ce n'est pas bloquant, mais c'est à nettoyer (voir le todo).
 - **CSP `img-src`**: autorise les photos de profil GitHub, bloquées par la politique par défaut.
@@ -59,37 +88,64 @@ CMD ["node", "packages/backend", "--config", "app-config.yaml", "--config", "app
 
 ## Organization
 
-| Setting             | File              | Current value |
-| ------------------- | ----------------- | ------------- |
-| `organization.name` | `app-config.yaml` | `Mathod`      |
+```yaml title="app-config.yaml"
+organization:
+  name: Mathod
+```
 
 ## MCP
 
-| Setting                  | File              | Current value               |
-| ------------------------ | ----------------- | --------------------------- |
-| `mcpActions.name`        | `app-config.yaml` | `Mathod Backstage`          |
-| `mcpActions.description` | `app-config.yaml` | Texte du modèle, en anglais |
+```yaml title="app-config.yaml"
+mcpActions:
+  name: 'Mathod Backstage' # defaults to "backstage"
+  description: 'Tools for managing your software catalog, creating new services from templates, and exploring your developer portal' # optional
+```
 
 Nom et description sous lesquels Backstage se présente à un assistant IA qui s'y connecte. Sans assistant branché, ces réglages n'ont aucun effet visible.
 
 ## Integrations
 
-| Setting               | File              | Current value                       |
-| --------------------- | ----------------- | ----------------------------------- |
-| `integrations.github` | `app-config.yaml` | Token `GITHUB_TOKEN`, lecture seule |
+```yaml title="app-config.yaml"
+integrations:
+  github:
+    - host: github.com
+      token: ${GITHUB_TOKEN}
+```
 
 Sert à lire le repo sur GitHub (catalogue, doc). Le token est un token fine-grained en lecture seule sur les repos publics.
 
 ## Catalog
 
-| Setting                                | File                         | Current value                                 |
-| -------------------------------------- | ---------------------------- | --------------------------------------------- |
-| `catalog.locations`                    | `app-config.production.yaml` | `catalog/all.yaml`, lu sur GitHub             |
-| `catalog.rules`                        | `app-config.production.yaml` | Users, groupes, templates: ce repo uniquement |
-| `catalog.import.entityFilename`        | `app-config.yaml`            | `catalog-info.yaml`                           |
-| `catalog.import.pullRequestBranchName` | `app-config.yaml`            | `backstage-integration`                       |
+=== "app-config.yaml"
 
-Les fichiers du catalogue sont lus sur GitHub, sans reconstruire l'image (voir [Catalogue lu depuis GitHub](../catalogue-depuis-github.md)). En local, `app-config.yaml` lit les mêmes fichiers sur le disque.
+    ```yaml title="app-config.yaml"
+    catalog:
+      import:
+        entityFilename: catalog-info.yaml
+        pullRequestBranchName: backstage-integration
+      rules:
+        - allow: [Component, System, API, Resource, Location, User, Group, Template]
+      locations:
+        - type: file
+          target: ../../catalog/all.yaml
+    ```
+
+=== "app-config.production.yaml"
+
+    ```yaml title="app-config.production.yaml"
+    catalog:
+      rules:
+        - allow: [Component, System, API, Resource, Location]
+        - allow: [Location, User, Group, Component, System, API, Resource, Template]
+          locations:
+            - type: url
+              pattern: https://github.com/Mathod95/backstage/blob/main/**
+      locations:
+        - type: url
+          target: https://github.com/Mathod95/backstage/blob/main/catalog/all.yaml
+    ```
+
+Les fichiers du catalogue sont lus sur GitHub en production, sans reconstruire l'image (voir [Catalogue lu depuis GitHub](../catalogue-depuis-github.md)). En local, les mêmes fichiers sont lus sur le disque. En production, les utilisateurs, groupes et templates ne sont acceptés que s'ils viennent de ce repo.
 
 La fiche du repo lui-même, avec son propriétaire et le lien vers cette doc:
 
@@ -114,43 +170,100 @@ spec:
 
 ## Authentication
 
-| Setting                 | File     | Current value                                     |
-| ----------------------- | -------- | ------------------------------------------------- |
-| `auth.environment`      | Les deux | `development` en local, `production` dans l'image |
-| `auth.providers.github` | Les deux | GitHub OAuth, via `AUTH_GITHUB_*`                 |
-| `signIn.resolvers`      | Les deux | `userIdMatchingUserEntityAnnotation`              |
+=== "app-config.yaml"
+
+    ```yaml title="app-config.yaml"
+    auth:
+      environment: development
+      providers:
+        github:
+          development:
+            clientId: ${AUTH_GITHUB_CLIENT_ID}
+            clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+            signIn:
+              resolvers:
+                - resolver: userIdMatchingUserEntityAnnotation
+      clientIdMetadataDocuments:
+        enabled: false
+    ```
+
+=== "app-config.production.yaml"
+
+    ```yaml title="app-config.production.yaml"
+    auth:
+      environment: production
+      providers:
+        github:
+          production:
+            clientId: ${AUTH_GITHUB_CLIENT_ID}
+            clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+            signIn:
+              resolvers:
+                - resolver: userIdMatchingUserEntityAnnotation
+    ```
 
 Seul GitHub est proposé, et seuls les comptes présents dans `catalog/org.yaml` peuvent entrer (voir [Retirer les exemples et l'invité](../retirer-exemples-et-invite.md)).
 
 ## Permissions
 
-| Setting              | File                            | Current value                              |
-| -------------------- | ------------------------------- | ------------------------------------------ |
-| `permission.enabled` | `app-config.yaml`               | `true`                                     |
-| Politique            | `packages/backend/src/index.ts` | `allow-all`: tout le monde peut tout faire |
+```yaml title="app-config.yaml"
+permission:
+  enabled: true
+```
+
+La politique est `allow-all`: toute personne connectée peut tout faire.
+
+```ts title="packages/backend/src/index.ts"
+// permission plugin
+backend.add(import('@backstage/plugin-permission-backend'));
+// See https://backstage.io/docs/permissions/getting-started for how to create your own permission policy
+backend.add(
+  import('@backstage/plugin-permission-backend-module-allow-all-policy'),
+);
+```
 
 La vraie politique de droits est prévue avant d'ajouter une deuxième personne (voir le todo).
 
 ## Database
 
-| Setting            | File                         | Current value                            |
-| ------------------ | ---------------------------- | ---------------------------------------- |
-| `backend.database` | `app-config.production.yaml` | Postgres, via les variables `POSTGRES_*` |
-| `backend.database` | `app-config.yaml`            | SQLite en mémoire (local)                |
+=== "app-config.yaml"
+
+    ```yaml title="app-config.yaml"
+    backend:
+      database:
+        client: better-sqlite3
+        connection: ':memory:'
+    ```
+
+=== "app-config.production.yaml"
+
+    ```yaml title="app-config.production.yaml"
+    backend:
+      database:
+        client: pg
+        connection:
+          host: ${POSTGRES_HOST}
+          port: ${POSTGRES_PORT}
+          user: ${POSTGRES_USER}
+          password: ${POSTGRES_PASSWORD}
+    ```
 
 En production, Postgres est déployé par le rôle Saltbox `backstage` (conteneur `backstage-postgres`, mot de passe généré par le rôle). La recherche utilise aussi Postgres (`search-backend-module-pg`). En local, `yarn start` utilise SQLite en mémoire: les données disparaissent à chaque redémarrage. Pas encore de sauvegarde planifiée (voir le todo).
 
 ## Proxy
 
-Non utilisé: le bloc `proxy` de `app-config.yaml` est vide. Il servirait à appeler une API externe depuis le navigateur sans exposer son token.
+Non utilisé: le bloc `proxy` de `app-config.yaml` ne contient que des commentaires. Il servirait à appeler une API externe depuis le navigateur sans exposer son token.
 
 ## TechDocs
 
-| Setting                    | File              | Current value |
-| -------------------------- | ----------------- | ------------- |
-| `techdocs.builder`         | `app-config.yaml` | `local`       |
-| `techdocs.generator.runIn` | `app-config.yaml` | `local`       |
-| `techdocs.publisher.type`  | `app-config.yaml` | `local`       |
+```yaml title="app-config.yaml"
+techdocs:
+  builder: 'local' # Alternatives - 'external'
+  generator:
+    runIn: 'local'
+  publisher:
+    type: 'local' # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
+```
 
 La doc est fabriquée dans le conteneur, à la visite (voir [TechDocs](../techdocs.md)).
 
