@@ -45,17 +45,19 @@ Procédure détaillée pour GitHub OAuth, le retrait de l'invité et des exemple
 - [x] Une fois OAuth validé: retirer la ligne `guest` de l'Inventory
 - [x] Décider de garder ou non Authelia devant Backstage: on le garde (décidé le 2026-09-24), double barrière avec GitHub OAuth. Spécifique à l'hôte Saltbox
 - [x] Une fois OAuth validé: remplacer `auth.providers.guest` par `github` dans `app-config.production.yaml` et retirer `plugin-auth-backend-module-guest-provider` de `packages/backend/src/index.ts`
-- [ ] Données du catalogue lues depuis GitHub (`catalog/` en `type: url`, hors image, hors pipeline): appliqué dans le repo, voir [catalogue-depuis-github.md](catalogue-depuis-github.md). Token `backstage-catalog-read` (sans expiration) créé et ajouté à l'Inventory, déployé et vérifié le 2026-09-24. Reste à tester l'ajout d'un groupe sans rebuild
+- [x] Données du catalogue lues depuis GitHub (`catalog/` en `type: url`, hors image, hors pipeline): appliqué dans le repo, voir [catalogue-depuis-github.md](catalogue-depuis-github.md). Token `backstage-catalog-read` (sans expiration) créé et ajouté à l'Inventory, déployé et vérifié le 2026-09-24
+- [ ] Tester l'ajout d'un groupe dans `catalog/org.yaml` sans rebuild (push seul, le groupe doit apparaître en quelques minutes)
 - [ ] Plus tard, **avant d'ajouter une deuxième personne** dans `catalog/org.yaml` (reporté le 2026-09-24, seul sur le projet pour l'instant): gestion des droits et des groupes
   - Remplacer la politique de permissions `allow-all`: aujourd'hui toute personne connectée a tous les droits, le groupe `admins` n'est qu'une étiquette
   - Définir les groupes (par exemple `admins` et un groupe d'utilisateurs) et qui peut faire quoi: lancer quels templates (par tag ou par thème), inscrire ou supprimer des entités du catalogue
+  - Définir le modèle de propriété du catalogue: quels `System` et `Component` décrire, et quel groupe possède chacun (`spec.owner`)
   - Rappel: le propriétaire d'une fiche (`spec.owner`, par exemple `group:admins`) indique qui est responsable, il ne limite pas qui la voit. Tant que la politique est `allow-all`, toute personne connectée voit tout. Les règles pourront ensuite s'appuyer sur le propriétaire (par exemple: seul le groupe propriétaire modifie ou voit une fiche)
   - Rappel: la connexion est déjà limitée aux personnes présentes dans `catalog/org.yaml` (résolveur GitHub), et Authelia filtre en amont sur l'hôte Saltbox
 - [x] ~~Configurer `backend.auth.keys`~~: pas nécessaire (vérifié le 2026-09-24 sur <https://backstage.io/docs/auth/service-to-service-auth>). C'est un réglage de l'ancien système backend. Avec le nouveau, les plugins s'authentifient entre eux automatiquement, avec des clés générées et stockées dans Postgres. Le commentaire du modèle dans `app-config.yaml` est un reste
 - [ ] Plus tard, si un script ou une CI doit appeler l'API de Backstage: configurer `backend.auth.externalAccess` (token statique limité à certains plugins)
 - [x] Faire tourner l'ancien secret OAuth GitHub (considéré comme compromis): nouvelle application créée, ancienne supprimée le 2026-09-24
 - [ ] Réduire le token d'intégration GitHub du scaffolder (fine-grained, `Contents` et `Administration`)
-- [ ] Secrets uniquement en variables d'environnement, jamais dans le repo
+- [x] Secrets uniquement en variables d'environnement, jamais dans le repo: c'est le cas pour tous les secrets (voir [Settings](backstage/settings.md#secrets))
 
 ### 2. Backstage app
 
@@ -74,7 +76,7 @@ Procédure détaillée pour GitHub OAuth, le retrait de l'invité et des exemple
   - Alternative plus légère: remplacer seulement le générateur de TechDocs par un module backend (`techdocsGeneratorExtensionPoint`, présent dans la version installée), mais l'affichage de TechDocs attend des pages MkDocs et risque de mal rendre celles de Zensical
   - Démarche: un essai dans une branche Git à part, sans toucher à `main` ni à TechDocs, testé en local d'abord (Zensical dans un environnement Python jetable), puis décision de continuer ou non. Ordre de grandeur: essai en quelques heures, équivalent complet de TechDocs sur plusieurs séances, puis entretien à chaque mise à jour de Backstage
   - À comparer avec la version officielle en cours (PR #35322 et #35781): si elle arrive avant, elle remplace ce chantier
-- [ ] Décider: sauvegardes planifiées de Postgres
+- [ ] Décider: sauvegardes planifiées de Postgres, et tester une restauration (une sauvegarde jamais restaurée ne garantit rien)
 - [ ] Décider: healthcheck du conteneur (`/.backstage/health/v1/readiness`)
 - [ ] Surveillance: être prévenu quand Backstage tombe (backend, base de données, erreurs de plugins), lié au healthcheck
 - [ ] CORS: `backend.cors.origin` vaut encore `http://localhost:3000` (valeur du développement local), à restreindre à l'adresse de production
