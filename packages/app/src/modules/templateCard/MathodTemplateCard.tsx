@@ -1,7 +1,12 @@
 import type { CSSProperties } from 'react';
 import { useTheme } from '@material-ui/core/styles';
 import { Link } from '@backstage/core-components';
-import { useStarredEntity } from '@backstage/plugin-catalog-react';
+import { useRouteRef } from '@backstage/core-plugin-api';
+import {
+  entityRouteParams,
+  entityRouteRef,
+  useStarredEntity,
+} from '@backstage/plugin-catalog-react';
 import type { TemplateCardComponentProps } from '@backstage/plugin-scaffolder-react/alpha';
 import { LOGOS } from './logos';
 
@@ -67,6 +72,11 @@ const STAR = [
   'm12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z',
 ];
 const ARROW = ['M5 12h14', 'm13 6 6 6-6 6'];
+const DETAILS = [
+  'M5 5h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2',
+  'M7 10h6',
+  'M7 14h10',
+];
 const GROUP = [
   'M2 20c0-3.5 3-5.5 7-5.5s7 2 7 5.5',
   'M17 14.5c3 0 5 1.5 5 4.5',
@@ -82,6 +92,8 @@ export const MathodTemplateCard = ({
   const theme = useTheme();
   const t = TOKENS[theme.palette.type === 'dark' ? 'dark' : 'light'];
   const { toggleStarredEntity, isStarredEntity } = useStarredEntity(template);
+  // Same link as the details icon of the standard card: the template page in the catalog
+  const catalogEntityRoute = useRouteRef(entityRouteRef);
 
   const { metadata, spec } = template;
   const tags = metadata.tags ?? [];
@@ -221,6 +233,13 @@ export const MathodTemplateCard = ({
       <div style={{ flexGrow: 1 }} />
 
       <div style={{ display: 'flex', gap: 8 }}>
+        <Link
+          to={catalogEntityRoute(entityRouteParams(template))}
+          aria-label="Template page"
+          style={iconButton}
+        >
+          <Icon d={DETAILS} />
+        </Link>
         {docsUrl && (
           <Link to={docsUrl} aria-label="Docs" style={iconButton}>
             <Icon d={DOC} />
