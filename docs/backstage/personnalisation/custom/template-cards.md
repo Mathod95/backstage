@@ -17,8 +17,6 @@ todo:
 
 > La conception des cartes sur mesure qui présentent les templates sur la page Create.
 
-Conçu le 2026-09-25 à partir de maquettes (canevas privé: <https://claude.ai/artifact/2mok8w9CPDgE7QMym7m8N2>). **Codé le 2026-09-25, pas encore déployé** (voir [Implementation](#implementation)).
-
 ## Default card
 
 Sans personnalisation, Backstage dessine chaque carte à partir du fichier `template.yaml` du template:
