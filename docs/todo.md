@@ -52,6 +52,8 @@ Procédure détaillée pour GitHub OAuth, le retrait de l'invité et des exemple
   - À comparer avec la version officielle en cours (PR #35322 et #35781): si elle arrive avant, elle remplace ce chantier
 - [ ] Décider: sauvegardes planifiées de Postgres
 - [ ] Décider: healthcheck du conteneur (`/.backstage/health/v1/readiness`)
+- [ ] Surveillance: être prévenu quand Backstage tombe (backend, base de données, erreurs de plugins), lié au healthcheck
+- [ ] CORS: `backend.cors.origin` vaut encore `http://localhost:3000` (valeur du développement local), à restreindre à l'adresse de production
 - [ ] Maintenance régulière: monter la version de Backstage (`yarn backstage-cli versions:bump`) et redéployer
 - [ ] Décider: épingler l'image par sha dans l'Inventory pour des déploiements reproductibles
 - [ ] Vérifier la version minimale de Postgres supportée par Backstage (17-alpine choisi sans vérification)

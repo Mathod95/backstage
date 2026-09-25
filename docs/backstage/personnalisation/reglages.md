@@ -4,7 +4,7 @@ description: Où se règle chaque élément personnalisable de l'interface
 icon: material/tune
 status: draft
 createdAt: 2026-09-24
-modifyAt: 2026-09-24
+modifyAt: 2026-09-25
 todo:
   - "[x] Restructurer convenablement les tableaux"
   - "[x] Les titres des tableau en anglais"
@@ -58,6 +58,44 @@ Détails des valeurs actuelles:
 - **Menu latéral**: Search, Home, Catalog, Create, puis le reste par ordre alphabétique, Settings en bas.
 - **Icônes de l'onglet**: `favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png`, `safari-pinned-tab.svg`, `apple-touch-icon.png`, `android-chrome-192x192.png`.
 - **Page de connexion**: le titre de la page est `app.title`, le texte de la carte "Sign in using GitHub". Voir [Sign-in page](page-de-connexion.md).
+
+## Configuration
+
+Réglages techniques déjà en place dans `app-config.yaml` (commun, et développement local) et `app-config.production.yaml` (image de production, qui remplace les valeurs communes).
+
+| Element                  | File                         | Setting                         | Current value                                 |
+| ------------------------ | ---------------------------- | ------------------------------- | --------------------------------------------- |
+| URL publique du front    | `app-config.production.yaml` | `app.baseUrl`                   | `https://backstage.mathod.fr`                 |
+| URL publique du back     | `app-config.production.yaml` | `backend.baseUrl`               | `https://backstage.mathod.fr`                 |
+| Port d'écoute            | `app-config.production.yaml` | `backend.listen`                | `:7007`                                       |
+| Base de données          | `app-config.production.yaml` | `backend.database`              | Postgres, via les variables `POSTGRES_*`      |
+| Base de données en local | `app-config.yaml`            | `backend.database`              | SQLite en mémoire                             |
+| Connexion                | Les deux                     | `auth.providers.github`         | GitHub OAuth, via `AUTH_GITHUB_*`             |
+| Intégration GitHub       | `app-config.yaml`            | `integrations.github`           | Token `GITHUB_TOKEN`, en lecture seule        |
+| Catalogue                | `app-config.production.yaml` | `catalog.locations`             | `catalog/all.yaml`, lu sur GitHub             |
+| Règles du catalogue      | `app-config.production.yaml` | `catalog.rules`                 | Users, groupes, templates: ce repo uniquement |
+| TechDocs                 | `app-config.yaml`            | `techdocs`                      | Génération dans le conteneur                  |
+| Images autorisées        | `app-config.yaml`            | `backend.csp.img-src`           | Le site et les avatars GitHub                 |
+| CORS                     | `app-config.yaml`            | `backend.cors.origin`           | `http://localhost:3000`                       |
+| Actions pour l'IA (MCP)  | `app-config.yaml`            | `backend.actions.pluginSources` | `auth`, `catalog`, `scaffolder`               |
+
+Détails:
+
+- **Base de données**: en production, Postgres est déployé par le rôle Saltbox `backstage` (conteneur `backstage-postgres`, mot de passe généré par le rôle). En local, `yarn start` utilise SQLite en mémoire: les données disparaissent à chaque redémarrage.
+- **Connexion**: seul GitHub est proposé, et seuls les comptes présents dans `catalog/org.yaml` peuvent entrer. Voir [Retirer les exemples et l'invité](../../retirer-exemples-et-invite.md).
+- **Catalogue**: les fichiers du catalogue sont lus sur GitHub, sans reconstruire l'image. Voir [Catalogue lu depuis GitHub](../../catalogue-depuis-github.md).
+- **TechDocs**: voir [TechDocs](../../techdocs.md).
+- **CORS**: la valeur est celle du développement local. En production, le front et le back sont servis par la même adresse, donc ce n'est pas bloquant, mais c'est à nettoyer (voir le todo).
+
+Variables d'environnement attendues par l'image (aucun secret dans le repo):
+
+| Variable                                                               | Used for                   | Provided by                 |
+| ---------------------------------------------------------------------- | -------------------------- | --------------------------- |
+| `POSTGRES_HOST`, `POSTGRES_PORT`, `POSTGRES_USER`, `POSTGRES_PASSWORD` | Base de données            | Rôle Saltbox `backstage`    |
+| `AUTH_GITHUB_CLIENT_ID`, `AUTH_GITHUB_CLIENT_SECRET`                   | Connexion GitHub OAuth     | Inventory de l'hôte Saltbox |
+| `GITHUB_TOKEN`                                                         | Lecture du repo sur GitHub | Inventory de l'hôte Saltbox |
+
+Sur une autre plateforme (Docker Desktop, Kubernetes), ces variables devront être fournies autrement: c'est noté dans le todo.
 
 ## Details
 
@@ -170,5 +208,6 @@ Titre, carte, bouton, fond, disposition: voir [Sign-in page](page-de-connexion.m
 
 - Page d'accueil (nouveau système frontend): <https://backstage.io/docs/getting-started/homepage>
 - Apparence, thèmes BUI et MUI: <https://backstage.io/docs/conf/user-interface>
+- [Day 183: Creating a Backstage Instance and Understanding Backstage Configuration](https://medium.com/@alokrahuldevops/day-183-creating-a-backstage-instance-and-understanding-backstage-configuration-801fd320e621), Alok Rahul, juillet 2026: structure d'une instance et principaux réglages de `app-config.yaml`
 - Réglages `app.*` (dont `app.support`): schéma `node_modules/@backstage/core-app-api/config.schema.json`
 - `ThemeBlueprint`: `node_modules/@backstage/plugin-app-react/dist/index.d.ts`
