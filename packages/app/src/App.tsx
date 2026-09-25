@@ -6,7 +6,6 @@ import { SignInPage } from '@backstage/core-components';
 import { createFrontendModule } from '@backstage/frontend-plugin-api';
 import { navModule } from './modules/nav';
 import { homeModule } from './modules/home';
-import { templateCardModule } from './modules/templateCard';
 
 // Replaces the default sign-in page, which only offers the guest provider.
 // See https://backstage.io/docs/getting-started/config/authentication
@@ -32,7 +31,6 @@ export default createApp({
     catalogPlugin,
     navModule,
     homeModule,
-    templateCardModule,
     createFrontendModule({
       pluginId: 'app',
       extensions: [signInPage],

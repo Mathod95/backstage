@@ -10,6 +10,7 @@ todo:
   - "[x] Ajouter l'annotation d'auteur aux templates"
   - "[ ] Vérifier les conditions d'usage des icônes AWS, puis ajouter le logo AWS"
   - "[x] Écrire le composant"
+  - "[ ] Rebrancher la carte: le module est prêt mais retiré de App.tsx, la carte standard est de retour"
   - "[ ] Déployer et vérifier dans Backstage"
 ---
 
@@ -154,12 +155,14 @@ En version claire, l'accent est un vert émeraude plus foncé, pour que le texte
 
 Le composant remplace la carte standard pour tous les templates de la page Create. Il n'est pas vérifié en local (pas de build local): la pipeline le compilera au push.
 
-| File                                                           | Content                                       |
-| -------------------------------------------------------------- | --------------------------------------------- |
-| `packages/app/src/modules/templateCard/MathodTemplateCard.tsx` | La carte                                      |
-| `packages/app/src/modules/templateCard/logos.ts`               | Les tracés SVG des logos                      |
-| `packages/app/src/modules/templateCard/index.ts`               | L'extension qui remplace `TemplateCard`       |
-| `packages/app/src/App.tsx`                                     | Le module ajouté aux fonctionnalités de l'app |
+| File                                                           | Content                                          |
+| -------------------------------------------------------------- | ------------------------------------------------ |
+| `packages/app/src/modules/templateCard/MathodTemplateCard.tsx` | La carte                                         |
+| `packages/app/src/modules/templateCard/logos.ts`               | Les tracés SVG des logos                         |
+| `packages/app/src/modules/templateCard/index.ts`               | L'extension qui remplace `TemplateCard`          |
+| `packages/app/src/App.tsx`                                     | Le module à ajouter aux fonctionnalités de l'app |
+
+La carte sur mesure est désactivée: `templateCardModule` n'est plus dans la liste `features` de `App.tsx`, et Backstage affiche la carte standard. Les fichiers du module sont conservés. Pour la réactiver, rajouter l'import et `templateCardModule` dans `features`.
 
 Le remplacement passe par un module du plugin `app`, seul autorisé à utiliser `SwappableComponentBlueprint`:
 
