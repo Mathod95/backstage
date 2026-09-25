@@ -41,7 +41,7 @@ python3 -m venv zensical/.venv && zensical/.venv/bin/pip install zensical
 Le menu est écrit deux fois, dans `mkdocs.yml` et dans `zensical.toml`: toute page ajoutée doit l'être dans les deux.
 
 !!! warning "Aperçu différent de Backstage"
-    L'aperçu montre la doc telle que Zensical la rend. Tant que Backstage utilise TechDocs (MkDocs), le rendu dans Backstage reste différent: voir [TechDocs](../techdocs.md). Les fonctionnalités ajoutées ci-dessous ne sont déclarées que dans `zensical.toml`: elles n'existent que dans l'aperçu.
+    L'aperçu montre la doc telle que Zensical la rend. Tant que Backstage utilise TechDocs (MkDocs), le rendu dans Backstage reste différent: voir [TechDocs](../backstage/techdocs.md). Les fonctionnalités ajoutées ci-dessous ne sont déclarées que dans `zensical.toml`: elles n'existent que dans l'aperçu.
 
 La config Zensical doit être à la racine du repo: Zensical refuse un dossier de pages situé en dehors de son propre dossier (`docs_dir must be within project root`), même à travers un lien symbolique (testé le 2026-09-24 avec Zensical 0.0.64).
 

@@ -15,7 +15,7 @@ todo:
 
 ## Current state
 
-La page est dessinée par le composant `SignInPage` de Backstage, branché dans `packages/app/src/App.tsx` avec l'extension `SignInPageBlueprint` (mise en place avec GitHub OAuth, voir [Retirer les exemples et l'invité](../../retirer-exemples-et-invite.md)). Elle affiche:
+La page est dessinée par le composant `SignInPage` de Backstage, branché dans `packages/app/src/App.tsx` avec l'extension `SignInPageBlueprint` (mise en place avec GitHub OAuth, voir [Retirer les exemples et l'invité](../github-sign-in.md)). Elle affiche:
 
 - en haut, le bandeau vert de Backstage avec le titre `app.title` ("Mathod");
 - une carte "GitHub", le texte "Sign in using GitHub" et un bouton "SIGN IN".

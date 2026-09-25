@@ -175,7 +175,7 @@ Le catalogue est le registre de tout ce que Backstage connaît: composants, APIs
 - **`rules`**: quels types d'éléments chaque location a le droit d'ajouter.
 - **`import`**: réglages de la page "Register existing component", qui cherche un `catalog-info.yaml` dans un repo et peut ouvrir une Pull Request pour l'ajouter.
 
-Les fichiers du catalogue sont lus sur GitHub en production, sans reconstruire l'image (voir [Catalogue lu depuis GitHub](../catalogue-depuis-github.md)). En local, les mêmes fichiers sont lus sur le disque. En production, les utilisateurs, groupes et templates ne sont acceptés que s'ils viennent de ce repo.
+Les fichiers du catalogue sont lus sur GitHub en production, sans reconstruire l'image (voir [Catalogue lu depuis GitHub](catalog.md)). En local, les mêmes fichiers sont lus sur le disque. En production, les utilisateurs, groupes et templates ne sont acceptés que s'ils viennent de ce repo.
 
 La fiche du repo lui-même, avec son propriétaire et le lien vers cette doc:
 
@@ -238,7 +238,7 @@ La connexion des personnes à Backstage passe par un fournisseur d'identité: ic
 - **`clientId`, `clientSecret`**: identifiants de l'application OAuth GitHub, toujours fournis par des variables d'environnement.
 - **`resolver`**: comment un compte GitHub est relié à un utilisateur du catalogue. `userIdMatchingUserEntityAnnotation` cherche l'utilisateur dont l'annotation `github.com/user-id` correspond au compte.
 
-Seul GitHub est proposé, et seuls les comptes présents dans `catalog/org.yaml` peuvent entrer (voir [Retirer les exemples et l'invité](../retirer-exemples-et-invite.md)).
+Seul GitHub est proposé, et seuls les comptes présents dans `catalog/org.yaml` peuvent entrer (voir [Retirer les exemples et l'invité](github-sign-in.md)).
 
 ## Permissions
 
@@ -308,7 +308,7 @@ techdocs:
     type: 'local' # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
 ```
 
-La doc est fabriquée dans le conteneur, à la visite (voir [TechDocs](../techdocs.md)). La doc officielle conseille plutôt, en production, de la fabriquer dans la CI et de la stocker à part: noté dans le todo pour plus tard.
+La doc est fabriquée dans le conteneur, à la visite (voir [TechDocs](techdocs.md)). La doc officielle conseille plutôt, en production, de la fabriquer dans la CI et de la stocker à part: noté dans le todo pour plus tard.
 
 ## Secrets
 

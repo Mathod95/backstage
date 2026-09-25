@@ -168,4 +168,4 @@ L'alignement du texte dans une colonne se règle avec des `:` dans la ligne de s
     </div>
 
 !!! note "Tableaux triables"
-    Zensical permet de rendre un tableau triable en cliquant sur l'en-tête d'une colonne (bibliothèque tablesort, ajoutée par `extra_javascript`). On ne l'utilisera qu'une fois la doc passée sur Zensical: voir [TechDocs, avenir de MkDocs et Zensical](../techdocs.md#avenir-de-mkdocs-et-zensical).
+    Zensical permet de rendre un tableau triable en cliquant sur l'en-tête d'une colonne (bibliothèque tablesort, ajoutée par `extra_javascript`). On ne l'utilisera qu'une fois la doc passée sur Zensical: voir [TechDocs, avenir de MkDocs et Zensical](../backstage/techdocs.md#mkdocs-and-zensical).
