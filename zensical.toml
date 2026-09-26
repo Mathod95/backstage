@@ -25,6 +25,7 @@ nav = [
     { "Customization" = [
       { "Branding" = "backstage/personnalisation/branding.md" },
       { "Theme" = "backstage/personnalisation/theme.md" },
+      { "Emerald theme" = "backstage/personnalisation/emerald-theme.md" },
       { "Custom" = [
         { "Login screen" = "backstage/personnalisation/custom/login-screen.md" },
         { "Template cards" = "backstage/personnalisation/custom/template-cards.md" },

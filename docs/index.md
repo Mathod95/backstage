@@ -66,6 +66,7 @@ Procédure détaillée pour GitHub OAuth, le retrait de l'invité et des exemple
 - [x] Remplacer le catalogue d'exemple par les vraies sources (`catalog.locations`), première étape décrite dans [retirer-exemples-et-invite.md](backstage/github-sign-in.md)
 - [x] TechDocs mis en place le 2026-09-24 avec génération par Backstage lui-même (choix de l'utilisateur, plutôt que CI et stockage externe), déployé et vérifié: voir [techdocs.md](backstage/techdocs.md)
 - [ ] Cartes de templates sur mesure (versions sombre et claire, sans effet au survol): codées, puis désactivées (carte standard de retour, module conservé), voir [Template cards](backstage/personnalisation/custom/template-cards.md)
+- [ ] Thème de couleurs Émeraude sobre (clair et sombre, MUI et BUI): codé, à déployer et vérifier, voir [Emerald theme](backstage/personnalisation/emerald-theme.md)
 - [ ] Explorer les améliorations possibles de TechDocs: apparence (thème), addons (le paquet `@backstage/plugin-techdocs-module-addons-contrib` est déjà installé), plugins MkDocs et fonctionnalités. Attention: chaque plugin MkDocs ajouté compliquera le futur passage à Zensical
 - [x] TechDocs n'était pas fonctionnel (aucune annotation `backstage.io/techdocs-ref`, `runIn: docker` sans Docker dans l'image): corrigé, voir [techdocs.md](backstage/techdocs.md)
 - [x] Une fois TechDocs en place: migrer `docs-temp/` vers `docs/` avec un `mkdocs.yml` et annoter `catalog-info.yaml`

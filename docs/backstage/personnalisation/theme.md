@@ -4,7 +4,7 @@ description: Changer l'apparence de tout Backstage avec un thème MUI et BUI
 icon: material/palette
 status: draft
 createdAt: 2026-09-24
-modifyAt: 2026-09-24
+modifyAt: 2026-09-26
 todo: []
 ---
 
@@ -12,7 +12,7 @@ todo: []
 
 > Comment changer l'apparence de tout Backstage: couleurs, polices, arrondis, ombres, style des boutons, des cartes, des menus, des champs de saisie.
 
-Rien n'est encore appliqué: le thème actuel est celui de Backstage par défaut.
+Le thème appliqué à ce Backstage est décrit dans [Emerald theme](emerald-theme.md).
 
 Cette page couvre le **theming graphique**. Le **branding** (nom de l'application, nom de l'organisation, logos, icônes, textes) se règle ailleurs, surtout dans `app-config.yaml`: voir [Branding](branding.md).
 

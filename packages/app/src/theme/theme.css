@@ -1,0 +1,38 @@
+/*
+ * "Emerald" theme (BUI), see docs/backstage/personnalisation/emerald-theme.md
+ * Same colors as theme.ts (MUI). Written outside any @layer, so it wins over
+ * the BUI defaults (@layer tokens) whatever the import order.
+ */
+
+:root,
+[data-theme-mode='light'] {
+  --bui-bg-app: #f6f7f9;
+  --bui-bg-neutral-1: #ffffff;
+  --bui-bg-neutral-2: #f6f7f9;
+  --bui-bg-neutral-3: #ffffff;
+  --bui-bg-neutral-4: #f6f7f9;
+  --bui-fg-primary: #1f2328;
+  --bui-fg-secondary: #5b6475;
+  --bui-border-1: #e2e4e8;
+  --bui-bg-solid: #047857;
+  --bui-bg-solid-hover: #065f46;
+  --bui-bg-solid-pressed: #064e3b;
+  --bui-fg-solid: #ffffff;
+  --bui-ring: #047857;
+}
+
+[data-theme-mode='dark'] {
+  --bui-bg-app: #0f1115;
+  --bui-bg-neutral-1: #171a1f;
+  --bui-bg-neutral-2: #1f2329;
+  --bui-bg-neutral-3: #262b31;
+  --bui-bg-neutral-4: #2d333a;
+  --bui-fg-primary: #e6e8eb;
+  --bui-fg-secondary: #9aa3ad;
+  --bui-border-1: #2a2f36;
+  --bui-bg-solid: #10b981;
+  --bui-bg-solid-hover: #34d399;
+  --bui-bg-solid-pressed: #059669;
+  --bui-fg-solid: #06281d;
+  --bui-ring: #10b981;
+}
